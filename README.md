@@ -8,10 +8,15 @@ by Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár.
 2) In the repository, execute `python setup.py install --user`.
    Note that due to inconsistencies with how `tensorflow` should be installed,
    this package does not define a dependency on `tensorflow` as it will try to install that (which at least on Arch Linux results in an incorrect installation).
-   Please make sure `tensorflow` is installed as per your systems requirements.
+   Please make sure `tensorflow` is installed as per your systems requirements. We tested `tensorflow` version 1.4.0 with `tensorflow-gpu` version 1.4.0.
+   To install tensorflow 1.4.0 via anaconda enter: `conda install -c conda-forge tensorflow`.
+   To install `tensorflow-gpu` 1.4.0 via anaconda enter: `conda install -c aaronzs tensorflow-gpu`.
    Also, make sure Keras 2.1.2 is installed.
+   To install Keras version 2.1.2 via anaconda enter: `conda install -c anaconda keras`.
 3) As of writing, this repository requires the master branch of `keras-resnet` (run `pip install --user --upgrade git+https://github.com/broadinstitute/keras-resnet`).
 4) Optionally, install `pycocotools` if you want to train / test on the MS COCO dataset by running `pip install --user git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI`.
+   If working on Windows you might require to change the following property to be able to build: `cd cocoapi\PythonAPI\setup.py` set the property `extra_compile_args={'gcc': ['/Qstd=c99']}`.
+   Furthermore, the CocoGenerator requires the usage of Pillow version 4.0.0. Install Pillow via pip: `pip install Pillow==4.0.0`
 
 ## Training
 `keras-retinanet` can be trained using [this](https://github.com/delftrobotics/keras-retinanet/blob/master/keras_retinanet/bin/train.py) script.

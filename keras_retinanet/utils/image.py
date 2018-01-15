@@ -19,13 +19,13 @@ import keras
 import time
 import numpy as np
 import cv2
-import PIL
+from PIL import Image
 
 from .transform import change_transform_origin, transform_aabb, colvec
 
 
 def read_image_bgr(path):
-    image = np.asarray(PIL.Image.open(path).convert('RGB'))
+    image = np.asarray(Image.open(path).convert('RGB'))
     return image[:, :, ::-1].copy()
 
 
