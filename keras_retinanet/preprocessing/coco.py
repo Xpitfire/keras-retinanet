@@ -17,6 +17,7 @@ limitations under the License.
 from ..preprocessing.generator import Generator
 from ..utils.image import read_image_bgr
 
+import json
 import os
 import numpy as np
 
@@ -81,6 +82,12 @@ class CocoGenerator(Generator):
         image_info = self.coco.loadImgs(self.image_ids[image_index])[0]
         path       = os.path.join(self.data_dir, 'images', self.set_name, image_info['file_name'])
         return read_image_bgr(path)
+
+    def save_meta_info(self):
+        with open("/tmp/classes.json", "w") as text_file:
+            print(json.dumps(self.classes), file=text_file)
+        with open("/tmp/labels.json", "w") as text_file:
+            print(json.dumps(self.labels), file=text_file)
 
     def load_annotations(self, image_index):
         # get ground truth annotations
