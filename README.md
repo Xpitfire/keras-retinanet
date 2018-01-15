@@ -15,11 +15,11 @@ by Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár.
    To install Keras version 2.1.2 via anaconda enter: `conda install -c anaconda keras`.
 3) As of writing, this repository requires the master branch of `keras-resnet` (run `pip install --user --upgrade git+https://github.com/broadinstitute/keras-resnet`).
 4) Optionally, install `pycocotools` if you want to train / test on the MS COCO dataset by running `pip install --user git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI`.
-   If working on Windows you might require to change the following property to be able to build: `cd cocoapi\PythonAPI\setup.py` set the property `extra_compile_args={'gcc': ['/Qstd=c99']}`.
+   If working on Windows you might require to change the following property to be able to build: `cd cocoapi\PythonAPI` edit `setup.py` by setting the property `extra_compile_args={'gcc': ['/Qstd=c99']}`.
    Furthermore, the CocoGenerator requires the usage of Pillow version 4.0.0. Install Pillow via pip: `pip install Pillow==4.0.0`
 
 ## Training
-`keras-retinanet` can be trained using [this](https://github.com/delftrobotics/keras-retinanet/blob/master/keras_retinanet/bin/train.py) script.
+`keras-retinanet` can be trained using [this](https://github.com/Xpitfire/keras-retinanet/blob/master/keras_retinanet/bin/train.py) script.
 Note that the train script uses relative imports since it is inside the `keras_retinanet` package.
 If you want to adjust the script for your own use outside of this repository,
 you will need to switch it to use absolute imports.
@@ -70,11 +70,11 @@ model.compile(
     optimizer=keras.optimizers.adam(lr=1e-5, clipnorm=0.001)
 )
 ```
-2) Create generators for training and testing data (an example is show in [`keras_retinanet.preprocessing.PascalVocGenerator`](https://github.com/fizyr/keras-retinanet/blob/master/keras_retinanet/preprocessing/pascal_voc.py)).
+2) Create generators for training and testing data (an example is show in [`keras_retinanet.preprocessing.PascalVocGenerator`](https://github.com/Xpitfire/keras-retinanet/blob/master/keras_retinanet/preprocessing/pascal_voc.py)).
 3) Use `model.fit_generator` to start training.
 
 ## Testing
-An example of testing the network can be seen in [this Notebook](https://github.com/delftrobotics/keras-retinanet/blob/master/examples/ResNet50RetinaNet%20-%20COCO%202017.ipynb).
+An example of testing the network can be seen in [this Notebook](https://github.com/Xpitfire/keras-retinanet/blob/master/ResNet50RetinaNet%20-%20COCO%202017.ipynb).
 In general, output can be retrieved from the network as follows:
 ```
 _, _, detections = model.predict_on_batch(inputs)
@@ -144,7 +144,7 @@ bird,2
 ## Results
 
 ### MS COCO
-The MS COCO model can be downloaded [here](https://github.com/fizyr/keras-retinanet/releases/download/0.1/resnet50_coco_best_v1.2.2.h5). Results using the `cocoapi` are shown below (note: according to the paper, this configuration should achieve a mAP of 0.343).
+The MS COCO model can be downloaded [here](https://1drv.ms/u/s!Ai9oaxqJ6sUumMgGxmI5u5qDCyO0og). Results using the `cocoapi` are shown below (note: according to the paper, this configuration should achieve a mAP of 0.343).
 
 ```
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.325
@@ -177,5 +177,3 @@ Example output images using `keras-retinanet` are shown below.
 
 Contributions to this project are welcome.
 
-### Discussions
-Feel free to join the `#keras-retinanet` [Keras Slack](https://keras-slack-autojoin.herokuapp.com/) channel for discussions and questions.
