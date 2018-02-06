@@ -21,8 +21,7 @@ import json
 import os
 import numpy as np
 
-from pycocotools.coco import COCO
-
+from .pycocotools.coco import COCO as COCO
 
 class CocoGenerator(Generator):
     def __init__(self, data_dir, set_name, **kwargs):
