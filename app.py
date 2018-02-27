@@ -27,38 +27,44 @@ def get_session():
     config.gpu_options.allow_growth = True
     return tf.Session(config=config)
 
-def init_model():
-    # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    keras.backend.tensorflow_backend.set_session(get_session())
-    model = keras.models.load_model(model_name, custom_objects=custom_objects)
-    # create image data generator object
-    generator = keras.preprocessing.image.ImageDataGenerator()
-    return (model, generator)
-
-model, generator = init_model()
-
 class Result(object):
     def __init__(self):
         self.time_elapsed = None
         self.detections = None
 
 def classify_urls(urls):
+    # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    print('Setting keras session...')
+    keras.backend.tensorflow_backend.set_session(get_session())
+
+    print('Loading model name...')
+    model = keras.models.load_model(model_name, custom_objects=custom_objects)
+
+    print('Creating image data generator...')
+    generator = keras.preprocessing.image.ImageDataGenerator()
+
     # create a generator for testing data
+    print('Creating validation generator...')
     val_generator = UrlGenerator(urls, classes_path, labels_path)
 
     results = []
 
     # load image
     for i in range(len(urls)):
+        print('Running classification on', urls[i])
+
         result = Result()
 
+        print('Reading image bgr...')
         image = val_generator.read_image_bgr(i)
 
         # copy to draw on
+        print('Drawing cvt color...')
         draw = np.asarray(image.copy())
         draw = cv2.cvtColor(draw, cv2.COLOR_BGR2RGB)
 
         # preprocess image for network
+        print('Processing image...')
         image = val_generator.preprocess_image(image)
         image, scale = val_generator.resize_image(image)
 
@@ -66,7 +72,7 @@ def classify_urls(urls):
         start = time.time()
         _, _, detections = model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
-        print("processing time: ", elapsed)
+        print("Processing time: ", elapsed)
         result.time_elapsed = elapsed
 
         # compute predicted labels and scores
@@ -93,16 +99,12 @@ def get_hit_count():
 
 @app.route('/')
 def home():
-    return 'Home'
+    return 'Hello RetinaNet!'
 
 @app.route('/count')
 def count():
     count = get_hit_count()
     return 'Demo: I have been seen {} times.\n'.format(count)
-
-@app.route("/hello")
-def hello():
-    return "Hello RetinaNet!"
 
 @app.route("/classify")
 def classify():

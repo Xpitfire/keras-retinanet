@@ -24,6 +24,7 @@ scikit-learn
 pandas
 opencv-python
 Cython
+h5py
 
 ################################################################
 # TensorFlow can be installed either as CPU or GPU versions.
@@ -58,3 +59,6 @@ flask
 # Open source (BSD licensed), in-memory data structure store, 
 # used as a database, cache and message broker.
 redis
+
+# Handle request parameters
+requests
