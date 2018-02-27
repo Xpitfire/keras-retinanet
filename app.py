@@ -21,27 +21,42 @@ cache = redis.Redis(host='redis', port=6379)
 classes_path = './data/coco/classes.json'
 labels_path = './data/coco/labels.json'
 model_name = 'snapshots/resnet50_coco_best.h5'
-
-def get_session():
-    config = tf.ConfigProto()
-    config.gpu_options.allow_growth = True
-    return tf.Session(config=config)
+is_model_loaded = False
+model = None
+generator = None
 
 class Result(object):
     def __init__(self):
         self.time_elapsed = None
         self.detections = None
 
+def get_session():
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+    return tf.Session(config=config)
+
+def init_classification():
+    global is_model_loaded
+    global model
+    global generator
+
+    if not is_model_loaded:
+        print('Model not loaded...')
+        # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+        print('Setting keras session...')
+        keras.backend.tensorflow_backend.set_session(get_session())
+
+        print('Loading model name...')
+        model = keras.models.load_model(model_name, custom_objects=custom_objects)
+
+        print('Creating image data generator...')
+        generator = keras.preprocessing.image.ImageDataGenerator()
+        is_model_loaded = True
+    else:
+        print('Model already loaded...')
+
 def classify_urls(urls):
-    # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    print('Setting keras session...')
-    keras.backend.tensorflow_backend.set_session(get_session())
-
-    print('Loading model name...')
-    model = keras.models.load_model(model_name, custom_objects=custom_objects)
-
-    print('Creating image data generator...')
-    generator = keras.preprocessing.image.ImageDataGenerator()
+    init_classification()
 
     # create a generator for testing data
     print('Creating validation generator...')
