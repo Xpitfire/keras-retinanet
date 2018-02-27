@@ -31,7 +31,7 @@ h5py
 # You select which one to install by (un)commenting these lines.
 
 tensorflow==1.4.0	        # CPU Version of TensorFlow.
-# tensorflow-gpu==1.4.0 	# GPU version of TensorFlow.
+#tensorflow-gpu==1.4.0 	    # GPU version of TensorFlow.
 
 keras==2.1.2 # keras api wrapper using tensorflow backend
 
