@@ -108,7 +108,6 @@ def classify_urls(urls):
                 continue
             b = detections[0, idx, :4].astype(int)
             cv2.rectangle(draw, (b[0], b[1]), (b[2], b[3]), (0, 0, 255), 3)
-            caption = "{} {:.3f}".format(val_generator.label_to_name(label), score)
             result.caption_list.append((label, val_generator.label_to_name(label), score, b))
 
         results.append(result)
