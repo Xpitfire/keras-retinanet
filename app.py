@@ -3,6 +3,7 @@ from flask import Flask
 from flask import request
 from flask import Response
 
+import traceback
 import sys
 import cv2
 import os
@@ -22,7 +23,7 @@ cache = redis.Redis(host='redis', port=6379)
 # model properties
 classes_path = './data/coco/classes.json'
 labels_path = './data/coco/labels.json'
-model_name = 'snapshots/resnet50_coco_best.h5'
+model_name = 'snapshots/resnet50_coco_best_v2.0.1.h5'
 is_model_loaded = False
 model = None
 generator = None
@@ -196,8 +197,10 @@ def classify():
         json = jsonify(classification_results)
         status = 200
     except:
-        json = '{ "exception": "' + str(sys.exc_info()[0]) + '" }'
+        err = traceback.format_exc()
+        json = '{ "exception": "Server endpoint not responding! Please try again later." }'
         status = 500
+        print(err)
     resp = Response(json, status=status, mimetype='application/json')
     return resp
 
