@@ -2,7 +2,7 @@
 Keras implementation of RetinaNet object detection as described in [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002)
 by Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár.
 
-## Docker (the easy way...)
+## Docker Setup (the easy way...)
 
 Pull the docker container from the docker hub by executing the following command:
 ```
@@ -24,6 +24,18 @@ docker-compose up
 ```
 
 Note that to enable GPU support it is required to install and setup [nvidia-docker2](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)) first. To configure docker-compose to use nvidia runtime you have to configure the default runtime of docker to use nvidia. See [here](https://github.com/NVIDIA/nvidia-docker/issues/568). It is also required to remove the `#` at the `tenworflow-gpu` line from the [requirements.txt](requirements.txt) file.
+
+## Service Usage
+
+Classification request can be sent to port `5000`:
+```
+http://localhost:5000?url=http://image.url.com/id1234.jpg
+```
+
+It is also possible to classify images from the file system by defining the protocol as `file://`:
+```
+http://localhost:5000?url=file:///path/to/image1234.jpg
+```
 
 ## Installation requirements to run RetinaNet (the hard way...)
 
