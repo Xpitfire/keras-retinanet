@@ -167,7 +167,7 @@ bird,2
 ## Results
 
 ### MS COCO
-The MS COCO model can be downloaded [here](https://1drv.ms/u/s!Ai9oaxqJ6sUumMgGxmI5u5qDCyO0og). Results using the `cocoapi` are shown below (note: according to the paper, this configuration should achieve a mAP of 0.343).
+The MS COCO model can be downloaded [here](https://1drv.ms/u/s!Ai9oaxqJ6sUumNJLUn8AGxnSMnaLvA). Results using the `cocoapi` are shown below (note: according to the paper, this configuration should achieve a mAP of 0.343).
 
 ```
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.325
