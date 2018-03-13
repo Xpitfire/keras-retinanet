@@ -24,6 +24,7 @@ import keras
 
 import json
 import requests
+import glob
 from PIL import Image
 from io import BytesIO
 
@@ -56,8 +57,14 @@ class UrlGenerator(Generator):
         super(UrlGenerator, self).__init__(**kwargs)
 
     def read_image_bgr(self, image_index):
-        response = requests.get(self.urls[image_index])
-        image = Image.open(BytesIO(response.content))
+        url = self.urls[image_index]
+        image = None
+        if 'file://' in url:
+            path = url.replace('file://','')
+            image = Image.open(path)
+        else:
+            response = requests.get(url)
+            image = Image.open(BytesIO(response.content))
         image = np.asarray(image.convert('RGB'))
         return image[:, :, ::-1].copy()
 
@@ -72,9 +79,11 @@ class UrlGenerator(Generator):
 
     def image_aspect_ratio(self, image_index):
         # PIL is fast for metadata
-        response = requests.get(self.urls[image_index])
-        image = Image.open(BytesIO(response.content))
-        return float(image.width) / float(image.height)
+        #print('test if something happens')
+        #response = requests.get(self.urls[image_index])
+        #image = Image.open(BytesIO(response.content))
+        #return float(image.width) / float(image.height)
+        return 1.0
 
     def load_meta_info(self):
         with open(self.classes_path, "r") as text_file:

@@ -6,7 +6,7 @@ by Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár.
 
 Pull the docker container from the docker hub by executing the following command:
 ```
-docker run --name retinanet --runtime=nvidia -p 5000:5000 -p 9090:9090 -v /home/celum/DataSets/:/home/celum/DataSets xpitfire/kerasretinanet_web
+docker run --name retinanet --runtime=nvidia -p 5000:5000 -p 9090:9090 -v /home/celum/DataSets/:/home/celum/DataSets -it xpitfire/kerasretinanet_web
 ```
 
 Here we are mapping a directory directly to the docker instance. The `--runtime=nvidia` option assumes that there is GPU support via `nvidia-docker2`. To operate on CPU only remove that option.
