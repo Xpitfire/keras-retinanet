@@ -103,16 +103,16 @@ def random_translation(min, max, prng=DEFAULT_PRNG):
     return translation(_random_vector(min, max, prng))
 
 
-def shear(amount):
+def shear(angle):
     """ Construct a homogeneous 2D shear matrix.
     # Arguments
-        amount: the shear amount
+        angle: the shear angle in radians
     # Returns
         the shear matrix as 3 by 3 numpy array
     """
     return np.array([
-        [1, -np.sin(amount), 0],
-        [0,  np.cos(amount), 0],
+        [1, -np.sin(angle), 0],
+        [0,  np.cos(angle), 0],
         [0, 0, 1]
     ])
 
@@ -120,8 +120,8 @@ def shear(amount):
 def random_shear(min, max, prng=DEFAULT_PRNG):
     """ Construct a random 2D shear matrix with shear angle between -max and max.
     # Arguments
-        min:  the minumum shear factor.
-        max:  the maximum shear factor.
+        min:  the minumum shear angle in radians.
+        max:  the maximum shear angle in radians.
         prng: the pseudo-random number generator to use.
     # Returns
         a homogeneous 3 by 3 shear matrix
@@ -171,7 +171,8 @@ def random_flip(flip_x_chance, flip_y_chance, prng=DEFAULT_PRNG):
 
 
 def change_transform_origin(transform, center):
-    """ Create a new transform with the origin at a different location.
+    """ Create a new transform representing the same transformation,
+        only with the origin of the linear part changed.
     # Arguments:
         transform: the transformation matrix
         center: the new origin of the transformation
@@ -179,7 +180,7 @@ def change_transform_origin(transform, center):
         translate(center) * transform * translate(-center)
     """
     center = np.array(center)
-    return np.dot(np.dot(translation(center), transform), translation(-center))
+    return np.linalg.multi_dot([translation(center), transform, translation(-center)])
 
 
 def random_transform(
@@ -205,13 +206,18 @@ def random_transform(
       * flip x (if applied)
       * flip y (if applied)
 
+    Note that by default, the data generators in `keras_retinanet.preprocessing.generators` interpret the translation
+    as factor of the image size. So an X translation of 0.1 would translate the image by 10% of it's width.
+    Set `relative_translation` to `False` in the `TransformParameters` of a data generator to have it interpret
+    the translation directly as pixel distances instead.
+
     # Arguments
-        min_rotation:    The minimum rotation for the transform as scalar.
-        max_rotation:    The maximum rotation for the transform as scalar.
+        min_rotation:    The minimum rotation in radians for the transform as scalar.
+        max_rotation:    The maximum rotation in radians for the transform as scalar.
         min_translation: The minimum translation for the transform as 2D column vector.
         max_translation: The maximum translation for the transform as 2D column vector.
-        min_shear:       The minimum shear for the transform as scalar.
-        max_shear:       The maximum shear for the transform as scalar.
+        min_shear:       The minimum shear angle for the transform in radians.
+        max_shear:       The maximum shear angle for the transform in radians.
         min_scaling:     The minimum scaling for the transform as 2D column vector.
         max_scaling:     The maximum scaling for the transform as 2D column vector.
         flip_x_chance:   The chance (0 to 1) that a transform will contain a flip along X direction.
@@ -223,14 +229,40 @@ def random_transform(
         random_translation(min_translation, max_translation, prng),
         random_shear(min_shear, max_shear, prng),
         random_scaling(min_scaling, max_scaling, prng),
-        random_flip(flip_x_chance, flip_x_chance)
+        random_flip(flip_x_chance, flip_y_chance, prng)
     ])
 
 
 def random_transform_generator(prng=None, **kwargs):
-    """ Create a random transform generator with the same arugments as `random_transform`.
+    """ Create a random transform generator.
 
     Uses a dedicated, newly created, properly seeded PRNG by default instead of the global DEFAULT_PRNG.
+
+    The transformation consists of the following operations in this order (from left to right):
+      * rotation
+      * translation
+      * shear
+      * scaling
+      * flip x (if applied)
+      * flip y (if applied)
+
+    Note that by default, the data generators in `keras_retinanet.preprocessing.generators` interpret the translation
+    as factor of the image size. So an X translation of 0.1 would translate the image by 10% of it's width.
+    Set `relative_translation` to `False` in the `TransformParameters` of a data generator to have it interpret
+    the translation directly as pixel distances instead.
+
+    # Arguments
+        min_rotation:    The minimum rotation in radians for the transform as scalar.
+        max_rotation:    The maximum rotation in radians for the transform as scalar.
+        min_translation: The minimum translation for the transform as 2D column vector.
+        max_translation: The maximum translation for the transform as 2D column vector.
+        min_shear:       The minimum shear angle for the transform in radians.
+        max_shear:       The maximum shear angle for the transform in radians.
+        min_scaling:     The minimum scaling for the transform as 2D column vector.
+        max_scaling:     The maximum scaling for the transform as 2D column vector.
+        flip_x_chance:   The chance (0 to 1) that a transform will contain a flip along X direction.
+        flip_y_chance:   The chance (0 to 1) that a transform will contain a flip along Y direction.
+        prng:            The pseudo-random number generator to use.
     """
 
     if prng is None:

@@ -22,7 +22,7 @@ import warnings
 
 import keras
 
-from ..utils.anchors import anchor_targets_bbox
+from ..utils.anchors import anchor_targets_bbox, bbox_transform
 from ..utils.image import (
     TransformParameters,
     adjust_transform_for_image,
@@ -40,8 +40,8 @@ class Generator(object):
         batch_size=1,
         group_method='ratio',  # one of 'none', 'random', 'ratio'
         shuffle_groups=True,
-        image_min_side=600,
-        image_max_side=1024,
+        image_min_side=800,
+        image_max_side=1333,
         transform_parameters=None,
     ):
         self.transform_generator  = transform_generator
@@ -110,6 +110,19 @@ class Generator(object):
     def load_image_group(self, group):
         return [self.load_image(image_index) for image_index in group]
 
+    def random_transform_group_entry(self, image, annotations):
+        # randomly transform both image and annotations
+        if self.transform_generator:
+            transform = adjust_transform_for_image(next(self.transform_generator), image, self.transform_parameters.relative_translation)
+            image     = apply_transform(transform, image, self.transform_parameters)
+
+            # Transform the bounding boxes in the annotations.
+            annotations = annotations.copy()
+            for index in range(annotations.shape[0]):
+                annotations[index, :4] = transform_aabb(transform, annotations[index, :4])
+
+        return image, annotations
+
     def resize_image(self, image):
         return resize_image(image, min_side=self.image_min_side, max_side=self.image_max_side)
 
@@ -120,15 +133,8 @@ class Generator(object):
         # preprocess the image
         image = self.preprocess_image(image)
 
-        # randomly transform both image and annotations
-        if self.transform_generator:
-            transform = adjust_transform_for_image(next(self.transform_generator), image)
-            apply_transform(transform, image, self.transform_parameters)
-
-            # Transform the bounding boxes in the annotations.
-            annotations = annotations.copy()
-            for index in range(annotations.shape[0]):
-                annotations[index, :4] = transform_aabb(transform, annotations[index, :4])
+        # randomly transform image and annotations
+        image, annotations = self.random_transform_group_entry(image, annotations)
 
         # resize image
         image, image_scale = self.resize_image(image)
@@ -176,14 +182,14 @@ class Generator(object):
     def anchor_targets(
         self,
         image_shape,
-        boxes,
+        annotations,
         num_classes,
         mask_shape=None,
         negative_overlap=0.4,
         positive_overlap=0.5,
         **kwargs
     ):
-        return anchor_targets_bbox(image_shape, boxes, num_classes, mask_shape, negative_overlap, positive_overlap, **kwargs)
+        return anchor_targets_bbox(image_shape, annotations, num_classes, mask_shape, negative_overlap, positive_overlap, **kwargs)
 
     def compute_targets(self, image_group, annotations_group):
         # get the max image shape
@@ -193,7 +199,9 @@ class Generator(object):
         labels_group     = [None] * self.batch_size
         regression_group = [None] * self.batch_size
         for index, (image, annotations) in enumerate(zip(image_group, annotations_group)):
-            labels_group[index], regression_group[index] = self.anchor_targets(max_shape, annotations, self.num_classes(), mask_shape=image.shape)
+            # compute regression targets
+            labels_group[index], annotations, anchors = self.anchor_targets(max_shape, annotations, self.num_classes(), mask_shape=image.shape)
+            regression_group[index] = bbox_transform(anchors, annotations)
 
             # append anchor states to regression targets (necessary for filtering 'ignore', 'positive' and 'negative' anchors)
             anchor_states           = np.max(labels_group[index], axis=1, keepdims=True)
