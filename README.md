@@ -37,6 +37,11 @@ It is also possible to classify images from the file system by defining the prot
 http://localhost:5000?url=file:///path/to/image1234.jpg
 ```
 
+Multiple images may be classified by separating them with a `;` as shown in the following example:
+```
+http://localhost:5000/classify?url=file:///home/celum/DataSets/voest_test_small/_75_1349031.png;file:///home/celum/DataSets/voest_test_small/_93_2000057.png
+```
+
 ## Installation requirements to run RetinaNet (the hard way...)
 
 1) Clone this repository.
