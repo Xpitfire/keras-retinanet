@@ -18,6 +18,7 @@
 numpy
 scipy
 jupyter
+jupyterlab
 matplotlib
 Pillow
 scikit-learn
