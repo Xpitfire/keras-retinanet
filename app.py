@@ -1,8 +1,11 @@
 import redis
 from flask import Flask
-from flask import request
+from flask import request, redirect, current_app
 from flask import Response
 
+from functools import wraps
+
+import json
 import traceback
 import sys
 import cv2
@@ -188,7 +191,21 @@ def count():
     count = get_hit_count()
     return 'Demo: I have been seen {} times.\n'.format(count)
 
-@app.route("/classify")
+def jsonp(func):
+    """Wraps JSONified output for JSONP requests."""
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            content = '{}({});'.format(callback, str(func(*args, **kwargs).data)).replace("(b", "(")
+            mimetype = 'application/javascript'
+            return current_app.response_class(content, mimetype=mimetype)
+        else:
+            return func(*args, **kwargs)
+    return decorated_function
+
+@app.route("/classify", methods=['GET'])
+@jsonp
 def classify():
     try:
         image_path = request.args.get('url').split(';')
