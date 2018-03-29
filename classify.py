@@ -1,7 +1,10 @@
 import sys
-import cv2
+import traceback
 import os
 import time
+from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError
+
+import cv2
 import numpy as np
 
 import keras
@@ -66,7 +69,15 @@ def classify_urls(urls):
         result.url = urls[i]
 
         print('Reading image bgr...')
-        image = val_generator.read_image_bgr(i)
+        try:
+            image = val_generator.read_image_bgr(i)
+        except (OSError, ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
+            print("Unable to reach resource")
+            continue
+        except:
+            err = traceback.format_exc()
+            print('Could not read image', err)
+            continue
 
         # copy to draw on
         print('Drawing cvt color...')

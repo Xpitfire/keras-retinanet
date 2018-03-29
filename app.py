@@ -18,11 +18,12 @@ def resolve_special_url_cmd(image_path):
     result_list = []
     for path in image_path:
         if 'file://' in path and path.endswith('.list'):
-            path = url.replace('file://','')
+            path = path.replace('file://','')
             content = [line.strip() for line in open(path, 'r').readlines()]
             result_list += content
         else:
             result_list.append(path)
+    return result_list
 
 @app.route("/classify", methods=['GET'])
 @jsonp
@@ -30,7 +31,7 @@ def classify():
     try:
         image_path = request.args.get('url').split(';')
         print(image_path)
-        resolve_special_url_cmd(image_path)
+        image_path = resolve_special_url_cmd(image_path)
         classification_results = classify_urls(image_path)
         json = jsonify(classification_results)
         status = 200
