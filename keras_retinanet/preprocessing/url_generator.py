@@ -41,6 +41,8 @@ from ..utils.image import (
 from ..utils.transform import transform_aabb
 
 class UrlGenerator(Generator):
+    """Class to load images according to the provided url request string.
+    """
     def __init__(
         self,
         urls,
@@ -59,9 +61,11 @@ class UrlGenerator(Generator):
     def read_image_bgr(self, image_index):
         url = self.urls[image_index]
         image = None
+        # check if local file referenced
         if 'file://' in url:
             path = url.replace('file://','')
             image = Image.open(path)
+        # or resolve web request
         else:
             response = requests.get(url)
             image = Image.open(BytesIO(response.content))
@@ -78,11 +82,6 @@ class UrlGenerator(Generator):
         return self.labels_to_classes[str(label)]
 
     def image_aspect_ratio(self, image_index):
-        # PIL is fast for metadata
-        #print('test if something happens')
-        #response = requests.get(self.urls[image_index])
-        #image = Image.open(BytesIO(response.content))
-        #return float(image.width) / float(image.height)
         return 1.0
 
     def load_meta_info(self):

@@ -1,11 +1,8 @@
 import redis
 from flask import Flask
-from flask import request, redirect, current_app
+from flask import request, redirect
 from flask import Response
 
-from functools import wraps
-
-import json
 import traceback
 import sys
 import cv2
@@ -20,10 +17,13 @@ import tensorflow as tf
 from keras_retinanet.models.resnet import custom_objects
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
+from misc import *
+
 app = Flask(__name__)
 cache = redis.Redis(host='redis', port=6379)
 
 # model properties
+# TODO: move to config file
 classes_path = './data/coco/classes.json'
 labels_path = './data/coco/labels.json'
 model_name = 'snapshots/resnet50_coco_best_v2.0.1.h5'
@@ -48,6 +48,7 @@ def init_classification():
     global model
     global generator
 
+    # if model not already loaded, load new model
     if not is_model_loaded:
         print('Model not loaded...')
         # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -63,7 +64,9 @@ def init_classification():
     else:
         print('Model already loaded...')
 
+
 def classify_urls(urls):
+    # init model
     init_classification()
 
     # create a generator for testing data
@@ -71,7 +74,6 @@ def classify_urls(urls):
     val_generator = UrlGenerator(urls, classes_path, labels_path)
 
     results = []
-
     # load image
     for i in range(len(urls)):
         print('Running classification on', urls[i])
@@ -106,103 +108,34 @@ def classify_urls(urls):
         # correct for image scale
         detections[0, :, :4] /= scale
 
-        # visualize detections
+        # process and save detections
         for idx, (label, score) in enumerate(zip(predicted_labels, scores)):
             if score < 0.5:
                 continue
+            # get position data
             b = detections[0, idx, :4].astype(int)
-            cv2.rectangle(draw, (b[0], b[1]), (b[2], b[3]), (0, 0, 255), 3)
-            result.caption_list.append((label, val_generator.label_to_name(label), score, b))
+            # Crop image for extraction
+            h = b[3] - b[1]
+            w = b[2] - b[0]
+            cropped = draw[b[1]:(b[1]+h), b[0]:(b[0]+w)]
+
+            #cropped = image[b[2]:b[3], b[0]:b[1]]
+            label_name = val_generator.label_to_name(label)
+            ts = time.time()
+            extraction_dir = "data/extracted/{}".format(label_name)
+            if not os.path.exists(extraction_dir):
+                os.makedirs(extraction_dir)
+                print("Created new dir: ", extraction_dir)
+            cropped_file_name = "{}/{}_{}.png".format(extraction_dir, ts, idx)
+            print("Extracted image: ", cropped_file_name)
+            cv2.imwrite(cropped_file_name, cv2.cvtColor(cropped, cv2.COLOR_RGB2BGR))
+
+            # save meta-info for REST API response
+            result.caption_list.append((label, label_name, score, b))
 
         results.append(result)
     
     return results
-
-def get_hit_count():
-    retries = 5
-    while True:
-        try:
-            return cache.incr('hits')
-        except redis.exceptions.ConnectionError as exc:
-            if retries == 0:
-                raise exc
-            retries -= 1
-            time.sleep(0.5)
-
-def jsonify(classification_results):
-    json = '{ "results": [ '
-    for i, result in enumerate(classification_results):
-        json += '{ '
-        # time
-        json += '"time": '
-        json += '"'
-        json += str(result.time_elapsed)
-        json += '", '
-        # url
-        json += '"url": '
-        json += '"'
-        json += result.url
-        json += '", '
-        # captions
-        json += '"captions": [ '
-        for j, item in enumerate(result.caption_list):
-            id, label, score, box = item
-            json += '{ '
-            # id
-            json += '"id": '
-            json += '"'
-            json += str(id)
-            json += '", '
-            # label
-            json += '"label": '
-            json += '"'
-            json += label
-            json += '", '
-            # score
-            json += '"score": '
-            json += '"'
-            json += str(score)
-            json += '", '
-            # box
-            json += '"top-left": '
-            json += '"'
-            json += str(box[0]) + ';' + str(box[1]) # (x1, y1)
-            json += '", '
-            json += '"bottom-right": '
-            json += '"'
-            json += str(box[2]) + ';' + str(box[3]) # (x2, y2)
-            json += '"'
-            json += ' }'
-            if j < len(result.caption_list)-1:
-                json += ', '
-        json += ' ] '
-        json += ' }'
-        if i < len(classification_results)-1:
-            json += ', '
-    json += ' ] }'
-    return json
-
-@app.route('/')
-def home():
-    return 'Hello RetinaNet!'
-
-@app.route('/count')
-def count():
-    count = get_hit_count()
-    return 'Demo: I have been seen {} times.\n'.format(count)
-
-def jsonp(func):
-    """Wraps JSONified output for JSONP requests."""
-    @wraps(func)
-    def decorated_function(*args, **kwargs):
-        callback = request.args.get('callback', False)
-        if callback:
-            content = '{}({});'.format(callback, str(func(*args, **kwargs).data)).replace("(b", "(")
-            mimetype = 'application/javascript'
-            return current_app.response_class(content, mimetype=mimetype)
-        else:
-            return func(*args, **kwargs)
-    return decorated_function
 
 @app.route("/classify", methods=['GET'])
 @jsonp
