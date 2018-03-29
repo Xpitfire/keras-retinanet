@@ -68,6 +68,12 @@ If you installed `keras-retinanet` correctly, the train script will be installed
 However, if you make local modifications to the `keras-retinanet` repository, you should run the script directly from the repository.
 That will ensure that your local changes will be used by the train script.
 
+## Data
+
+To get imagenet test data follow the link below to the github repository:
+
+`https://github.com/dividiti/ck-caffe/tree/master/script/imagenet-downloader`
+
 ### Usage
 For training on [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/), run:
 ```
