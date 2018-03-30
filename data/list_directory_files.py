@@ -9,7 +9,7 @@ if __name__ == "__main__":
     out_list = []
     for file in glob.iglob(os.path.join(dir_path, '*')):
         if file.endswith('.jpg') or file.endswith('.png'):
-            out_list.append(file)
+            out_list.append('file://{}'.format(file))
 
     with open(out_file_name, 'w') as fdata:
         for item in out_list:
