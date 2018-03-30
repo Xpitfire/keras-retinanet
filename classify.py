@@ -1,3 +1,4 @@
+import logging
 import sys
 import traceback
 import os
@@ -25,6 +26,8 @@ is_model_loaded = False
 model = None
 generator = None
 
+log = logging.getLogger('celum.classify')
+
 def get_session():
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
@@ -37,19 +40,19 @@ def init_classification():
 
     # if model not already loaded, load new model
     if not is_model_loaded:
-        print('Model not loaded...')
+        log.info('Model not loaded...')
         # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-        print('Setting keras session...')
+        log.info('Setting keras session...')
         keras.backend.tensorflow_backend.set_session(get_session())
 
-        print('Loading model name...')
+        log.info('Loading model name...')
         model = keras.models.load_model(model_name, custom_objects=custom_objects)
 
-        print('Creating image data generator...')
+        log.info('Creating image data generator...')
         generator = keras.preprocessing.image.ImageDataGenerator()
         is_model_loaded = True
     else:
-        print('Model already loaded...')
+        log.info('Model already loaded...')
 
 
 def classify_urls(urls):
@@ -57,35 +60,35 @@ def classify_urls(urls):
     init_classification()
 
     # create a generator for testing data
-    print('Creating validation generator...')
+    log.info('Creating validation generator...')
     val_generator = UrlGenerator(urls, classes_path, labels_path)
 
     results = []
     # load image
     for i in range(len(urls)):
-        print('Running classification on', urls[i])
+        log.info('Running classification on: {}'.format(urls[i]))
 
         result = Result()
         result.url = urls[i]
 
-        print('Reading image bgr...')
+        log.info('Reading image bgr...')
         try:
             image = val_generator.read_image_bgr(i)
         except (OSError, ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
-            print("Unable to reach resource")
+            log.warning('Skipped: Unable to reach resource')
             continue
         except:
             err = traceback.format_exc()
-            print('Could not read image', err)
+            log.error('Could not read image: {}'.format(err))
             continue
 
         # copy to draw on
-        print('Drawing cvt color...')
+        log.info('Drawing cvt color...')
         draw = np.asarray(image.copy())
         draw = cv2.cvtColor(draw, cv2.COLOR_BGR2RGB)
 
         # preprocess image for network
-        print('Processing image...')
+        log.info('Processing image...')
         image = val_generator.preprocess_image(image)
         image, scale = val_generator.resize_image(image)
 
@@ -93,7 +96,7 @@ def classify_urls(urls):
         start = time.time()
         _, _, detections = model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
-        print("Processing time: ", elapsed)
+        log.info('Processing time: {}'.format(elapsed))
         result.time_elapsed = elapsed
 
         # compute predicted labels and scores
@@ -117,12 +120,12 @@ def classify_urls(urls):
             #cropped = image[b[2]:b[3], b[0]:b[1]]
             label_name = val_generator.label_to_name(label)
             ts = time.time()
-            extraction_dir = "data/extracted/{}".format(label_name)
+            extraction_dir = 'data/extracted/{}'.format(label_name)
             if not os.path.exists(extraction_dir):
                 os.makedirs(extraction_dir)
-                print("Created new dir: ", extraction_dir)
-            cropped_file_name = "{}/{}_{}.png".format(extraction_dir, ts, idx)
-            print("Extracted image: ", cropped_file_name)
+                log.info('Created new dir: {}'.format(extraction_dir))
+            cropped_file_name = '{}/{}_{}.png'.format(extraction_dir, ts, idx)
+            log.info('Extracted image: {}'.format(cropped_file_name))
             cv2.imwrite(cropped_file_name, cv2.cvtColor(cropped, cv2.COLOR_RGB2BGR))
 
             # save meta-info for REST API response
