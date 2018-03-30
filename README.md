@@ -70,9 +70,11 @@ That will ensure that your local changes will be used by the train script.
 
 ## Data
 
-To get imagenet test data follow the link below to the github repository:
+To get imagenet indices test data follow the link below to the github repository
 
 `https://github.com/dividiti/ck-caffe/tree/master/script/imagenet-downloader`
+
+or use the `download_imagenet_indices.sh` located in the `data` directory.
 
 ### Usage
 For training on [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/), run:
