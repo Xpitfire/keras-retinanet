@@ -15,11 +15,7 @@ from keras_retinanet.models.resnet import custom_objects
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
 from models import Result
-
-# model properties
-classes_path = './data/coco/classes.json'
-labels_path = './data/coco/labels.json'
-model_name = 'snapshots/resnet50_coco_best_v2.0.1.h5'
+import settings
 
 is_model_loaded = False
 model = None
@@ -47,7 +43,8 @@ def init_classification():
         keras.backend.tensorflow_backend.set_session(get_session())
 
         log.info('Loading model name...')
-        model = keras.models.load_model(model_name, custom_objects=custom_objects)
+        model = keras.models.load_model(settings.config['RETINANET_MODEL']['model_path']+settings.config['RETINANET_MODEL']['model_name'],
+                                        custom_objects=custom_objects)
 
         log.info('Creating image data generator...')
         generator = keras.preprocessing.image.ImageDataGenerator()
@@ -62,7 +59,9 @@ def classify_urls(urls):
 
     # create a generator for testing data
     log.info('Creating validation generator...')
-    val_generator = UrlGenerator(urls, classes_path, labels_path)
+    val_generator = UrlGenerator(urls,
+                                 settings.config['RETINANET_MODEL']['classes_file'],
+                                 settings.config['RETINANET_MODEL']['labels_file'])
 
     results = []
     # load image

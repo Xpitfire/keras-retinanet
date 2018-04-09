@@ -19,7 +19,8 @@ WORKDIR /code
 RUN pip3 install -r requirements.txt
 RUN pip3 install --user --upgrade git+https://github.com/broadinstitute/keras-resnet
 RUN python3 setup.py install --user
-# setting notebook options
+
+# setting notebook options for development mode -> uncomment for production mode
 RUN mkdir ~/.jupyter
 RUN touch ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.token = u''" >> ~/.jupyter/jupyter_notebook_config.py
