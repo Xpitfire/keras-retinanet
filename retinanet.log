@@ -1,3 +1,210 @@
 04-09 21:12 root         INFO     Server app started!
 04-09 21:12 werkzeug     WARNING   * Debugger is active!
 04-09 21:12 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:23 root         INFO     Server app started!
+04-09 23:23 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:23 werkzeug     INFO      * Restarting with stat
+04-09 23:23 root         INFO     Server app started!
+04-09 23:23 werkzeug     WARNING   * Debugger is active!
+04-09 23:23 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:23 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:23 celum.classify INFO     Model not loaded...
+04-09 23:23 celum.classify INFO     Setting keras session...
+04-09 23:23 celum.classify INFO     Loading model name...
+04-09 23:23 celum.classify INFO     Creating image data generator...
+04-09 23:23 celum.classify INFO     Creating validation generator...
+04-09 23:23 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:23 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:23 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:23:43] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:25 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:25 celum.classify INFO     Model already loaded...
+04-09 23:25 celum.classify INFO     Creating validation generator...
+04-09 23:25 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:25 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:25 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:25:05] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:25 root         INFO     Server app started!
+04-09 23:25 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:25 werkzeug     INFO      * Restarting with stat
+04-09 23:25 root         INFO     Server app started!
+04-09 23:25 werkzeug     WARNING   * Debugger is active!
+04-09 23:25 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:25 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:25 celum.classify INFO     Model not loaded...
+04-09 23:25 celum.classify INFO     Setting keras session...
+04-09 23:25 celum.classify INFO     Loading model name...
+04-09 23:25 celum.classify INFO     Creating image data generator...
+04-09 23:25 celum.classify INFO     Creating validation generator...
+04-09 23:25 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:25 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:25 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:25:33] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:26 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:26 celum.classify INFO     Model already loaded...
+04-09 23:26 celum.classify INFO     Creating validation generator...
+04-09 23:26 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:26 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:26 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:26:00] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:26 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:26:27] "GET / HTTP/1.1" 404 -
+04-09 23:26 root         INFO     ['https://i.stack.imgur.com/H03KE.png']
+04-09 23:26 celum.classify INFO     Model already loaded...
+04-09 23:26 celum.classify INFO     Creating validation generator...
+04-09 23:26 celum.classify INFO     Running classification on: https://i.stack.imgur.com/H03KE.png
+04-09 23:26 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:26 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:26:59] "GET /classify?url=https://i.stack.imgur.com/H03KE.png HTTP/1.1" 500 -
+04-09 23:27 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:27 werkzeug     INFO      * Restarting with stat
+04-09 23:27 root         INFO     Server app started!
+04-09 23:27 werkzeug     WARNING   * Debugger is active!
+04-09 23:27 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:28 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:28 werkzeug     INFO      * Restarting with stat
+04-09 23:29 root         INFO     Server app started!
+04-09 23:29 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:29 werkzeug     INFO      * Restarting with stat
+04-09 23:29 root         INFO     Server app started!
+04-09 23:29 werkzeug     WARNING   * Debugger is active!
+04-09 23:29 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:29 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:29 celum.classify INFO     Model not loaded...
+04-09 23:29 celum.classify INFO     Setting keras session...
+04-09 23:29 celum.classify INFO     Loading model name...
+04-09 23:29 celum.classify INFO     Creating image data generator...
+04-09 23:29 celum.classify INFO     Creating validation generator...
+04-09 23:29 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:29 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:29 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:29:19] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:29 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:29 werkzeug     INFO      * Restarting with stat
+04-09 23:29 root         INFO     Server app started!
+04-09 23:29 werkzeug     WARNING   * Debugger is active!
+04-09 23:29 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:30 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:30 celum.classify INFO     Model not loaded...
+04-09 23:30 celum.classify INFO     Setting keras session...
+04-09 23:30 celum.classify INFO     Loading model name...
+04-09 23:30 celum.classify INFO     Creating image data generator...
+04-09 23:30 celum.classify INFO     Creating validation generator...
+04-09 23:30 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:30 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:30 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:30:14] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:30 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:30 werkzeug     INFO      * Restarting with stat
+04-09 23:30 root         INFO     Server app started!
+04-09 23:30 werkzeug     WARNING   * Debugger is active!
+04-09 23:30 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:30 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:30 werkzeug     INFO      * Restarting with stat
+04-09 23:30 root         INFO     Server app started!
+04-09 23:30 werkzeug     WARNING   * Debugger is active!
+04-09 23:30 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:31 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:31 werkzeug     INFO      * Restarting with stat
+04-09 23:31 root         INFO     Server app started!
+04-09 23:31 werkzeug     WARNING   * Debugger is active!
+04-09 23:31 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:31 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/settings.py', reloading
+04-09 23:31 werkzeug     INFO      * Restarting with stat
+04-09 23:31 root         INFO     Server app started!
+04-09 23:31 werkzeug     WARNING   * Debugger is active!
+04-09 23:31 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:31 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/settings.py', reloading
+04-09 23:31 werkzeug     INFO      * Restarting with stat
+04-09 23:31 root         INFO     Server app started!
+04-09 23:31 werkzeug     WARNING   * Debugger is active!
+04-09 23:31 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:31 root         INFO     Server app started!
+04-09 23:31 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:31 werkzeug     INFO      * Restarting with stat
+04-09 23:31 root         INFO     Server app started!
+04-09 23:31 werkzeug     WARNING   * Debugger is active!
+04-09 23:31 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:31 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:31 celum.classify INFO     Model not loaded...
+04-09 23:31 celum.classify INFO     Setting keras session...
+04-09 23:31 celum.classify INFO     Loading model name...
+04-09 23:31 celum.classify INFO     Creating image data generator...
+04-09 23:31 celum.classify INFO     Creating validation generator...
+04-09 23:31 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:31 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 36, in classify
+    classification_results = classify_urls(image_path)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py", line 71, in classify_urls
+    result = Result()
+TypeError: __init__() missing 1 required positional argument: 'json_str'
+
+04-09 23:31 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:31:42] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:32 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:32 werkzeug     INFO      * Restarting with stat
+04-09 23:32 root         INFO     Server app started!
+04-09 23:32 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:32 werkzeug     INFO      * Restarting with stat
+04-09 23:32 root         INFO     Server app started!
+04-09 23:32 werkzeug     WARNING   * Debugger is active!
+04-09 23:32 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:32 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:32 celum.classify INFO     Model not loaded...
+04-09 23:32 celum.classify INFO     Setting keras session...
+04-09 23:32 celum.classify INFO     Loading model name...
+04-09 23:32 celum.classify INFO     Creating image data generator...
+04-09 23:32 celum.classify INFO     Creating validation generator...
+04-09 23:32 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:32 celum.classify INFO     Reading image bgr...
+04-09 23:32 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:32 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:32 celum.classify INFO     Drawing cvt color...
+04-09 23:32 celum.classify INFO     Processing image...
+04-09 23:32 celum.classify INFO     Processing time: 6.430222988128662
+04-09 23:32 celum.classify INFO     Extracted image: data/extracted/tie/1523309557.717061_139579.png
+04-09 23:32 celum.classify INFO     Extracted image: data/extracted/person/1523309557.762544_160669.png
+04-09 23:32 root         INFO     Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 38, in classify
+    test = jsonpars.dumps(classification_results.__dict__)
+AttributeError: 'list' object has no attribute '__dict__'
+
+04-09 23:32 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:32:37] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-09 23:35 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:35 werkzeug     INFO      * Restarting with stat
+04-09 23:35 root         INFO     Server app started!
+04-09 23:35 werkzeug     WARNING   * Debugger is active!
+04-09 23:35 werkzeug     INFO      * Debugger PIN: 620-200-766
