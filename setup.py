@@ -2,12 +2,12 @@ import setuptools
 
 setuptools.setup(
     name='keras-retinanet',
-    version='0.0.1',
-    url='https://github.com/fizyr/keras-retinanet',
-    author='Hans Gaiser',
-    author_email='h.gaiser@fizyr.com',
-    maintainer='Hans Gaiser',
-    maintainer_email='h.gaiser@fizyr.com',
+    version='0.0.2',
+    url='https://github.com/Xpitfire/keras-retinanet.git',
+    author='Marius-Constantin Dinu',
+    author_email='dinu.marius-constantin@hotmail.com',
+    maintainer='Marius-Constantin Dinu',
+    maintainer_email='dinu.marius-constantin@hotmail.com',
     packages=setuptools.find_packages(),
     install_requires=['keras', 'keras-resnet', 'six', 'scipy'],
     entry_points = {

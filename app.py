@@ -1,12 +1,11 @@
 import redis
 from flask import Flask
-from flask import request, redirect
+from flask import request
 from flask import Response
 
 import traceback
 
 from misc import jsonp, jsonify
-from models import Result
 from classify import classify_urls
 
 import logging
@@ -43,6 +42,7 @@ def resolve_special_url_cmd(image_path):
         else:
             result_list.append(path)
     return result_list
+
 
 @app.route("/classify", methods=['GET'])
 @jsonp

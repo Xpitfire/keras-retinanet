@@ -1,5 +1,6 @@
-from functools import wraps
+import functools
 from flask import request, current_app
+
 
 def jsonify(classification_results):
     # parse the json response
@@ -41,26 +42,28 @@ def jsonify(classification_results):
             # box
             json += '"top-left": '
             json += '"'
-            json += str(box[0]) + ';' + str(box[1]) # (x1, y1)
+            json += str(box[0]) + ';' + str(box[1])  # (x1, y1)
             json += '", '
             json += '"bottom-right": '
             json += '"'
-            json += str(box[2]) + ';' + str(box[3]) # (x2, y2)
+            json += str(box[2]) + ';' + str(box[3])  # (x2, y2)
             json += '"'
             json += ' }'
-            if j < len(result.caption_list)-1:
+            if j < len(result.caption_list) - 1:
                 json += ', '
         json += ' ] '
         json += ' }'
-        if i < len(classification_results)-1:
+        if i < len(classification_results) - 1:
             json += ', '
     json += ' ] }'
     return json
 
+
 def jsonp(func):
     # TODO: fix jsonp workaround - currently used to avoid cors issue 
     """Wraps JSONified output for JSONP requests."""
-    @wraps(func)
+
+    @functools.wraps(func)
     def decorated_function(*args, **kwargs):
         callback = request.args.get('callback', False)
         if callback:
@@ -72,4 +75,5 @@ def jsonp(func):
             return current_app.response_class(content, mimetype=mimetype)
         else:
             return func(*args, **kwargs)
+
     return decorated_function

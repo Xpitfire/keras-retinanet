@@ -1,5 +1,4 @@
 import logging
-import sys
 import traceback
 import os
 import time
@@ -28,10 +27,12 @@ generator = None
 
 log = logging.getLogger('celum.classify')
 
+
 def get_session():
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
     return tf.Session(config=config)
+
 
 def init_classification():
     global is_model_loaded
@@ -115,9 +116,9 @@ def classify_urls(urls):
             # Crop image for extraction
             h = b[3] - b[1]
             w = b[2] - b[0]
-            cropped = draw[b[1]:(b[1]+h), b[0]:(b[0]+w)]
+            cropped = draw[b[1]:(b[1] + h), b[0]:(b[0] + w)]
 
-            #cropped = image[b[2]:b[3], b[0]:b[1]]
+            # cropped = image[b[2]:b[3], b[0]:b[1]]
             label_name = val_generator.label_to_name(label)
             ts = time.time()
             extraction_dir = 'data/extracted/{}'.format(label_name)
@@ -132,5 +133,5 @@ def classify_urls(urls):
             result.caption_list.append((label, label_name, score, b))
 
         results.append(result)
-    
+
     return results
