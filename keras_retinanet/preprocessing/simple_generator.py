@@ -14,50 +14,33 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import numpy as np
-
 import json
-import requests
-from PIL import Image
-from io import BytesIO
 
 from .generator import Generator
 
 
-class UrlGenerator(Generator):
+class SimpleGenerator(Generator):
     """Class to load images according to the provided url request string.
     """
 
     def __init__(
             self,
-            urls,
             classes_path,
             labels_path,
             **kwargs
     ):
-        self.urls = urls
         self.classes_path = classes_path
         self.labels_path = labels_path
         self.load_meta_info()
         self.label_to_name(0)
 
-        super(UrlGenerator, self).__init__(**kwargs)
+        super(SimpleGenerator, self).__init__(**kwargs)
 
     def read_image_bgr(self, image_index):
-        url = self.urls[image_index]
-        # check if local file referenced
-        if 'file://' in url:
-            path = url.replace('file://', '')
-            image = Image.open(path)
-        # or resolve web request
-        else:
-            response = requests.get(url)
-            image = Image.open(BytesIO(response.content))
-        image = np.asarray(image.convert('RGB'))
-        return image[:, :, ::-1].copy()
+        pass
 
     def size(self):
-        return len(self.urls)
+        return 0
 
     def name_to_label(self, name):
         return int(self.classes_to_labels[name])

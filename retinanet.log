@@ -208,3 +208,2660 @@ AttributeError: 'list' object has no attribute '__dict__'
 04-09 23:35 root         INFO     Server app started!
 04-09 23:35 werkzeug     WARNING   * Debugger is active!
 04-09 23:35 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:44 root         INFO     Server app started!
+04-09 23:44 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:44 werkzeug     INFO      * Restarting with stat
+04-09 23:44 root         INFO     Server app started!
+04-09 23:44 werkzeug     WARNING   * Debugger is active!
+04-09 23:44 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:44 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:44 celum.classify INFO     Model not loaded...
+04-09 23:44 celum.classify INFO     Setting keras session...
+04-09 23:44 celum.classify INFO     Loading model name...
+04-09 23:44 celum.classify INFO     Creating image data generator...
+04-09 23:44 celum.classify INFO     Creating validation generator...
+04-09 23:44 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:44 celum.classify INFO     Reading image bgr...
+04-09 23:44 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:44 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:44 celum.classify INFO     Drawing cvt color...
+04-09 23:44 celum.classify INFO     Processing image...
+04-09 23:44 celum.classify INFO     Processing time: 6.293292045593262
+04-09 23:44 celum.classify INFO     Extracted image: data/extracted/tie/1523310267.119063_139579.png
+04-09 23:44 celum.classify INFO     Extracted image: data/extracted/person/1523310267.152128_160669.png
+04-09 23:44 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 38, in classify
+    test = json.dump(classification_results)
+TypeError: dump() missing 1 required positional argument: 'fp'
+
+04-09 23:44 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:44:27] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-09 23:45 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:45 werkzeug     INFO      * Restarting with stat
+04-09 23:45 root         INFO     Server app started!
+04-09 23:45 werkzeug     WARNING   * Debugger is active!
+04-09 23:45 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:45 root         INFO     Server app started!
+04-09 23:45 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-09 23:45 werkzeug     INFO      * Restarting with stat
+04-09 23:45 root         INFO     Server app started!
+04-09 23:45 werkzeug     WARNING   * Debugger is active!
+04-09 23:45 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:45 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:45 celum.classify INFO     Model not loaded...
+04-09 23:45 celum.classify INFO     Setting keras session...
+04-09 23:45 celum.classify INFO     Loading model name...
+04-09 23:45 celum.classify INFO     Creating image data generator...
+04-09 23:45 celum.classify INFO     Creating validation generator...
+04-09 23:45 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:45 celum.classify INFO     Reading image bgr...
+04-09 23:45 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:45 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:45 celum.classify INFO     Drawing cvt color...
+04-09 23:45 celum.classify INFO     Processing image...
+04-09 23:45 celum.classify INFO     Processing time: 6.24620795249939
+04-09 23:45 celum.classify INFO     Extracted image: data/extracted/tie/1523310349.610729_139579.png
+04-09 23:45 celum.classify INFO     Extracted image: data/extracted/person/1523310349.644489_160669.png
+04-09 23:45 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 38, in classify
+    test = json.dumps(classification_results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <models.ResultList object at 0x1817466c50> is not JSON serializable
+
+04-09 23:45 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:45:49] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-09 23:46 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:46 werkzeug     INFO      * Restarting with stat
+04-09 23:46 root         INFO     Server app started!
+04-09 23:46 werkzeug     WARNING   * Debugger is active!
+04-09 23:46 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:46 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:46 celum.classify INFO     Model not loaded...
+04-09 23:46 celum.classify INFO     Setting keras session...
+04-09 23:46 celum.classify INFO     Loading model name...
+04-09 23:46 celum.classify INFO     Creating image data generator...
+04-09 23:46 celum.classify INFO     Creating validation generator...
+04-09 23:46 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:46 celum.classify INFO     Reading image bgr...
+04-09 23:46 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:46 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:46 celum.classify INFO     Drawing cvt color...
+04-09 23:46 celum.classify INFO     Processing image...
+04-09 23:46 celum.classify INFO     Processing time: 6.896852970123291
+04-09 23:46 celum.classify INFO     Extracted image: data/extracted/tie/1523310409.296687_139579.png
+04-09 23:46 celum.classify INFO     Extracted image: data/extracted/person/1523310409.328547_160669.png
+04-09 23:46 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 38, in classify
+    test = json.dumps(classification_results.results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <models.Result object at 0x18206e6c18> is not JSON serializable
+
+04-09 23:46 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:46:49] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-09 23:51 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:51 werkzeug     INFO      * Restarting with stat
+04-09 23:51 root         INFO     Server app started!
+04-09 23:51 werkzeug     WARNING   * Debugger is active!
+04-09 23:51 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:52 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:52 werkzeug     INFO      * Restarting with stat
+04-09 23:52 root         INFO     Server app started!
+04-09 23:52 werkzeug     WARNING   * Debugger is active!
+04-09 23:52 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:52 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:52 werkzeug     INFO      * Restarting with stat
+04-09 23:52 root         INFO     Server app started!
+04-09 23:52 werkzeug     WARNING   * Debugger is active!
+04-09 23:52 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:52 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:52 werkzeug     INFO      * Restarting with stat
+04-09 23:52 root         INFO     Server app started!
+04-09 23:52 werkzeug     WARNING   * Debugger is active!
+04-09 23:52 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:52 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:52 celum.classify INFO     Model not loaded...
+04-09 23:52 celum.classify INFO     Setting keras session...
+04-09 23:52 celum.classify INFO     Loading model name...
+04-09 23:52 celum.classify INFO     Creating image data generator...
+04-09 23:52 celum.classify INFO     Creating validation generator...
+04-09 23:52 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:52 celum.classify INFO     Reading image bgr...
+04-09 23:52 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:52 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:52 celum.classify INFO     Drawing cvt color...
+04-09 23:52 celum.classify INFO     Processing image...
+04-09 23:52 celum.classify INFO     Processing time: 6.286880016326904
+04-09 23:52 celum.classify INFO     Extracted image: data/extracted/tie/1523310770.679754_139579.png
+04-09 23:52 celum.classify INFO     Extracted image: data/extracted/person/1523310770.712914_160669.png
+04-09 23:52 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 38, in classify
+    test = json.dumps(classification_results.results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <models.Result object at 0x181827bbe0> is not JSON serializable
+
+04-09 23:52 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 43, in classify
+    json_response = jsonify(classification_results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 10, in jsonify
+    for i, result in enumerate(classification_results):
+TypeError: 'ResultList' object is not iterable
+
+04-09 23:52 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:52:50] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:53 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:53 werkzeug     INFO      * Restarting with stat
+04-09 23:53 root         INFO     Server app started!
+04-09 23:53 werkzeug     WARNING   * Debugger is active!
+04-09 23:53 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:53 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:53 celum.classify INFO     Model not loaded...
+04-09 23:53 celum.classify INFO     Setting keras session...
+04-09 23:53 celum.classify INFO     Loading model name...
+04-09 23:53 celum.classify INFO     Creating image data generator...
+04-09 23:53 celum.classify INFO     Creating validation generator...
+04-09 23:53 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:53 celum.classify INFO     Reading image bgr...
+04-09 23:53 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:53 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:53 celum.classify INFO     Drawing cvt color...
+04-09 23:53 celum.classify INFO     Processing image...
+04-09 23:53 celum.classify INFO     Processing time: 6.375253915786743
+04-09 23:53 celum.classify INFO     Extracted image: data/extracted/tie/1523310829.885497_139579.png
+04-09 23:53 celum.classify INFO     Extracted image: data/extracted/person/1523310829.917433_160669.png
+04-09 23:53 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 38, in classify
+    test = json.dumps(classification_results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <models.ResultList object at 0x1821b0ab70> is not JSON serializable
+
+04-09 23:53 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:53:49] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-09 23:54 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:54 werkzeug     INFO      * Restarting with stat
+04-09 23:54 root         INFO     Server app started!
+04-09 23:54 werkzeug     WARNING   * Debugger is active!
+04-09 23:54 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:55 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:55 celum.classify INFO     Model not loaded...
+04-09 23:55 celum.classify INFO     Setting keras session...
+04-09 23:55 celum.classify INFO     Loading model name...
+04-09 23:55 celum.classify INFO     Creating image data generator...
+04-09 23:55 celum.classify INFO     Creating validation generator...
+04-09 23:55 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:55 celum.classify INFO     Reading image bgr...
+04-09 23:55 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:55 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:55 celum.classify INFO     Drawing cvt color...
+04-09 23:55 celum.classify INFO     Processing image...
+04-09 23:55 celum.classify INFO     Processing time: 7.4082629680633545
+04-09 23:55 celum.classify INFO     Extracted image: data/extracted/tie/1523310923.093688_139579.png
+04-09 23:55 celum.classify INFO     Extracted image: data/extracted/person/1523310923.12702_160669.png
+04-09 23:55 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <models.ResultList object at 0x1820863b70> is not JSON serializable
+
+04-09 23:55 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results, cls=ResultList)
+TypeError: jsonify() got an unexpected keyword argument 'cls'
+
+04-09 23:55 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:55:23] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-09 23:56 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:56 werkzeug     INFO      * Restarting with stat
+04-09 23:56 root         INFO     Server app started!
+04-09 23:56 werkzeug     WARNING   * Debugger is active!
+04-09 23:56 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:56 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:56 celum.classify INFO     Model not loaded...
+04-09 23:56 celum.classify INFO     Setting keras session...
+04-09 23:56 celum.classify INFO     Loading model name...
+04-09 23:56 celum.classify INFO     Creating image data generator...
+04-09 23:56 celum.classify INFO     Creating validation generator...
+04-09 23:56 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:56 celum.classify INFO     Reading image bgr...
+04-09 23:56 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:56 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:56 celum.classify INFO     Drawing cvt color...
+04-09 23:56 celum.classify INFO     Processing image...
+04-09 23:56 celum.classify INFO     Processing time: 6.675065040588379
+04-09 23:56 celum.classify INFO     Extracted image: data/extracted/tie/1523310988.074991_139579.png
+04-09 23:56 celum.classify INFO     Extracted image: data/extracted/person/1523310988.110887_160669.png
+04-09 23:56 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultList)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+TypeError: __init__() got an unexpected keyword argument 'default'
+
+04-09 23:56 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:56:28] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-09 23:58 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-09 23:58 werkzeug     INFO      * Restarting with stat
+04-09 23:58 root         INFO     Server app started!
+04-09 23:58 werkzeug     WARNING   * Debugger is active!
+04-09 23:58 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:58 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-09 23:58 werkzeug     INFO      * Restarting with stat
+04-09 23:58 root         INFO     Server app started!
+04-09 23:58 werkzeug     WARNING   * Debugger is active!
+04-09 23:58 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-09 23:58 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-09 23:58 celum.classify INFO     Model not loaded...
+04-09 23:58 celum.classify INFO     Setting keras session...
+04-09 23:58 celum.classify INFO     Loading model name...
+04-09 23:58 celum.classify INFO     Creating image data generator...
+04-09 23:58 celum.classify INFO     Creating validation generator...
+04-09 23:58 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-09 23:58 celum.classify INFO     Reading image bgr...
+04-09 23:58 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-09 23:58 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-09 23:58 celum.classify INFO     Drawing cvt color...
+04-09 23:58 celum.classify INFO     Processing image...
+04-09 23:58 celum.classify INFO     Processing time: 6.2508180141448975
+04-09 23:58 celum.classify INFO     Extracted image: data/extracted/tie/1523311115.162043_139579.png
+04-09 23:58 celum.classify INFO     Extracted image: data/extracted/person/1523311115.193762_160669.png
+04-09 23:58 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 7, in default
+    return o.__dict__
+AttributeError: 'numpy.int64' object has no attribute '__dict__'
+
+04-09 23:58 werkzeug     INFO     127.0.0.1 - - [09/Apr/2018 23:58:35] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-10 00:00 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:00 werkzeug     INFO      * Restarting with stat
+04-10 00:10 root         INFO     Server app started!
+04-10 00:10 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 00:10 werkzeug     INFO      * Restarting with stat
+04-10 00:10 root         INFO     Server app started!
+04-10 00:10 werkzeug     WARNING   * Debugger is active!
+04-10 00:10 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:10 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:10 celum.classify INFO     Model not loaded...
+04-10 00:10 celum.classify INFO     Setting keras session...
+04-10 00:10 celum.classify INFO     Loading model name...
+04-10 00:10 celum.classify INFO     Creating image data generator...
+04-10 00:10 celum.classify INFO     Creating validation generator...
+04-10 00:10 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:10 celum.classify INFO     Reading image bgr...
+04-10 00:10 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:10 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:10 celum.classify INFO     Drawing cvt color...
+04-10 00:10 celum.classify INFO     Processing image...
+04-10 00:10 celum.classify INFO     Processing time: 6.5477869510650635
+04-10 00:11 celum.classify INFO     Extracted image: data/extracted/tie/1523311860.236294_139579.png
+04-10 00:11 celum.classify INFO     Extracted image: data/extracted/person/1523311860.269216_160669.png
+04-10 00:11 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 42, in default
+    o.__dict__['results'] = o.results
+AttributeError: 'Result' object has no attribute 'results'
+
+04-10 00:11 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:11 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:11:00] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:16 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:16 werkzeug     INFO      * Restarting with stat
+04-10 00:16 root         INFO     Server app started!
+04-10 00:16 werkzeug     WARNING   * Debugger is active!
+04-10 00:16 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:16 root         INFO     Server app started!
+04-10 00:16 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 00:16 werkzeug     INFO      * Restarting with stat
+04-10 00:16 root         INFO     Server app started!
+04-10 00:16 werkzeug     WARNING   * Debugger is active!
+04-10 00:16 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:16 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:16 celum.classify INFO     Model not loaded...
+04-10 00:16 celum.classify INFO     Setting keras session...
+04-10 00:16 celum.classify INFO     Loading model name...
+04-10 00:16 celum.classify INFO     Creating image data generator...
+04-10 00:16 celum.classify INFO     Creating validation generator...
+04-10 00:16 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:16 celum.classify INFO     Reading image bgr...
+04-10 00:16 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:16 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:16 celum.classify INFO     Drawing cvt color...
+04-10 00:16 celum.classify INFO     Processing image...
+04-10 00:16 celum.classify INFO     Processing time: 6.201114177703857
+04-10 00:16 celum.classify INFO     Extracted image: data/extracted/tie/1523312188.791036_139579.png
+04-10 00:16 celum.classify INFO     Extracted image: data/extracted/person/1523312188.822527_160669.png
+04-10 00:16 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 42, in default
+    o['results'] = o.results
+TypeError: 'ResultList' object does not support item assignment
+
+04-10 00:16 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:16 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:16:28] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:19 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:19 werkzeug     INFO      * Restarting with stat
+04-10 00:19 root         INFO     Server app started!
+04-10 00:19 werkzeug     WARNING   * Debugger is active!
+04-10 00:19 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:19 root         INFO     Server app started!
+04-10 00:19 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 00:19 werkzeug     INFO      * Restarting with stat
+04-10 00:19 root         INFO     Server app started!
+04-10 00:19 werkzeug     WARNING   * Debugger is active!
+04-10 00:19 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:20 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:20 celum.classify INFO     Model not loaded...
+04-10 00:20 celum.classify INFO     Setting keras session...
+04-10 00:20 celum.classify INFO     Loading model name...
+04-10 00:20 celum.classify INFO     Creating image data generator...
+04-10 00:20 celum.classify INFO     Creating validation generator...
+04-10 00:20 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:20 celum.classify INFO     Reading image bgr...
+04-10 00:20 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:20 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:20 celum.classify INFO     Drawing cvt color...
+04-10 00:20 celum.classify INFO     Processing image...
+04-10 00:20 celum.classify INFO     Processing time: 6.169843912124634
+04-10 00:20 celum.classify INFO     Extracted image: data/extracted/tie/1523312415.542204_139579.png
+04-10 00:20 celum.classify INFO     Extracted image: data/extracted/person/1523312415.573883_160669.png
+04-10 00:20 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 42, in default
+    dict_enc = {'results': o.results}
+AttributeError: 'Result' object has no attribute 'results'
+
+04-10 00:20 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:20 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:20:15] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:23 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:23 werkzeug     INFO      * Restarting with stat
+04-10 00:23 root         INFO     Server app started!
+04-10 00:23 werkzeug     WARNING   * Debugger is active!
+04-10 00:23 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:23 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:23 werkzeug     INFO      * Restarting with stat
+04-10 00:23 root         INFO     Server app started!
+04-10 00:23 werkzeug     WARNING   * Debugger is active!
+04-10 00:23 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:23 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:23 celum.classify INFO     Model not loaded...
+04-10 00:23 celum.classify INFO     Setting keras session...
+04-10 00:23 celum.classify INFO     Loading model name...
+04-10 00:23 celum.classify INFO     Creating image data generator...
+04-10 00:23 celum.classify INFO     Creating validation generator...
+04-10 00:23 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:23 celum.classify INFO     Reading image bgr...
+04-10 00:23 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:23 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:23 celum.classify INFO     Drawing cvt color...
+04-10 00:23 celum.classify INFO     Processing image...
+04-10 00:24 celum.classify INFO     Processing time: 6.269873142242432
+04-10 00:24 celum.classify INFO     Extracted image: data/extracted/tie/1523312644.48274_139579.png
+04-10 00:24 celum.classify INFO     Extracted image: data/extracted/person/1523312644.516761_160669.png
+04-10 00:24 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 42, in default
+    dict_enc = {'results': ResultEncoder().encode(o.results)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 26, in default
+    'captions': CaptionEncoder().encode(o.captions)}
+AttributeError: 'Result' object has no attribute 'captions'
+
+04-10 00:24 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:24 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:24:04] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:25 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:25 werkzeug     INFO      * Restarting with stat
+04-10 00:25 root         INFO     Server app started!
+04-10 00:25 werkzeug     WARNING   * Debugger is active!
+04-10 00:25 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:26 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:26 celum.classify INFO     Model not loaded...
+04-10 00:26 celum.classify INFO     Setting keras session...
+04-10 00:26 celum.classify INFO     Loading model name...
+04-10 00:26 celum.classify INFO     Creating image data generator...
+04-10 00:26 celum.classify INFO     Creating validation generator...
+04-10 00:26 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:26 celum.classify INFO     Reading image bgr...
+04-10 00:26 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:26 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:26 celum.classify INFO     Drawing cvt color...
+04-10 00:26 celum.classify INFO     Processing image...
+04-10 00:26 celum.classify INFO     Processing time: 6.168694972991943
+04-10 00:26 celum.classify INFO     Extracted image: data/extracted/tie/1523312780.096707_139579.png
+04-10 00:26 celum.classify INFO     Extracted image: data/extracted/person/1523312780.129837_160669.png
+04-10 00:26 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 42, in default
+    dict_enc = {'results': ResultEncoder().encode(o.results)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 26, in default
+    'captions': CaptionEncoder().encode(o.caption_list)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 7, in default
+    dict_enc = {'id': o.id,
+AttributeError: 'numpy.ndarray' object has no attribute 'id'
+
+04-10 00:26 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:26 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:26:20] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:28 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:28 werkzeug     INFO      * Restarting with stat
+04-10 00:28 root         INFO     Server app started!
+04-10 00:28 werkzeug     WARNING   * Debugger is active!
+04-10 00:28 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:29 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:29 celum.classify INFO     Model not loaded...
+04-10 00:29 celum.classify INFO     Setting keras session...
+04-10 00:29 celum.classify INFO     Loading model name...
+04-10 00:29 celum.classify INFO     Creating image data generator...
+04-10 00:29 celum.classify INFO     Creating validation generator...
+04-10 00:29 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:29 celum.classify INFO     Reading image bgr...
+04-10 00:29 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:29 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:29 celum.classify INFO     Drawing cvt color...
+04-10 00:29 celum.classify INFO     Processing image...
+04-10 00:29 celum.classify INFO     Processing time: 6.671755075454712
+04-10 00:29 celum.classify INFO     Extracted image: data/extracted/tie/1523312956.403214_139579.png
+04-10 00:29 celum.classify INFO     Extracted image: data/extracted/person/1523312956.443743_160669.png
+04-10 00:29 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 42, in default
+    dict_enc = {'results': ResultEncoder().encode(o.results)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 24, in default
+    dict_enc = {'time': o.time_elapsed,
+AttributeError: 'Caption' object has no attribute 'time_elapsed'
+
+04-10 00:29 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:29 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:29:16] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:30 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:30 werkzeug     INFO      * Restarting with stat
+04-10 00:34 root         INFO     Server app started!
+04-10 00:34 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 00:34 werkzeug     INFO      * Restarting with stat
+04-10 00:34 root         INFO     Server app started!
+04-10 00:34 werkzeug     WARNING   * Debugger is active!
+04-10 00:34 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:34 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:34 celum.classify INFO     Model not loaded...
+04-10 00:34 celum.classify INFO     Setting keras session...
+04-10 00:34 celum.classify INFO     Loading model name...
+04-10 00:34 celum.classify INFO     Creating image data generator...
+04-10 00:34 celum.classify INFO     Creating validation generator...
+04-10 00:34 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:34 celum.classify INFO     Reading image bgr...
+04-10 00:34 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:34 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:34 celum.classify INFO     Drawing cvt color...
+04-10 00:34 celum.classify INFO     Processing image...
+04-10 00:34 celum.classify INFO     Processing time: 6.298145055770874
+04-10 00:34 celum.classify INFO     Extracted image: data/extracted/tie/1523313292.370735_139579.png
+04-10 00:34 celum.classify INFO     Extracted image: data/extracted/person/1523313292.403926_160669.png
+04-10 00:34 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 36, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: array([326, 301, 364, 398]) is not JSON serializable
+
+04-10 00:34 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:34 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:34:52] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:36 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:36 werkzeug     INFO      * Restarting with stat
+04-10 00:36 root         INFO     Server app started!
+04-10 00:36 werkzeug     WARNING   * Debugger is active!
+04-10 00:36 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:36 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:36 celum.classify INFO     Model not loaded...
+04-10 00:36 celum.classify INFO     Setting keras session...
+04-10 00:36 celum.classify INFO     Loading model name...
+04-10 00:36 celum.classify INFO     Creating image data generator...
+04-10 00:36 celum.classify INFO     Creating validation generator...
+04-10 00:36 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:36 celum.classify INFO     Reading image bgr...
+04-10 00:36 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:36 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:36 celum.classify INFO     Drawing cvt color...
+04-10 00:36 celum.classify INFO     Processing image...
+04-10 00:37 celum.classify INFO     Processing time: 6.48467493057251
+04-10 00:37 celum.classify INFO     Extracted image: data/extracted/tie/1523313421.16984_139579.png
+04-10 00:37 celum.classify INFO     Extracted image: data/extracted/person/1523313421.203337_160669.png
+04-10 00:37 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 26, in default
+    return {'results': o.results.toList()}
+AttributeError: 'list' object has no attribute 'toList'
+
+04-10 00:37 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:37 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:37:01] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:38 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:38 werkzeug     INFO      * Restarting with stat
+04-10 00:38 root         INFO     Server app started!
+04-10 00:38 werkzeug     WARNING   * Debugger is active!
+04-10 00:38 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:38 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:38 celum.classify INFO     Model not loaded...
+04-10 00:38 celum.classify INFO     Setting keras session...
+04-10 00:38 celum.classify INFO     Loading model name...
+04-10 00:38 celum.classify INFO     Creating image data generator...
+04-10 00:38 celum.classify INFO     Creating validation generator...
+04-10 00:38 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:38 celum.classify INFO     Reading image bgr...
+04-10 00:38 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:38 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:38 celum.classify INFO     Drawing cvt color...
+04-10 00:38 celum.classify INFO     Processing image...
+04-10 00:39 celum.classify INFO     Processing time: 6.274578809738159
+04-10 00:39 celum.classify INFO     Extracted image: data/extracted/tie/1523313541.630416_139579.png
+04-10 00:39 celum.classify INFO     Extracted image: data/extracted/person/1523313541.661965_160669.png
+04-10 00:39 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 35, in default
+    'box': o.box.toList()}
+AttributeError: 'numpy.ndarray' object has no attribute 'toList'
+
+04-10 00:39 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:39 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:39:01] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:41 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:41 werkzeug     INFO      * Restarting with stat
+04-10 00:41 root         INFO     Server app started!
+04-10 00:41 werkzeug     WARNING   * Debugger is active!
+04-10 00:41 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:42 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:42 celum.classify INFO     Model not loaded...
+04-10 00:42 celum.classify INFO     Setting keras session...
+04-10 00:42 celum.classify INFO     Loading model name...
+04-10 00:42 celum.classify INFO     Creating image data generator...
+04-10 00:42 celum.classify INFO     Creating validation generator...
+04-10 00:42 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:42 celum.classify INFO     Reading image bgr...
+04-10 00:42 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:42 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:42 celum.classify INFO     Drawing cvt color...
+04-10 00:42 celum.classify INFO     Processing image...
+04-10 00:42 celum.classify INFO     Processing time: 6.139551877975464
+04-10 00:42 celum.classify INFO     Extracted image: data/extracted/tie/1523313747.423406_139579.png
+04-10 00:42 celum.classify INFO     Extracted image: data/extracted/person/1523313747.455742_160669.png
+04-10 00:42 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 27 is not JSON serializable
+
+04-10 00:42 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:42 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:42:27] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:44 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:45 werkzeug     INFO      * Restarting with stat
+04-10 00:45 root         INFO     Server app started!
+04-10 00:45 werkzeug     WARNING   * Debugger is active!
+04-10 00:45 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:45 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:45 celum.classify INFO     Model not loaded...
+04-10 00:45 celum.classify INFO     Setting keras session...
+04-10 00:45 celum.classify INFO     Loading model name...
+04-10 00:45 celum.classify INFO     Creating image data generator...
+04-10 00:45 celum.classify INFO     Creating validation generator...
+04-10 00:45 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:45 celum.classify INFO     Reading image bgr...
+04-10 00:45 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:45 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:45 celum.classify INFO     Drawing cvt color...
+04-10 00:45 celum.classify INFO     Processing image...
+04-10 00:45 celum.classify INFO     Processing time: 6.084012031555176
+04-10 00:45 celum.classify INFO     Extracted image: data/extracted/tie/1523313923.56165_139579.png
+04-10 00:45 celum.classify INFO     Extracted image: data/extracted/person/1523313923.593679_160669.png
+04-10 00:45 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 26, in default
+    return {'results': JSONEncoder.default(self, o.results)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: [<models.Result object at 0x1826f0bac8>] is not JSON serializable
+
+04-10 00:45 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:45 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:45:23] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:46 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:46 werkzeug     INFO      * Restarting with stat
+04-10 00:46 root         INFO     Server app started!
+04-10 00:46 werkzeug     WARNING   * Debugger is active!
+04-10 00:46 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:46 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:46 celum.classify INFO     Model not loaded...
+04-10 00:46 celum.classify INFO     Setting keras session...
+04-10 00:46 celum.classify INFO     Loading model name...
+04-10 00:46 celum.classify INFO     Creating image data generator...
+04-10 00:46 celum.classify INFO     Creating validation generator...
+04-10 00:46 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:46 celum.classify INFO     Reading image bgr...
+04-10 00:46 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:46 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:46 celum.classify INFO     Drawing cvt color...
+04-10 00:46 celum.classify INFO     Processing image...
+04-10 00:46 celum.classify INFO     Processing time: 6.143534898757935
+04-10 00:46 celum.classify INFO     Extracted image: data/extracted/tie/1523313986.095091_139579.png
+04-10 00:46 celum.classify INFO     Extracted image: data/extracted/person/1523313986.12734_160669.png
+04-10 00:46 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 26, in default
+    return {'results': JSONEncoder.encode(self,o.results)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 30, in default
+    'captions': JSONEncoder.encode(self, o.caption_list)}
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 27 is not JSON serializable
+
+04-10 00:46 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:46 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:46:26] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:48 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:48 werkzeug     INFO      * Restarting with stat
+04-10 00:48 root         INFO     Server app started!
+04-10 00:48 werkzeug     WARNING   * Debugger is active!
+04-10 00:48 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:48 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:48 celum.classify INFO     Model not loaded...
+04-10 00:48 celum.classify INFO     Setting keras session...
+04-10 00:48 celum.classify INFO     Loading model name...
+04-10 00:48 celum.classify INFO     Creating image data generator...
+04-10 00:48 celum.classify INFO     Creating validation generator...
+04-10 00:48 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:48 celum.classify INFO     Reading image bgr...
+04-10 00:48 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:48 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:48 celum.classify INFO     Drawing cvt color...
+04-10 00:48 celum.classify INFO     Processing image...
+04-10 00:48 celum.classify INFO     Processing time: 6.132379055023193
+04-10 00:48 celum.classify INFO     Extracted image: data/extracted/tie/1523314102.293478_139579.png
+04-10 00:48 celum.classify INFO     Extracted image: data/extracted/person/1523314102.325705_160669.png
+04-10 00:48 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return JSONEncoder.encode(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+RecursionError: maximum recursion depth exceeded while calling a Python object
+
+04-10 00:48 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:48 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:48:22] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:48 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:48 werkzeug     INFO      * Restarting with stat
+04-10 00:48 root         INFO     Server app started!
+04-10 00:48 werkzeug     WARNING   * Debugger is active!
+04-10 00:48 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:49 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:49 celum.classify INFO     Model not loaded...
+04-10 00:49 celum.classify INFO     Setting keras session...
+04-10 00:49 celum.classify INFO     Loading model name...
+04-10 00:49 celum.classify INFO     Creating image data generator...
+04-10 00:49 celum.classify INFO     Creating validation generator...
+04-10 00:49 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:49 celum.classify INFO     Reading image bgr...
+04-10 00:49 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:49 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:49 celum.classify INFO     Drawing cvt color...
+04-10 00:49 celum.classify INFO     Processing image...
+04-10 00:49 celum.classify INFO     Processing time: 6.408957004547119
+04-10 00:49 celum.classify INFO     Extracted image: data/extracted/tie/1523314155.647755_139579.png
+04-10 00:49 celum.classify INFO     Extracted image: data/extracted/person/1523314155.681136_160669.png
+04-10 00:49 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return o.__dict__
+AttributeError: 'numpy.float32' object has no attribute '__dict__'
+
+04-10 00:49 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:49 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:49:15] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:49 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:49 celum.classify INFO     Model already loaded...
+04-10 00:49 celum.classify INFO     Creating validation generator...
+04-10 00:49 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:49 celum.classify INFO     Reading image bgr...
+04-10 00:49 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:49 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:49 celum.classify INFO     Drawing cvt color...
+04-10 00:49 celum.classify INFO     Processing image...
+04-10 00:49 celum.classify INFO     Processing time: 6.585630893707275
+04-10 00:49 celum.classify INFO     Extracted image: data/extracted/tie/1523314162.714518_139579.png
+04-10 00:49 celum.classify INFO     Extracted image: data/extracted/person/1523314162.748297_160669.png
+04-10 00:49 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return o.__dict__
+AttributeError: 'numpy.float32' object has no attribute '__dict__'
+
+04-10 00:49 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:49 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:49:22] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:51 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:51 werkzeug     INFO      * Restarting with stat
+04-10 00:51 root         INFO     Server app started!
+04-10 00:51 werkzeug     WARNING   * Debugger is active!
+04-10 00:51 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 00:51 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 00:51 celum.classify INFO     Model not loaded...
+04-10 00:51 celum.classify INFO     Setting keras session...
+04-10 00:51 celum.classify INFO     Loading model name...
+04-10 00:51 celum.classify INFO     Creating image data generator...
+04-10 00:51 celum.classify INFO     Creating validation generator...
+04-10 00:51 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 00:51 celum.classify INFO     Reading image bgr...
+04-10 00:51 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 00:51 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 00:51 celum.classify INFO     Drawing cvt color...
+04-10 00:51 celum.classify INFO     Processing image...
+04-10 00:51 celum.classify INFO     Processing time: 6.406087160110474
+04-10 00:51 celum.classify INFO     Extracted image: data/extracted/tie/1523314308.35278_139579.png
+04-10 00:51 celum.classify INFO     Extracted image: data/extracted/person/1523314308.385027_160669.png
+04-10 00:51 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+ValueError: Circular reference detected
+
+04-10 00:51 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 00:51 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 00:51:48] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 00:59 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 00:59 werkzeug     INFO      * Restarting with stat
+04-10 01:02 root         INFO     Server app started!
+04-10 01:02 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 01:02 werkzeug     INFO      * Restarting with stat
+04-10 01:02 root         INFO     Server app started!
+04-10 01:02 werkzeug     WARNING   * Debugger is active!
+04-10 01:02 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:02 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:02 celum.classify INFO     Model not loaded...
+04-10 01:02 celum.classify INFO     Setting keras session...
+04-10 01:02 celum.classify INFO     Loading model name...
+04-10 01:03 celum.classify INFO     Creating image data generator...
+04-10 01:03 celum.classify INFO     Creating validation generator...
+04-10 01:03 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:03 celum.classify INFO     Reading image bgr...
+04-10 01:03 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:03 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:03 celum.classify INFO     Drawing cvt color...
+04-10 01:03 celum.classify INFO     Processing image...
+04-10 01:03 celum.classify INFO     Processing time: 6.452012062072754
+04-10 01:03 celum.classify INFO     Extracted image: data/extracted/tie/1523314993.967562_139579.png
+04-10 01:03 celum.classify INFO     Extracted image: data/extracted/person/1523314994.000449_160669.png
+04-10 01:03 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 37, in default
+    return o.value
+AttributeError: 'numpy.int64' object has no attribute 'value'
+
+04-10 01:03 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:03 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:03:14] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:04 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:04 werkzeug     INFO      * Restarting with stat
+04-10 01:04 root         INFO     Server app started!
+04-10 01:04 werkzeug     WARNING   * Debugger is active!
+04-10 01:04 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:08 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:08 werkzeug     INFO      * Restarting with stat
+04-10 01:08 root         INFO     Server app started!
+04-10 01:08 werkzeug     WARNING   * Debugger is active!
+04-10 01:08 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:08 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:08 celum.classify INFO     Model not loaded...
+04-10 01:08 celum.classify INFO     Setting keras session...
+04-10 01:08 celum.classify INFO     Loading model name...
+04-10 01:08 celum.classify INFO     Creating image data generator...
+04-10 01:08 celum.classify INFO     Creating validation generator...
+04-10 01:08 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:08 celum.classify INFO     Reading image bgr...
+04-10 01:08 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:08 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:08 celum.classify INFO     Drawing cvt color...
+04-10 01:08 celum.classify INFO     Processing image...
+04-10 01:08 celum.classify INFO     Processing time: 6.239580869674683
+04-10 01:08 celum.classify INFO     Extracted image: data/extracted/tie/1523315311.974666_139579.png
+04-10 01:08 celum.classify INFO     Extracted image: data/extracted/person/1523315312.006924_160669.png
+04-10 01:08 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 43, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 0.9165796 is not JSON serializable
+
+04-10 01:08 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:08 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:08:32] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:12 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:12 werkzeug     INFO      * Restarting with stat
+04-10 01:12 root         INFO     Server app started!
+04-10 01:12 werkzeug     WARNING   * Debugger is active!
+04-10 01:12 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:12 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:12 werkzeug     INFO      * Restarting with stat
+04-10 01:12 root         INFO     Server app started!
+04-10 01:12 werkzeug     WARNING   * Debugger is active!
+04-10 01:12 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:13 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:13 werkzeug     INFO      * Restarting with stat
+04-10 01:13 root         INFO     Server app started!
+04-10 01:13 werkzeug     WARNING   * Debugger is active!
+04-10 01:13 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:13 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:13 celum.classify INFO     Model not loaded...
+04-10 01:13 celum.classify INFO     Setting keras session...
+04-10 01:13 celum.classify INFO     Loading model name...
+04-10 01:13 celum.classify INFO     Creating image data generator...
+04-10 01:13 celum.classify INFO     Creating validation generator...
+04-10 01:13 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:13 celum.classify INFO     Reading image bgr...
+04-10 01:13 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:13 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:13 celum.classify INFO     Drawing cvt color...
+04-10 01:13 celum.classify INFO     Processing image...
+04-10 01:13 celum.classify INFO     Processing time: 6.260823965072632
+04-10 01:13 celum.classify INFO     Extracted image: data/extracted/tie/1523315614.848909_139579.png
+04-10 01:13 celum.classify INFO     Extracted image: data/extracted/person/1523315614.881327_160669.png
+04-10 01:13 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 43, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 27 is not JSON serializable
+
+04-10 01:13 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:13 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:13:34] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:14 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:14 werkzeug     INFO      * Restarting with stat
+04-10 01:14 root         INFO     Server app started!
+04-10 01:14 werkzeug     WARNING   * Debugger is active!
+04-10 01:14 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:14 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:14 celum.classify INFO     Model not loaded...
+04-10 01:14 celum.classify INFO     Setting keras session...
+04-10 01:14 celum.classify INFO     Loading model name...
+04-10 01:14 celum.classify INFO     Creating image data generator...
+04-10 01:14 celum.classify INFO     Creating validation generator...
+04-10 01:14 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:14 celum.classify INFO     Reading image bgr...
+04-10 01:14 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:14 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:14 celum.classify INFO     Drawing cvt color...
+04-10 01:14 celum.classify INFO     Processing image...
+04-10 01:14 celum.classify INFO     Processing time: 6.122188091278076
+04-10 01:14 celum.classify INFO     Extracted image: data/extracted/tie/1523315677.258727_139579.png
+04-10 01:14 celum.classify INFO     Extracted image: data/extracted/person/1523315677.291224_160669.png
+04-10 01:14 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 44, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 0.9165796 is not JSON serializable
+
+04-10 01:14 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:14 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:14:37] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:15 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:15 werkzeug     INFO      * Restarting with stat
+04-10 01:15 root         INFO     Server app started!
+04-10 01:15 werkzeug     WARNING   * Debugger is active!
+04-10 01:15 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:15 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:15 celum.classify INFO     Model not loaded...
+04-10 01:15 celum.classify INFO     Setting keras session...
+04-10 01:15 celum.classify INFO     Loading model name...
+04-10 01:15 celum.classify INFO     Creating image data generator...
+04-10 01:15 celum.classify INFO     Creating validation generator...
+04-10 01:15 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:15 celum.classify INFO     Reading image bgr...
+04-10 01:15 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:16 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:16 celum.classify INFO     Drawing cvt color...
+04-10 01:16 celum.classify INFO     Processing image...
+04-10 01:16 celum.classify INFO     Processing time: 6.204632043838501
+04-10 01:16 celum.classify INFO     Extracted image: data/extracted/tie/1523315769.298715_139579.png
+04-10 01:16 celum.classify INFO     Extracted image: data/extracted/person/1523315769.331627_160669.png
+04-10 01:16 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 43, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 27 is not JSON serializable
+
+04-10 01:16 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:16 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:16:09] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:16 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:16 werkzeug     INFO      * Restarting with stat
+04-10 01:16 root         INFO     Server app started!
+04-10 01:16 werkzeug     WARNING   * Debugger is active!
+04-10 01:16 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:16 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:16 celum.classify INFO     Model not loaded...
+04-10 01:16 celum.classify INFO     Setting keras session...
+04-10 01:16 celum.classify INFO     Loading model name...
+04-10 01:17 celum.classify INFO     Creating image data generator...
+04-10 01:17 celum.classify INFO     Creating validation generator...
+04-10 01:17 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:17 celum.classify INFO     Reading image bgr...
+04-10 01:17 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:17 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:17 celum.classify INFO     Drawing cvt color...
+04-10 01:17 celum.classify INFO     Processing image...
+04-10 01:17 celum.classify INFO     Processing time: 6.222654819488525
+04-10 01:17 celum.classify INFO     Extracted image: data/extracted/tie/1523315827.073964_139579.png
+04-10 01:17 celum.classify INFO     Extracted image: data/extracted/person/1523315827.10613_160669.png
+04-10 01:17 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py", line 41, in default
+    return o.value
+AttributeError: 'numpy.int64' object has no attribute 'value'
+
+04-10 01:17 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:17 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:17:07] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:17 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:17 werkzeug     INFO      * Restarting with stat
+04-10 01:17 root         INFO     Server app started!
+04-10 01:17 werkzeug     WARNING   * Debugger is active!
+04-10 01:17 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:17 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:17 celum.classify INFO     Model not loaded...
+04-10 01:17 celum.classify INFO     Setting keras session...
+04-10 01:17 celum.classify INFO     Loading model name...
+04-10 01:17 celum.classify INFO     Creating image data generator...
+04-10 01:17 celum.classify INFO     Creating validation generator...
+04-10 01:17 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:17 celum.classify INFO     Reading image bgr...
+04-10 01:17 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:17 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:17 celum.classify INFO     Drawing cvt color...
+04-10 01:17 celum.classify INFO     Processing image...
+04-10 01:17 celum.classify INFO     Processing time: 6.124955892562866
+04-10 01:17 celum.classify INFO     Extracted image: data/extracted/tie/1523315864.749127_139579.png
+04-10 01:17 celum.classify INFO     Extracted image: data/extracted/person/1523315864.781852_160669.png
+04-10 01:17 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results, cls=ResultListEncoder)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 237, in dumps
+    **kw).encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+ValueError: Circular reference detected
+
+04-10 01:17 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py", line 25, in jsonify
+    id, label, score, box = item
+TypeError: 'Caption' object is not iterable
+
+04-10 01:17 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:17:44] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:19 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:19 werkzeug     INFO      * Restarting with stat
+04-10 01:19 root         INFO     Server app started!
+04-10 01:19 werkzeug     WARNING   * Debugger is active!
+04-10 01:19 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:26 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py', reloading
+04-10 01:26 werkzeug     INFO      * Restarting with stat
+04-10 01:26 root         INFO     Server app started!
+04-10 01:26 werkzeug     WARNING   * Debugger is active!
+04-10 01:26 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:26 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:26 werkzeug     INFO      * Restarting with stat
+04-10 01:26 root         INFO     Server app started!
+04-10 01:26 werkzeug     WARNING   * Debugger is active!
+04-10 01:26 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:27 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 01:27 werkzeug     INFO      * Restarting with stat
+04-10 01:27 root         INFO     Server app started!
+04-10 01:27 werkzeug     WARNING   * Debugger is active!
+04-10 01:27 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:27 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:27 celum.classify INFO     Model not loaded...
+04-10 01:27 celum.classify INFO     Setting keras session...
+04-10 01:27 celum.classify INFO     Loading model name...
+04-10 01:27 celum.classify INFO     Creating image data generator...
+04-10 01:27 celum.classify INFO     Creating validation generator...
+04-10 01:27 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:27 celum.classify INFO     Reading image bgr...
+04-10 01:27 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:27 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:27 celum.classify INFO     Drawing cvt color...
+04-10 01:27 celum.classify INFO     Processing image...
+04-10 01:27 celum.classify INFO     Processing time: 6.218997955322266
+04-10 01:27 celum.classify INFO     Extracted image: data/extracted/tie/1523316447.691183_139579.png
+04-10 01:27 celum.classify INFO     Extracted image: data/extracted/person/1523316447.722883_160669.png
+04-10 01:27 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 39, in classify
+    test = json.dumps(classification_results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 27 is not JSON serializable
+
+04-10 01:27 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 44, in classify
+    json_response = jsonify(classification_results.results)
+AttributeError: 'dict' object has no attribute 'results'
+
+04-10 01:27 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:27:27] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:28 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 01:28 werkzeug     INFO      * Restarting with stat
+04-10 01:28 root         INFO     Server app started!
+04-10 01:28 werkzeug     WARNING   * Debugger is active!
+04-10 01:28 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:28 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:28 celum.classify INFO     Model not loaded...
+04-10 01:28 celum.classify INFO     Setting keras session...
+04-10 01:28 celum.classify INFO     Loading model name...
+04-10 01:28 celum.classify INFO     Creating image data generator...
+04-10 01:28 celum.classify INFO     Creating validation generator...
+04-10 01:28 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:28 celum.classify INFO     Reading image bgr...
+04-10 01:28 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:28 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:28 celum.classify INFO     Drawing cvt color...
+04-10 01:28 celum.classify INFO     Processing image...
+04-10 01:28 celum.classify INFO     Processing time: 6.021389961242676
+04-10 01:28 celum.classify INFO     Extracted image: data/extracted/tie/1523316510.721464_139579.png
+04-10 01:28 celum.classify INFO     Extracted image: data/extracted/person/1523316510.754105_160669.png
+04-10 01:28 root         INFO     {'results': {'time': 6.021389961242676, 'url': 'https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg', 'captions': [{'bottom-right': '364;398', 'top-left': '326;301', 'label': 'tie', 'score': 0.9165796, 'id': 27}, {'bottom-right': '698;450', 'top-left': '26;99', 'label': 'person', 'score': 0.8162691, 'id': 0}]}}
+04-10 01:28 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 40, in classify
+    test = json.dumps(classification_results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 0.9165796 is not JSON serializable
+
+04-10 01:28 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 45, in classify
+    json_response = jsonify(classification_results.results)
+AttributeError: 'dict' object has no attribute 'results'
+
+04-10 01:28 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:28:30] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:30 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py', reloading
+04-10 01:30 werkzeug     INFO      * Restarting with stat
+04-10 01:30 root         INFO     Server app started!
+04-10 01:30 werkzeug     WARNING   * Debugger is active!
+04-10 01:30 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:31 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py', reloading
+04-10 01:31 werkzeug     INFO      * Restarting with stat
+04-10 01:31 root         INFO     Server app started!
+04-10 01:31 werkzeug     WARNING   * Debugger is active!
+04-10 01:31 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:31 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:31 celum.classify INFO     Model not loaded...
+04-10 01:31 celum.classify INFO     Setting keras session...
+04-10 01:31 celum.classify INFO     Loading model name...
+04-10 01:31 celum.classify INFO     Creating image data generator...
+04-10 01:31 celum.classify INFO     Creating validation generator...
+04-10 01:31 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:31 celum.classify INFO     Reading image bgr...
+04-10 01:31 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:31 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:31 celum.classify INFO     Drawing cvt color...
+04-10 01:31 celum.classify INFO     Processing image...
+04-10 01:31 celum.classify INFO     Processing time: 6.23279595375061
+04-10 01:31 celum.classify INFO     Extracted image: data/extracted/tie/1523316690.62519_139579.png
+04-10 01:31 celum.classify INFO     Extracted image: data/extracted/person/1523316690.656413_160669.png
+04-10 01:31 root         INFO     {'results': [{'time': 6.23279595375061, 'captions': [{'top-left': '326;301', 'bottom-right': '364;398', 'score': 0.9165796, 'id': 27, 'label': 'tie'}, {'top-left': '26;99', 'bottom-right': '698;450', 'score': 0.8162691, 'id': 0, 'label': 'person'}], 'url': 'https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg'}]}
+04-10 01:31 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 40, in classify
+    test = json.dumps(classification_results)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 198, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 256, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/xpitfire/anaconda3/lib/python3.5/json/encoder.py", line 179, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: 0.9165796 is not JSON serializable
+
+04-10 01:31 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 45, in classify
+    json_response = jsonify(classification_results.results)
+AttributeError: 'dict' object has no attribute 'results'
+
+04-10 01:31 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:31:30] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:33 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py', reloading
+04-10 01:33 werkzeug     INFO      * Restarting with stat
+04-10 01:33 root         INFO     Server app started!
+04-10 01:33 werkzeug     WARNING   * Debugger is active!
+04-10 01:33 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:33 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:33 celum.classify INFO     Model not loaded...
+04-10 01:33 celum.classify INFO     Setting keras session...
+04-10 01:33 celum.classify INFO     Loading model name...
+04-10 01:33 celum.classify INFO     Creating image data generator...
+04-10 01:33 celum.classify INFO     Creating validation generator...
+04-10 01:33 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:33 celum.classify INFO     Reading image bgr...
+04-10 01:33 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:33 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:33 celum.classify INFO     Drawing cvt color...
+04-10 01:33 celum.classify INFO     Processing image...
+04-10 01:33 celum.classify INFO     Processing time: 6.086405992507935
+04-10 01:33 celum.classify INFO     Extracted image: data/extracted/tie/1523316828.985196_139579.png
+04-10 01:33 celum.classify INFO     Extracted image: data/extracted/person/1523316829.018689_160669.png
+04-10 01:33 root         INFO     {'results': [{'url': 'https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg', 'captions': [{'label': 'tie', 'id': '27', 'top-left': '326;301', 'bottom-right': '364;398', 'score': '0.9165796'}, {'label': 'person', 'id': '0', 'top-left': '26;99', 'bottom-right': '698;450', 'score': '0.8162691'}], 'time': '6.086405992507935'}]}
+04-10 01:33 root         INFO     {"results": [{"url": "https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg", "captions": [{"label": "tie", "id": "27", "top-left": "326;301", "bottom-right": "364;398", "score": "0.9165796"}, {"label": "person", "id": "0", "top-left": "26;99", "bottom-right": "698;450", "score": "0.8162691"}], "time": "6.086405992507935"}]}
+04-10 01:33 root         ERROR    Traceback (most recent call last):
+  File "/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py", line 45, in classify
+    json_response = jsonify(classification_results.results)
+AttributeError: 'dict' object has no attribute 'results'
+
+04-10 01:33 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:33:49] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 500 -
+04-10 01:34 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/models.py', reloading
+04-10 01:34 werkzeug     INFO      * Restarting with stat
+04-10 01:34 root         INFO     Server app started!
+04-10 01:34 werkzeug     WARNING   * Debugger is active!
+04-10 01:34 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:35 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 01:35 werkzeug     INFO      * Restarting with stat
+04-10 01:35 root         INFO     Server app started!
+04-10 01:35 werkzeug     WARNING   * Debugger is active!
+04-10 01:35 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:35 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 01:35 celum.classify INFO     Model not loaded...
+04-10 01:35 celum.classify INFO     Setting keras session...
+04-10 01:35 celum.classify INFO     Loading model name...
+04-10 01:35 celum.classify INFO     Creating image data generator...
+04-10 01:35 celum.classify INFO     Creating validation generator...
+04-10 01:35 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 01:35 celum.classify INFO     Reading image bgr...
+04-10 01:35 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 01:36 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 01:36 celum.classify INFO     Drawing cvt color...
+04-10 01:36 celum.classify INFO     Processing image...
+04-10 01:36 celum.classify INFO     Processing time: 6.135427951812744
+04-10 01:36 celum.classify INFO     Extracted image: data/extracted/tie/1523316967.267159_139579.png
+04-10 01:36 celum.classify INFO     Extracted image: data/extracted/person/1523316967.299566_160669.png
+04-10 01:36 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:36:07] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-10 01:47 root         INFO     ['https://pics.me.me/cat-vs-dog-like-love-14110779.png']
+04-10 01:47 celum.classify INFO     Model already loaded...
+04-10 01:47 celum.classify INFO     Creating validation generator...
+04-10 01:47 celum.classify INFO     Running classification on: https://pics.me.me/cat-vs-dog-like-love-14110779.png
+04-10 01:47 celum.classify INFO     Reading image bgr...
+04-10 01:47 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): pics.me.me
+04-10 01:47 urllib3.connectionpool DEBUG    https://pics.me.me:443 "GET /cat-vs-dog-like-love-14110779.png HTTP/1.1" 200 133520
+04-10 01:47 PIL.PngImagePlugin DEBUG    STREAM b'IHDR' 16 13
+04-10 01:47 PIL.PngImagePlugin DEBUG    STREAM b'gAMA' 41 4
+04-10 01:47 PIL.PngImagePlugin DEBUG    STREAM b'sRGB' 57 1
+04-10 01:47 PIL.PngImagePlugin DEBUG    b'sRGB' 57 1 (unknown)
+04-10 01:47 PIL.PngImagePlugin DEBUG    STREAM b'PLTE' 70 768
+04-10 01:47 PIL.PngImagePlugin DEBUG    STREAM b'IDAT' 850 8192
+04-10 01:47 celum.classify INFO     Drawing cvt color...
+04-10 01:47 celum.classify INFO     Processing image...
+04-10 01:47 celum.classify INFO     Processing time: 5.0165770053863525
+04-10 01:47 celum.classify INFO     Extracted image: data/extracted/cat/1523317650.579937_125267.png
+04-10 01:47 celum.classify INFO     Extracted image: data/extracted/dog/1523317650.589967_125333.png
+04-10 01:47 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:47:30] "GET /classify?url=https://pics.me.me/cat-vs-dog-like-love-14110779.png&callback=ng_jsonp_callback_0 HTTP/1.1" 200 -
+04-10 01:49 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 01:49 werkzeug     INFO      * Restarting with stat
+04-10 01:49 root         INFO     Server app started!
+04-10 01:49 werkzeug     WARNING   * Debugger is active!
+04-10 01:49 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:49 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/misc.py', reloading
+04-10 01:49 werkzeug     INFO      * Restarting with stat
+04-10 01:49 root         INFO     Server app started!
+04-10 01:49 werkzeug     WARNING   * Debugger is active!
+04-10 01:49 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:49 root         INFO     ['https://pics.me.me/cat-vs-dog-like-love-14110779.png']
+04-10 01:49 celum.classify INFO     Model not loaded...
+04-10 01:49 celum.classify INFO     Setting keras session...
+04-10 01:49 celum.classify INFO     Loading model name...
+04-10 01:50 celum.classify INFO     Creating image data generator...
+04-10 01:50 celum.classify INFO     Creating validation generator...
+04-10 01:50 celum.classify INFO     Running classification on: https://pics.me.me/cat-vs-dog-like-love-14110779.png
+04-10 01:50 celum.classify INFO     Reading image bgr...
+04-10 01:50 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): pics.me.me
+04-10 01:50 urllib3.connectionpool DEBUG    https://pics.me.me:443 "GET /cat-vs-dog-like-love-14110779.png HTTP/1.1" 200 133520
+04-10 01:50 PIL.PngImagePlugin DEBUG    STREAM b'IHDR' 16 13
+04-10 01:50 PIL.PngImagePlugin DEBUG    STREAM b'gAMA' 41 4
+04-10 01:50 PIL.PngImagePlugin DEBUG    STREAM b'sRGB' 57 1
+04-10 01:50 PIL.PngImagePlugin DEBUG    b'sRGB' 57 1 (unknown)
+04-10 01:50 PIL.PngImagePlugin DEBUG    STREAM b'PLTE' 70 768
+04-10 01:50 PIL.PngImagePlugin DEBUG    STREAM b'IDAT' 850 8192
+04-10 01:50 celum.classify INFO     Drawing cvt color...
+04-10 01:50 celum.classify INFO     Processing image...
+04-10 01:50 celum.classify INFO     Processing time: 5.588263034820557
+04-10 01:50 celum.classify INFO     Extracted image: data/extracted/cat/1523317811.668176_125267.png
+04-10 01:50 celum.classify INFO     Extracted image: data/extracted/dog/1523317811.672557_125333.png
+04-10 01:50 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 01:50:11] "GET /classify?url=https://pics.me.me/cat-vs-dog-like-love-14110779.png&callback=ng_jsonp_callback_1 HTTP/1.1" 200 -
+04-10 01:51 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/classify.py', reloading
+04-10 01:51 werkzeug     INFO      * Restarting with stat
+04-10 01:51 root         INFO     Server app started!
+04-10 01:51 werkzeug     WARNING   * Debugger is active!
+04-10 01:51 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 01:52 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 01:52 werkzeug     INFO      * Restarting with stat
+04-10 01:52 root         INFO     Server app started!
+04-10 01:52 werkzeug     WARNING   * Debugger is active!
+04-10 01:52 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:00 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 02:00 werkzeug     INFO      * Restarting with stat
+04-10 02:00 root         INFO     Server app started!
+04-10 02:00 werkzeug     WARNING   * Debugger is active!
+04-10 02:00 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:00 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:00:17] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 405 -
+04-10 02:00 root         INFO     Server app started!
+04-10 02:00 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 02:00 werkzeug     INFO      * Restarting with stat
+04-10 02:00 root         INFO     Server app started!
+04-10 02:00 werkzeug     WARNING   * Debugger is active!
+04-10 02:00 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:00 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:00:34] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 405 -
+04-10 02:01 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 02:01 werkzeug     INFO      * Restarting with stat
+04-10 02:01 root         INFO     Server app started!
+04-10 02:01 werkzeug     WARNING   * Debugger is active!
+04-10 02:01 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:01 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 02:01 celum.classify INFO     Model not loaded...
+04-10 02:01 celum.classify INFO     Setting keras session...
+04-10 02:01 celum.classify INFO     Loading model name...
+04-10 02:01 celum.classify INFO     Creating image data generator...
+04-10 02:01 celum.classify INFO     Creating validation generator...
+04-10 02:01 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 02:01 celum.classify INFO     Reading image bgr...
+04-10 02:01 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 02:01 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 02:01 celum.classify INFO     Drawing cvt color...
+04-10 02:01 celum.classify INFO     Processing image...
+04-10 02:02 celum.classify INFO     Processing time: 6.663228988647461
+04-10 02:02 celum.classify INFO     Extracted image: data/extracted/tie/1523318522.402858_139579.png
+04-10 02:02 celum.classify INFO     Extracted image: data/extracted/person/1523318522.437027_160669.png
+04-10 02:02 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:02:02] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-10 02:02 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 02:02 werkzeug     INFO      * Restarting with stat
+04-10 02:02 root         INFO     Server app started!
+04-10 02:02 werkzeug     WARNING   * Debugger is active!
+04-10 02:02 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:02 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 02:02 celum.classify INFO     Model not loaded...
+04-10 02:02 celum.classify INFO     Setting keras session...
+04-10 02:02 celum.classify INFO     Loading model name...
+04-10 02:02 celum.classify INFO     Creating image data generator...
+04-10 02:02 celum.classify INFO     Creating validation generator...
+04-10 02:02 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 02:02 celum.classify INFO     Reading image bgr...
+04-10 02:02 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 02:02 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 02:02 celum.classify INFO     Drawing cvt color...
+04-10 02:02 celum.classify INFO     Processing image...
+04-10 02:03 celum.classify INFO     Processing time: 6.861759901046753
+04-10 02:03 celum.classify INFO     Extracted image: data/extracted/tie/1523318584.169277_139579.png
+04-10 02:03 celum.classify INFO     Extracted image: data/extracted/person/1523318584.201536_160669.png
+04-10 02:03 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:03:04] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-10 02:03 root         INFO     ['https://pics.me.me/cat-vs-dog-like-love-14110779.png']
+04-10 02:03 celum.classify INFO     Model already loaded...
+04-10 02:03 celum.classify INFO     Creating validation generator...
+04-10 02:03 celum.classify INFO     Running classification on: https://pics.me.me/cat-vs-dog-like-love-14110779.png
+04-10 02:03 celum.classify INFO     Reading image bgr...
+04-10 02:03 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): pics.me.me
+04-10 02:03 urllib3.connectionpool DEBUG    https://pics.me.me:443 "GET /cat-vs-dog-like-love-14110779.png HTTP/1.1" 200 133520
+04-10 02:03 PIL.PngImagePlugin DEBUG    STREAM b'IHDR' 16 13
+04-10 02:03 PIL.PngImagePlugin DEBUG    STREAM b'gAMA' 41 4
+04-10 02:03 PIL.PngImagePlugin DEBUG    STREAM b'sRGB' 57 1
+04-10 02:03 PIL.PngImagePlugin DEBUG    b'sRGB' 57 1 (unknown)
+04-10 02:03 PIL.PngImagePlugin DEBUG    STREAM b'PLTE' 70 768
+04-10 02:03 PIL.PngImagePlugin DEBUG    STREAM b'IDAT' 850 8192
+04-10 02:03 celum.classify INFO     Drawing cvt color...
+04-10 02:03 celum.classify INFO     Processing image...
+04-10 02:03 celum.classify INFO     Processing time: 4.948020935058594
+04-10 02:03 celum.classify INFO     Extracted image: data/extracted/cat/1523318630.728415_125267.png
+04-10 02:03 celum.classify INFO     Extracted image: data/extracted/dog/1523318630.733007_125333.png
+04-10 02:03 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:03:50] "GET /classify?url=https://pics.me.me/cat-vs-dog-like-love-14110779.png&callback=ng_jsonp_callback_2 HTTP/1.1" 200 -
+04-10 02:08 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 02:08 werkzeug     INFO      * Restarting with stat
+04-10 02:08 root         INFO     Server app started!
+04-10 02:08 werkzeug     WARNING   * Debugger is active!
+04-10 02:08 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:12 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/app.py', reloading
+04-10 02:12 werkzeug     INFO      * Restarting with stat
+04-10 02:38 root         INFO     Server app started!
+04-10 02:38 werkzeug     INFO      * Running on http://localhost:5000/ (Press CTRL+C to quit)
+04-10 02:38 werkzeug     INFO      * Restarting with stat
+04-10 02:38 root         INFO     Server app started!
+04-10 02:38 werkzeug     WARNING   * Debugger is active!
+04-10 02:38 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:38 root         INFO     ['https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg']
+04-10 02:38 celum.classify INFO     Model not loaded...
+04-10 02:38 celum.classify INFO     Setting keras session...
+04-10 02:38 celum.classify INFO     Loading model name...
+04-10 02:38 celum.classify INFO     Creating image data generator...
+04-10 02:38 celum.classify INFO     Creating validation generator...
+04-10 02:38 celum.classify INFO     Running classification on: https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg
+04-10 02:38 celum.classify INFO     Reading image bgr...
+04-10 02:38 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): media.newyorker.com
+04-10 02:39 urllib3.connectionpool DEBUG    https://media.newyorker.com:443 "GET /photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 35695
+04-10 02:39 celum.classify INFO     Drawing cvt color...
+04-10 02:39 celum.classify INFO     Processing image...
+04-10 02:39 celum.classify INFO     Processing time: 6.6559600830078125
+04-10 02:39 celum.classify INFO     Extracted image: data/extracted/tie/1523320747.356415_139579.png
+04-10 02:39 celum.classify INFO     Extracted image: data/extracted/person/1523320747.389455_160669.png
+04-10 02:39 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:39:07] "GET /classify?url=https://media.newyorker.com/photos/59e8c9a104bcf6250436ce67/master/w_727,c_limit/171030_r30777.jpg HTTP/1.1" 200 -
+04-10 02:42 werkzeug     INFO      * Detected change in '/Users/xpitfire/workspace/GitHub/keras-retinanet/keras_retinanet/preprocessing/url_generator.py', reloading
+04-10 02:42 werkzeug     INFO      * Restarting with stat
+04-10 02:42 root         INFO     Server app started!
+04-10 02:42 werkzeug     WARNING   * Debugger is active!
+04-10 02:42 werkzeug     INFO      * Debugger PIN: 620-200-766
+04-10 02:42 root         INFO     ['https://pics.me.me/cat-vs-dog-like-love-14110779.png']
+04-10 02:42 celum.classify INFO     Model not loaded...
+04-10 02:42 celum.classify INFO     Setting keras session...
+04-10 02:42 celum.classify INFO     Loading model name...
+04-10 02:42 celum.classify INFO     Creating image data generator...
+04-10 02:42 celum.classify INFO     Creating validation generator...
+04-10 02:42 celum.classify INFO     Running classification on: https://pics.me.me/cat-vs-dog-like-love-14110779.png
+04-10 02:42 celum.classify INFO     Reading image bgr...
+04-10 02:42 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): pics.me.me
+04-10 02:42 urllib3.connectionpool DEBUG    https://pics.me.me:443 "GET /cat-vs-dog-like-love-14110779.png HTTP/1.1" 200 133520
+04-10 02:42 PIL.PngImagePlugin DEBUG    STREAM b'IHDR' 16 13
+04-10 02:42 PIL.PngImagePlugin DEBUG    STREAM b'gAMA' 41 4
+04-10 02:42 PIL.PngImagePlugin DEBUG    STREAM b'sRGB' 57 1
+04-10 02:42 PIL.PngImagePlugin DEBUG    b'sRGB' 57 1 (unknown)
+04-10 02:42 PIL.PngImagePlugin DEBUG    STREAM b'PLTE' 70 768
+04-10 02:42 PIL.PngImagePlugin DEBUG    STREAM b'IDAT' 850 8192
+04-10 02:42 celum.classify INFO     Drawing cvt color...
+04-10 02:42 celum.classify INFO     Processing image...
+04-10 02:42 celum.classify INFO     Processing time: 5.464447975158691
+04-10 02:42 celum.classify INFO     Extracted image: data/extracted/cat/1523320948.594188_125267.png
+04-10 02:42 celum.classify INFO     Extracted image: data/extracted/dog/1523320948.598642_125333.png
+04-10 02:42 werkzeug     INFO     127.0.0.1 - - [10/Apr/2018 02:42:28] "GET /classify?url=https://pics.me.me/cat-vs-dog-like-love-14110779.png&callback=ng_jsonp_callback_0 HTTP/1.1" 200 -

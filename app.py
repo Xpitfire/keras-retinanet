@@ -1,10 +1,8 @@
-from flask import Flask
-from flask import request
-from flask import Response
+from flask import Flask, request, Response, jsonify
 
 import traceback
 
-from misc import jsonp, jsonify
+from misc import jsonp
 from classify import classify_urls
 
 import logging
@@ -33,14 +31,13 @@ def classify():
         logging.info(image_path)
         image_path = resolve_special_url_cmd(image_path)
         classification_results = classify_urls(image_path)
-        json = jsonify(classification_results)
-        status = 200
+        return jsonify(classification_results)
     except:
         err = traceback.format_exc()
-        json = '{ "exception": "Server endpoint not responding! Please try again later." }'
+        json_response = jsonify({'exception': 'Server endpoint not responding! Please try again later.'})
         status = 500
         logging.error(err)
-    return Response(json, status=status, mimetype='application/json')
+        return Response(json_response, status=status, mimetype='application/json')
 
 
 if __name__ == '__main__':

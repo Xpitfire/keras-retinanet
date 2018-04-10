@@ -14,7 +14,6 @@ import tensorflow as tf
 from keras_retinanet.models.resnet import custom_objects
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
-from models import Result
 import settings
 
 is_model_loaded = False
@@ -63,13 +62,12 @@ def classify_urls(urls):
                                  settings.config['RETINANET_MODEL']['classes_file'],
                                  settings.config['RETINANET_MODEL']['labels_file'])
 
-    results = []
+    result_list = []
     # load image
     for i in range(len(urls)):
         log.info('Running classification on: {}'.format(urls[i]))
 
-        result = Result()
-        result.url = urls[i]
+        result = {'url': urls[i]}
 
         log.info('Reading image bgr...')
         try:
@@ -87,7 +85,7 @@ def classify_urls(urls):
         draw = np.asarray(image.copy())
         draw = cv2.cvtColor(draw, cv2.COLOR_BGR2RGB)
 
-        # preprocess image for network
+        # pre-process the image for the network
         log.info('Processing image...')
         image = val_generator.preprocess_image(image)
         image, scale = val_generator.resize_image(image)
@@ -97,7 +95,7 @@ def classify_urls(urls):
         _, _, detections = model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
         log.info('Processing time: {}'.format(elapsed))
-        result.time_elapsed = elapsed
+        result['time'] = str(elapsed)
 
         # compute predicted labels and scores
         predicted_labels = np.argmax(detections[0, :, 4:], axis=1)
@@ -106,18 +104,19 @@ def classify_urls(urls):
         # correct for image scale
         detections[0, :, :4] /= scale
 
+        captions = []
         # process and save detections
         for idx, (label, score) in enumerate(zip(predicted_labels, scores)):
             if score < 0.5:
                 continue
             # get position data
-            b = detections[0, idx, :4].astype(int)
+            box = detections[0, idx, :4].astype(int)
             # Crop image for extraction
-            h = b[3] - b[1]
-            w = b[2] - b[0]
-            cropped = draw[b[1]:(b[1] + h), b[0]:(b[0] + w)]
+            h = box[3] - box[1]
+            w = box[2] - box[0]
+            cropped = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
 
-            # cropped = image[b[2]:b[3], b[0]:b[1]]
+            # cropped = image[box[2]:box[3], box[0]:box[1]]
             label_name = val_generator.label_to_name(label)
             ts = time.time()
             extraction_dir = 'data/extracted/{}'.format(label_name)
@@ -129,8 +128,14 @@ def classify_urls(urls):
             cv2.imwrite(cropped_file_name, cv2.cvtColor(cropped, cv2.COLOR_RGB2BGR))
 
             # save meta-info for REST API response
-            result.caption_list.append((label, label_name, score, b))
+            caption = {'id': str(label),
+                       'label': label_name,
+                       'score': str(score),
+                       'top-left': '{};{}'.format(box[0], box[1]),         # x1;y1
+                       'bottom-right': '{};{}'.format(box[2], box[3])}     # x2;y2
+            captions.append(caption)
 
-        results.append(result)
+        result['captions'] = captions
+        result_list.append(result)
 
-    return results
+    return {'results': result_list}
