@@ -4,3 +4,4 @@ __pycache__/
 /.cache
 /data/extracted
 retinanet.log
+MNIST_data/
