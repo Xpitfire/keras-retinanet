@@ -95,7 +95,7 @@ def classify_urls(urls):
             label_name = val_generator.label_to_name(label_id)
 
             # process cropped image fragment for searching
-            index_copped_image(cropped, idx)
+            index_copped_image(cropped, label_name, idx)
 
             # save meta-info for REST API response
             caption = {'id': str(label_id),
