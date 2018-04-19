@@ -43,6 +43,8 @@ def classify():
 if __name__ == '__main__':
     settings.initialize_settings()
     settings.initialize_logging()
+    settings.initialize_similarity_index()
+    settings.initialize_elastic_search()
     logging.info('Server app started!')
     app.run(host=settings.config['RETINANET_SERVER']['host'],
             port=int(settings.config['RETINANET_SERVER']['port']),

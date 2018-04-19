@@ -121,6 +121,16 @@ model.compile(
 2) Create generators for training and testing data (an example is show in [`keras_retinanet.preprocessing.PascalVocGenerator`](https://github.com/Xpitfire/keras-retinanet/blob/master/keras_retinanet/preprocessing/pascal_voc.py)).
 3) Use `model.fit_generator` to start training.
 
+## Additional Tools
+
+To run the application a running elastic search server is required.
+To start a demo of elastic search via docker type in the following command:
+
+```$bash
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+``` 
+
+
 ## Testing
 An example of testing the network can be seen in [this Notebook](https://github.com/Xpitfire/keras-retinanet/blob/master/ResNet50RetinaNet%20-%20COCO%202017.ipynb).
 In general, output can be retrieved from the network as follows:

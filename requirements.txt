@@ -63,3 +63,13 @@ redis
 
 # Handle request parameters
 requests
+
+
+################################################################
+# Internal no-sql search engine.
+elasticsearch
+
+
+################################################################
+# Indexing engine
+faiss-gpu
