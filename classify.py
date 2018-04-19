@@ -35,8 +35,12 @@ def index_copped_image(img, label_name, idx):
 def classify_content(content):
     # create a generator for testing data
     log.info('Creating validation generator...')
+
+    urls = []
+    for asset in content['assets']:
+        urls.append(asset['url'])
     # prepare images for download
-    val_generator = UrlGenerator(content,
+    val_generator = UrlGenerator(urls,
                                  settings.config['RETINANET_MODEL']['classes_file'],
                                  settings.config['RETINANET_MODEL']['labels_file'])
     result_list = []

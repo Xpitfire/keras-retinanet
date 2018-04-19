@@ -6,16 +6,13 @@ from classify import classify_content
 
 import logging
 import settings
+from misc import jsonp
 
 app = Flask(__name__)
 
 
-@app.route('/classify', methods=['POST'])
-def classify():
+def handle_request(content):
     try:
-        logging.info('starting to handle request')
-        content = request.get_json()
-        logging.info('handle my request: ', content)
         classification_results = classify_content(content)
         return jsonify(classification_results)
     except:
@@ -24,6 +21,27 @@ def classify():
         status = 500
         logging.error(err)
         return Response(json_response, status=status, mimetype='application/json')
+
+
+@app.route('/classify/assets', methods=['POST'])
+def classify_asset():
+    content = request.get_json()
+    return handle_request(content)
+
+
+@app.route('/classify', methods=['GET'])
+@jsonp
+def classify():
+    url = request.args.get('url')
+    content = {
+        "assets": [
+            {
+                "asset-id": "demo",
+                "url": url
+            }
+        ]
+    }
+    return handle_request(content)
 
 
 @app.before_first_request
