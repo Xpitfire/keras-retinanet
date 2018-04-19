@@ -97,15 +97,7 @@ def classify_content(content):
                 continue
             # get position data
             box = detections[0, idx, :4].astype(int)
-            # Crop image for extraction
-            h = box[3] - box[1]
-            w = box[2] - box[0]
-            cropped = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
             label_name = val_generator.label_to_name(label_id)
-
-            # process cropped image fragment for searching
-            index_copped_image(cropped, label_name, idx)
-
             # save meta-info for REST API response
             caption = {'id': str(label_id),
                        'label': label_name,
@@ -113,6 +105,15 @@ def classify_content(content):
                        'top-left': '{};{}'.format(box[0], box[1]),         # x1;y1
                        'bottom-right': '{};{}'.format(box[2], box[3])}     # x2;y2
             captions.append(caption)
+            # do not post process image fragments if dummy
+            if asset['asset-id'] == "<no-process-demo>":
+                continue
+            # Crop image for extraction
+            h = box[3] - box[1]
+            w = box[2] - box[0]
+            cropped = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
+            # process cropped image fragment for searching
+            index_copped_image(cropped, label_name, idx)
 
         result['captions'] = captions
         result_list.append(result)

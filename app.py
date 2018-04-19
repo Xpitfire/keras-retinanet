@@ -24,7 +24,7 @@ def handle_request(content):
 
 
 @app.route('/classify/assets', methods=['POST'])
-def classify_asset():
+def classify_assets():
     content = request.get_json()
     return handle_request(content)
 
@@ -36,7 +36,7 @@ def classify():
     content = {
         "assets": [
             {
-                "asset-id": "demo",
+                "asset-id": "<no-process-demo>",
                 "url": url
             }
         ]
