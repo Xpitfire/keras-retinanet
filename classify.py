@@ -14,8 +14,21 @@ import settings
 log = logging.getLogger('celum.classify')
 
 
-def index_image_crop():
+def index_original_image(img):
     pass
+
+
+def index_copped_image(img, label_name, idx):
+    # cropped = image[box[2]:box[3], box[0]:box[1]]
+    ts = time.time()
+    extraction_dir = 'data/extracted/{}'.format(label_name)
+    if not os.path.exists(extraction_dir):
+        os.makedirs(extraction_dir)
+        log.info('Created new dir: {}'.format(extraction_dir))
+    cropped_file_name = '{}/{}_{}.png'.format(extraction_dir, ts, idx)
+    log.info('Extracted image: {}'.format(cropped_file_name))
+    converted_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    cv2.imwrite(cropped_file_name, converted_img)
 
 
 def classify_urls(urls):
@@ -24,17 +37,18 @@ def classify_urls(urls):
     val_generator = UrlGenerator(urls,
                                  settings.config['RETINANET_MODEL']['classes_file'],
                                  settings.config['RETINANET_MODEL']['labels_file'])
-
     result_list = []
     # load image
     for i in range(len(urls)):
         log.info('Running classification on: {}'.format(urls[i]))
-
+        # initialize result object
         result = {'url': urls[i]}
-
         log.info('Reading image bgr...')
         try:
+            # fetch images
             image = val_generator.read_image_bgr(i)
+            # index original image for searching
+            index_original_image(image)
         except (OSError, ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
             log.warning('Skipped: Unable to reach resource')
             continue
@@ -53,7 +67,7 @@ def classify_urls(urls):
         image = val_generator.preprocess_image(image)
         image, scale = val_generator.resize_image(image)
 
-        # process image
+        # classify image
         start = time.time()
         _, _, detections = settings.model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
@@ -69,7 +83,7 @@ def classify_urls(urls):
 
         captions = []
         # process and save detections
-        for idx, (label, score) in enumerate(zip(predicted_labels, scores)):
+        for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
             if score < 0.5:
                 continue
             # get position data
@@ -78,20 +92,13 @@ def classify_urls(urls):
             h = box[3] - box[1]
             w = box[2] - box[0]
             cropped = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
+            label_name = val_generator.label_to_name(label_id)
 
-            # cropped = image[box[2]:box[3], box[0]:box[1]]
-            label_name = val_generator.label_to_name(label)
-            ts = time.time()
-            extraction_dir = 'data/extracted/{}'.format(label_name)
-            if not os.path.exists(extraction_dir):
-                os.makedirs(extraction_dir)
-                log.info('Created new dir: {}'.format(extraction_dir))
-            cropped_file_name = '{}/{}_{}.png'.format(extraction_dir, ts, idx)
-            log.info('Extracted image: {}'.format(cropped_file_name))
-            cv2.imwrite(cropped_file_name, cv2.cvtColor(cropped, cv2.COLOR_RGB2BGR))
+            # process cropped image fragment for searching
+            index_copped_image(cropped, idx)
 
             # save meta-info for REST API response
-            caption = {'id': str(label),
+            caption = {'id': str(label_id),
                        'label': label_name,
                        'score': str(score),
                        'top-left': '{};{}'.format(box[0], box[1]),         # x1;y1
