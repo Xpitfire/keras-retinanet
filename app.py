@@ -2,7 +2,6 @@ from flask import Flask, request, Response, jsonify
 
 import traceback
 
-from misc import jsonp
 from classify import classify_content
 
 import logging
@@ -12,10 +11,11 @@ app = Flask(__name__)
 
 
 @app.route('/classify', methods=['POST'])
-@jsonp
 def classify():
     try:
+        logging.info('starting to handle request')
         content = request.get_json()
+        logging.info('handle my request: ', content)
         classification_results = classify_content(content)
         return jsonify(classification_results)
     except:
