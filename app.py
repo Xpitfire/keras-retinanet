@@ -2,11 +2,13 @@ from flask import Flask, request, Response, jsonify
 
 import traceback
 
-from classify import classify_content
-
-import logging
 import settings
 from misc import jsonp
+import logging
+
+from services import classify_content
+
+logger = logging.getLogger('celum.app')
 
 app = Flask(__name__)
 
@@ -19,7 +21,7 @@ def handle_request(content):
         err = traceback.format_exc()
         json_response = jsonify({'exception': 'Server endpoint not responding! Please try again later.'})
         status = 500
-        logging.error(err)
+        logger.error(err)
         return Response(json_response, status=status, mimetype='application/json')
 
 
@@ -54,7 +56,7 @@ def initialize():
 if __name__ == '__main__':
     settings.initialize_settings()
     settings.initialize_logging()
-    logging.info('Server app started!')
+    logger.info('Server app started!')
     app.run(host=settings.config['RETINANET_SERVER']['host'],
             port=int(settings.config['RETINANET_SERVER']['port']),
             debug=True)

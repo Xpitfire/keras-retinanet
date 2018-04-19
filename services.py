@@ -1,4 +1,3 @@
-import logging
 import traceback
 import os
 import time
@@ -10,31 +9,33 @@ import numpy as np
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
 import settings
+import search_engine
+import indexer
 
-log = logging.getLogger('celum.classify')
+import logging
+logger = logging.getLogger('celum.services')
 
 
 def index_original_image(img):
-
+    #settings.search.index()
     pass
 
 
 def index_copped_image(img, label_name, idx):
-    # cropped = image[box[2]:box[3], box[0]:box[1]]
     ts = time.time()
     extraction_dir = 'data/extracted/{}'.format(label_name)
     if not os.path.exists(extraction_dir):
         os.makedirs(extraction_dir)
-        log.info('Created new dir: {}'.format(extraction_dir))
+        logger.info('Created new dir: {}'.format(extraction_dir))
     cropped_file_name = '{}/{}_{}.png'.format(extraction_dir, ts, idx)
-    log.info('Extracted image: {}'.format(cropped_file_name))
+    logger.info('Extracted image: {}'.format(cropped_file_name))
     converted_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(cropped_file_name, converted_img)
 
 
 def classify_content(content):
     # create a generator for testing data
-    log.info('Creating validation generator...')
+    logger.info('Creating validation generator...')
 
     urls = []
     for asset in content['assets']:
@@ -46,33 +47,33 @@ def classify_content(content):
     result_list = []
     # load image
     for i, asset in enumerate(content['assets']):
-        log.info('Running classification on: {}'.format(asset['url']))
+        logger.info('Running classification on: {}'.format(asset['url']))
         # initialize result object
         result = {
             'url': asset['url'],
             'asset-id': asset['asset-id']
         }
-        log.info('Reading image bgr...')
+        logger.info('Reading image bgr...')
         try:
             # fetch images
             image = val_generator.read_image_bgr(i)
             # index original image for searching
             index_original_image(image)
         except (OSError, ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
-            log.warning('Skipped: Unable to reach resource')
+            logger.warning('Skipped: Unable to reach resource')
             continue
         except:
             err = traceback.format_exc()
-            log.error('Could not read image: {}'.format(err))
+            logger.error('Could not read image: {}'.format(err))
             continue
 
         # copy to draw on
-        log.info('Drawing cvt color...')
+        logger.info('Drawing cvt color...')
         draw = np.asarray(image.copy())
         draw = cv2.cvtColor(draw, cv2.COLOR_BGR2RGB)
 
         # pre-process the image for the network
-        log.info('Processing image...')
+        logger.info('Processing image...')
         image = val_generator.preprocess_image(image)
         image, scale = val_generator.resize_image(image)
 
@@ -80,7 +81,7 @@ def classify_content(content):
         start = time.time()
         _, _, detections = settings.model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
-        log.info('Processing time: {}'.format(elapsed))
+        logger.info('Processing time: {}'.format(elapsed))
         result['time'] = str(elapsed)
 
         # compute predicted labels and scores

@@ -1,5 +1,4 @@
 import configparser
-import logging
 import faiss
 import os
 from elasticsearch import Elasticsearch
@@ -8,6 +7,9 @@ import keras
 import keras.preprocessing.image
 from keras_retinanet.models.resnet import custom_objects
 import tensorflow as tf
+
+import logging
+logger = logging.getLogger('celum.settings')
 
 
 config = None
@@ -41,7 +43,6 @@ def initialize_logging():
     # add the handler to the root logger
     logging.getLogger('').addHandler(console)
 
-
 def initialize_similarity_index():
     global index
     path = config["FAISS_SETTINGS"]["index_path"]
@@ -54,44 +55,34 @@ def initialize_similarity_index():
     else:
         try:
             index = faiss.read_index(file)
-            logging.info("Faiss index loaded")
+            logger.info("Faiss index loaded")
         except (OSError, TypeError, NameError):
             index = faiss.read_index(file)
-            logging.error("Can't load index! Using default empty index")
-
-
-def persist_similarity_index():
-    if index is not None:
-        faiss.write_index(index,
-                          config["FAISS_SETTINGS"]["index_path"] +
-                          config["FAISS_SETTINGS"]["index_file"])
-        logging.info("Faiss index saved to disk")
-    else:
-        logging.warning("Can't save, index was not loaded yet!")
+            logger.error("Can't load index! Using default empty index")
 
 
 def initialize_elastic_search():
     global search
     search = Elasticsearch(hosts=[{'host': config["ELASTICSEARCH_SERVER"]["host"],
                                    'port': config["ELASTICSEARCH_SERVER"]["port"]}])
-    logging.info("Elastic search initialized!")
+    logger.info("Elastic search initialized!")
 
 
 def get_session():
-    config = tf.ConfigProto()
-    config.gpu_options.allow_growth = True
-    return tf.Session(config=config)
+    cfg = tf.ConfigProto()
+    cfg.gpu_options.allow_growth = True
+    return tf.Session(config=cfg)
 
 
 def init_retinanet():
     global model
 
-    logging.info('Model not loaded...')
+    logger.info('Model not loaded...')
     # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    logging.info('Setting keras session...')
+    logger.info('Setting keras session...')
     keras.backend.tensorflow_backend.set_session(get_session())
 
-    logging.info('Loading model name...')
+    logger.info('Loading model name...')
     model = keras.models.load_model(config['RETINANET_MODEL']['model_path'] +
                                     config['RETINANET_MODEL']['model_name'],
                                     custom_objects=custom_objects)
