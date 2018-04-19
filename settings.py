@@ -4,9 +4,16 @@ import faiss
 import os
 from elasticsearch import Elasticsearch
 
+import keras
+import keras.preprocessing.image
+from keras_retinanet.models.resnet import custom_objects
+import tensorflow as tf
+
+
 config = None
 index = None
 search = None
+model = None
 
 
 def initialize_settings():
@@ -68,3 +75,23 @@ def initialize_elastic_search():
     search = Elasticsearch(hosts=[{'host': config["ELASTICSEARCH_SERVER"]["host"],
                                    'port': config["ELASTICSEARCH_SERVER"]["port"]}])
     logging.info("Elastic search initialized!")
+
+
+def get_session():
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+    return tf.Session(config=config)
+
+
+def init_retinanet():
+    global model
+
+    logging.info('Model not loaded...')
+    # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    logging.info('Setting keras session...')
+    keras.backend.tensorflow_backend.set_session(get_session())
+
+    logging.info('Loading model name...')
+    model = keras.models.load_model(config['RETINANET_MODEL']['model_path'] +
+                                    config['RETINANET_MODEL']['model_name'],
+                                    custom_objects=custom_objects)

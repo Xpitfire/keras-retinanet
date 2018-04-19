@@ -7,55 +7,18 @@ from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, Connection
 import cv2
 import numpy as np
 
-import keras
-import keras.preprocessing.image
-import tensorflow as tf
-
-from keras_retinanet.models.resnet import custom_objects
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
 import settings
 
-is_model_loaded = False
-model = None
-generator = None
-
 log = logging.getLogger('celum.classify')
 
 
-def get_session():
-    config = tf.ConfigProto()
-    config.gpu_options.allow_growth = True
-    return tf.Session(config=config)
-
-
-def init_classification():
-    global is_model_loaded
-    global model
-    global generator
-
-    # if model not already loaded, load new model
-    if not is_model_loaded:
-        log.info('Model not loaded...')
-        # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-        log.info('Setting keras session...')
-        keras.backend.tensorflow_backend.set_session(get_session())
-
-        log.info('Loading model name...')
-        model = keras.models.load_model(settings.config['RETINANET_MODEL']['model_path']+settings.config['RETINANET_MODEL']['model_name'],
-                                        custom_objects=custom_objects)
-
-        log.info('Creating image data generator...')
-        generator = keras.preprocessing.image.ImageDataGenerator()
-        is_model_loaded = True
-    else:
-        log.info('Model already loaded...')
+def index_image_crop():
+    pass
 
 
 def classify_urls(urls):
-    # init model
-    init_classification()
-
     # create a generator for testing data
     log.info('Creating validation generator...')
     val_generator = UrlGenerator(urls,
@@ -92,7 +55,7 @@ def classify_urls(urls):
 
         # process image
         start = time.time()
-        _, _, detections = model.predict_on_batch(np.expand_dims(image, axis=0))
+        _, _, detections = settings.model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
         log.info('Processing time: {}'.format(elapsed))
         result['time'] = str(elapsed)
