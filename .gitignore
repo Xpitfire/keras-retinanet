@@ -3,5 +3,5 @@ __pycache__/
 /.pytest_cache
 /.cache
 /data/extracted
-retinanet.log
+**/*.log
 MNIST_data/
