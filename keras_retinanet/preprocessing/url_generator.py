@@ -30,12 +30,14 @@ class UrlGenerator(Generator):
 
     def __init__(
             self,
-            urls,
+            content,
             classes_path,
             labels_path,
             **kwargs
     ):
-        self.urls = urls
+        self.urls = []
+        for asset in content['assets']:
+            self.urls.append(asset['url'])
         self.classes_path = classes_path
         self.labels_path = labels_path
         self.load_meta_info()

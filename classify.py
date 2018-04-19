@@ -15,6 +15,7 @@ log = logging.getLogger('celum.classify')
 
 
 def index_original_image(img):
+
     pass
 
 
@@ -31,18 +32,22 @@ def index_copped_image(img, label_name, idx):
     cv2.imwrite(cropped_file_name, converted_img)
 
 
-def classify_urls(urls):
+def classify_content(content):
     # create a generator for testing data
     log.info('Creating validation generator...')
-    val_generator = UrlGenerator(urls,
+    # prepare images for download
+    val_generator = UrlGenerator(content,
                                  settings.config['RETINANET_MODEL']['classes_file'],
                                  settings.config['RETINANET_MODEL']['labels_file'])
     result_list = []
     # load image
-    for i in range(len(urls)):
-        log.info('Running classification on: {}'.format(urls[i]))
+    for i, asset in enumerate(content['assets']):
+        log.info('Running classification on: {}'.format(asset['url']))
         # initialize result object
-        result = {'url': urls[i]}
+        result = {
+            'url': asset['url'],
+            'asset-id': asset['asset-id']
+        }
         log.info('Reading image bgr...')
         try:
             # fetch images

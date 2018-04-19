@@ -3,7 +3,7 @@ from flask import Flask, request, Response, jsonify
 import traceback
 
 from misc import jsonp
-from classify import classify_urls
+from classify import classify_content
 
 import logging
 import settings
@@ -11,26 +11,12 @@ import settings
 app = Flask(__name__)
 
 
-def resolve_special_url_cmd(image_path):
-    result_list = []
-    for path in image_path:
-        if 'file://' in path and path.endswith('.list'):
-            path = path.replace('file://', '')
-            content = [line.strip() for line in open(path, 'r').readlines()]
-            result_list += content
-        else:
-            result_list.append(path)
-    return result_list
-
-
-@app.route('/classify', methods=['GET'])
+@app.route('/classify', methods=['POST'])
 @jsonp
 def classify():
     try:
-        image_path = request.args.get('url').split(';')
-        logging.info(image_path)
-        image_path = resolve_special_url_cmd(image_path)
-        classification_results = classify_urls(image_path)
+        content = request.get_json()
+        classification_results = classify_content(content)
         return jsonify(classification_results)
     except:
         err = traceback.format_exc()
