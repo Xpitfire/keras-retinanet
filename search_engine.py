@@ -1,30 +1,42 @@
-from elasticsearch_dsl import DocType, Integer, Keyword, Text
 import configparser
 
+import settings
 import logging
 logger = logging.getLogger('celum.search_engine')
 
-
-# Define elasticsearch asset DocType -> easy persistence with elasticsearch
-class ESQueryAsset(DocType):
-    asset_id = Keyword()
-    asset_url = Text()
-    asset_encoding = []
-    asset_similarity_index = Integer()
-
-    class Meta:
-        config = configparser.ConfigParser()
-        config.read('retinanet.cfg')
-        index = config["ELASTICSEARCH_SERVER"]["index_name"]
-
-    def save(self, **kwargs):
-        return super(ESQueryAsset, self).save(**kwargs)
+config = configparser.ConfigParser()
+config.read('retinanet.cfg')
+search_index_prefix = config["ELASTICSEARCH_SERVER"]["index_prefix"]
 
 
-def save(asset):
-    es_asset = ESQueryAsset(meta={'id': asset.asset_id},
-                            asset_id=asset.asset_id,
-                            asset_url=asset.asset_url,
-                            asset_encoding=asset.asset_encoding.tolist(),
-                            asset_similarity_index=asset.similarity_index)
-    es_asset.save()
+def insert_auto(doc, doc_type):
+    index_name = '{}_{}'.format(search_index_prefix, doc_type)
+    return settings.search.index(index=index_name,
+                                 doc_type=doc_type,
+                                 body=doc)
+
+
+def insert(asset_id, doc, doc_type):
+    index_name = '{}_{}'.format(search_index_prefix, doc_type)
+    return settings.search.create(index=index_name,
+                                  doc_type=doc_type,
+                                  id=asset_id,
+                                  body=doc)
+
+
+def get(asset_id, doc_type):
+    index_name = '{}_{}'.format(search_index_prefix, doc_type)
+    return settings.search.get(index=index_name,
+                               doc_type=doc_type,
+                               id=asset_id)
+
+
+def update(asset_id, ref_id, doc_type):
+    index_name = '{}_{}'.format(search_index_prefix, doc_type)
+    doc = {
+        'script': 'ctx._source.captions = "{}"'.format(ref_id)
+    }
+    settings.search.update(index=index_name,
+                           doc_type=doc_type,
+                           id=asset_id,
+                           body=doc)

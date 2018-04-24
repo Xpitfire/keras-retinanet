@@ -2,6 +2,8 @@ import configparser
 import faiss
 import os
 from elasticsearch import Elasticsearch
+from tensorflow.python.keras.applications.resnet50 import ResNet50
+from tensorflow.python.keras.models import Model
 
 import keras
 import keras.preprocessing.image
@@ -16,6 +18,7 @@ config = None
 index = None
 search = None
 model = None
+extraction_model = None
 
 
 def initialize_settings():
@@ -42,6 +45,7 @@ def initialize_logging():
     console.setFormatter(formatter)
     # add the handler to the root logger
     logging.getLogger('').addHandler(console)
+
 
 def initialize_similarity_index():
     global index
@@ -74,10 +78,9 @@ def get_session():
     return tf.Session(config=cfg)
 
 
-def init_retinanet():
+def initialize_retinanet():
     global model
-
-    logger.info('Model not loaded...')
+    logger.info('Loading retinanet classification model...')
     # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     logger.info('Setting keras session...')
     keras.backend.tensorflow_backend.set_session(get_session())
@@ -86,3 +89,11 @@ def init_retinanet():
     model = keras.models.load_model(config['RETINANET_MODEL']['model_path'] +
                                     config['RETINANET_MODEL']['model_name'],
                                     custom_objects=custom_objects)
+
+
+def initialize_extraction_model():
+    global extraction_model
+    logger.info('Loading extraction model...')
+    resnet = ResNet50(weights='imagenet')
+    output = resnet.layers[-2].output
+    extraction_model = Model(resnet.input, output)

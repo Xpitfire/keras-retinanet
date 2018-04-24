@@ -10,18 +10,27 @@ from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
 import settings
 import search_engine
+import feature_extractor
 import indexer
+import faiss
 
 import logging
 logger = logging.getLogger('celum.services')
 
 
-def index_original_image(img):
-    #settings.search.index()
-    pass
+def index_original_image(img, asset):
+    asset_id = asset['asset-id']
+    search_engine.insert(asset_id, {
+        'asset-id': asset_id,
+        'url': asset['url']
+    }, doc_type='asset')
+    #print('test', settings.index.is_trained)
+    #settings.index.add()
+    #similarity_index = (settings.index.ntotal - 1)
+    #print(similarity_index)
 
 
-def index_copped_image(img, label_name, idx):
+def process_cropped_image(img, label_name, idx):
     ts = time.time()
     extraction_dir = 'data/extracted/{}'.format(label_name)
     if not os.path.exists(extraction_dir):
@@ -31,6 +40,19 @@ def index_copped_image(img, label_name, idx):
     logger.info('Extracted image: {}'.format(cropped_file_name))
     converted_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(cropped_file_name, converted_img)
+    return feature_extractor.predict(cropped_file_name)
+
+
+def index_captions(asset, captions, features):
+    print(features)
+    asset_id = asset['asset-id']
+    doc = search_engine.insert_auto({
+        'captions': captions,
+        'features': features
+    }, doc_type='caption')
+    search_engine.update(asset_id=asset_id,
+                         ref_id=doc['_id'],
+                         doc_type='asset')
 
 
 def classify_content(content):
@@ -58,7 +80,7 @@ def classify_content(content):
             # fetch images
             image = val_generator.read_image_bgr(i)
             # index original image for searching
-            index_original_image(image)
+            index_original_image(image, asset)
         except (OSError, ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
             logger.warning('Skipped: Unable to reach resource')
             continue
@@ -92,6 +114,7 @@ def classify_content(content):
         detections[0, :, :4] /= scale
 
         captions = []
+        features = []
         # process and save detections
         for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
             if score < 0.5:
@@ -114,7 +137,9 @@ def classify_content(content):
             w = box[2] - box[0]
             cropped = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
             # process cropped image fragment for searching
-            index_copped_image(cropped, label_name, idx)
+            features.append(process_cropped_image(cropped, label_name, idx).tolist())
+
+        index_captions(asset, captions, features)
 
         result['captions'] = captions
         result_list.append(result)

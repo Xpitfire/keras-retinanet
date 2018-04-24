@@ -50,7 +50,8 @@ def classify():
 def initialize():
     settings.initialize_similarity_index()
     settings.initialize_elastic_search()
-    settings.init_retinanet()
+    settings.initialize_retinanet()
+    settings.initialize_extraction_model()
 
 
 if __name__ == '__main__':
