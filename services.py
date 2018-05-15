@@ -36,7 +36,7 @@ def index_original_image(img, asset):
     es_asset.save()
 
 
-def index_cropped_image(asset, img, label_name, box, idx):
+def index_cropped_image(asset, img, label_name, idx):
     # save cropped image
     extraction_dir = 'data/extracted/{}'.format(label_name)
     if not os.path.exists(extraction_dir):
@@ -147,7 +147,7 @@ def classify_content(content):
             w = box[2] - box[0]
             cropped_img = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
             # process cropped image fragment for searching
-            pred = index_cropped_image(asset, cropped_img, label_name, box, idx)
+            pred = index_cropped_image(asset, cropped_img, label_name, idx)
             # index caption
             index_asset_meta(asset, idx, caption, pred)
 
