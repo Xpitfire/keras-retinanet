@@ -1,5 +1,4 @@
 import configparser
-import faiss
 import os
 from elasticsearch_dsl import Index
 from elasticsearch_dsl.connections import connections
@@ -10,7 +9,8 @@ import keras
 import keras.preprocessing.image
 from keras_retinanet.models.resnet import custom_objects
 import tensorflow as tf
-from search_engine import EsAsset
+from search_engine import EsAsset, EsAssetMeta, EsCropped
+import faiss
 
 import logging
 logger = logging.getLogger('celum.settings')
@@ -18,7 +18,9 @@ logger = logging.getLogger('celum.settings')
 
 config = None
 index = None
-search = None
+db_asset = None
+db_asset_meta = None
+db_cropped = None
 model = None
 extraction_model = None
 
@@ -57,7 +59,7 @@ def initialize_similarity_index():
 
     file = path + config["FAISS_SETTINGS"]["index_file"]
     if not os.path.exists(file):
-        index = faiss.IndexFlatL2(int(config["FAISS_SETTINGS"]["index_size"]))
+        index = faiss.IndexFlatIP(int(config['FAISS_SETTINGS']['index_size']))
     else:
         try:
             index = faiss.read_index(file)
@@ -68,15 +70,23 @@ def initialize_similarity_index():
 
 
 def initialize_elastic_search():
-    global search
+    global db_asset, db_cropped, db_asset_meta
     connections.create_connection(hosts=config["ELASTICSEARCH_SERVER"]["host"],
                                   port=config["ELASTICSEARCH_SERVER"]["port"],
                                   timeout=20)
 
-    index = Index('retinanet_demo')
-    if not index.exists():
-        index.doc_type(EsAsset)
-        index.create()
+    db_asset = Index(config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_asset"])
+    if not db_asset.exists():
+        db_asset.doc_type(EsAsset)
+        db_asset.create()
+    db_asset_meta = Index(config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_asset_meta"])
+    if not db_asset_meta.exists():
+        db_asset_meta.doc_type(EsAssetMeta)
+        db_asset_meta.create()
+    db_cropped = Index(config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_cropped"])
+    if not db_cropped.exists():
+        db_cropped.doc_type(EsCropped)
+        db_cropped.create()
 
     logger.info("Elastic search initialized!")
 
