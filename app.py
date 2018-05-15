@@ -38,7 +38,7 @@ def classify():
     content = {
         "assets": [
             {
-                "asset-id": "<no-process-demo>",
+                "asset-id": "no-process-demo",
                 "url": url
             }
         ]

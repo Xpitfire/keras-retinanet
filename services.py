@@ -9,7 +9,7 @@ import numpy as np
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 
 import settings
-import search_engine
+from search_engine import EsAsset, EsCropped, EsAssetMeta
 import feature_extractor
 import indexer
 import faiss
@@ -19,46 +19,60 @@ logger = logging.getLogger('celum.services')
 
 
 def index_original_image(img, asset):
-    asset_id = asset['asset-id']
-    search_engine.insert(asset_id, {
-        'asset-id': asset_id,
-        'url': asset['url']
-    }, doc_type='asset')
-    #print('test', settings.index.is_trained)
-    #settings.index.add()
-    #similarity_index = (settings.index.ntotal - 1)
-    #print(similarity_index)
+    # save original image
+    original_dir = 'data/original'
+    if not os.path.exists(original_dir):
+        os.makedirs(original_dir)
+        logger.info('Created new dir: {}'.format(original_dir))
+    ori_file_name = '{}/{}.png'.format(original_dir, asset['asset-id'])
+    cv2.imwrite(ori_file_name, img)
+
+    # insert asset into database
+    logger.info('Creating validation generator...')
+    es_asset = EsAsset(meta={'id': asset['asset-id']},
+                       asset_id=asset['asset-id'],
+                       asset_url=asset['url'],
+                       path=ori_file_name)
+    es_asset.save()
 
 
-def process_cropped_image(img, label_name, idx):
-    ts = time.time()
+def index_cropped_image(asset, img, label_name, box, idx):
+    # save cropped image
     extraction_dir = 'data/extracted/{}'.format(label_name)
     if not os.path.exists(extraction_dir):
         os.makedirs(extraction_dir)
         logger.info('Created new dir: {}'.format(extraction_dir))
-    cropped_file_name = '{}/{}_{}.png'.format(extraction_dir, ts, idx)
+    cropped_file_name = '{}/{}-{}.png'.format(extraction_dir, asset['asset-id'], idx)
     logger.info('Extracted image: {}'.format(cropped_file_name))
     converted_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(cropped_file_name, converted_img)
-    return feature_extractor.predict(cropped_file_name)
+
+    # extract features
+    pred = feature_extractor.predict(cropped_file_name).tolist()
+
+    # insert cropped image into database
+    es_cropped = EsCropped(meta={'id': '{}-{}'.format(asset['asset-id'], idx)},
+                           asset_id=asset['asset-id'],
+                           path=cropped_file_name)
+    es_cropped.save()
+    return pred
 
 
-def index_captions(asset, captions, features):
-    print(features)
-    asset_id = asset['asset-id']
-    doc = search_engine.insert_auto({
-        'captions': captions,
-        'features': features
-    }, doc_type='caption')
-    search_engine.update(asset_id=asset_id,
-                         ref_id=doc['_id'],
-                         doc_type='asset')
+def index_asset_meta(asset, idx, caption, feature):
+    # store cropped image in database
+    es_meta = EsAssetMeta(meta={'id': '{}-{}'.format(asset['asset-id'], idx)},
+                          asset_id=asset['asset-id'],
+                          cropped_id=idx,
+                          label=caption['label'],
+                          score=caption['score'],
+                          top_left=caption['top-left'],
+                          bottom_right=caption['bottom-right'],
+                          feature=feature)
+    es_meta.save()
 
 
 def classify_content(content):
     # create a generator for testing data
-    logger.info('Creating validation generator...')
-
     urls = []
     for asset in content['assets']:
         urls.append(asset['url'])
@@ -114,7 +128,6 @@ def classify_content(content):
         detections[0, :, :4] /= scale
 
         captions = []
-        features = []
         # process and save detections
         for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
             if score < 0.5:
@@ -129,17 +142,14 @@ def classify_content(content):
                        'top-left': '{};{}'.format(box[0], box[1]),         # x1;y1
                        'bottom-right': '{};{}'.format(box[2], box[3])}     # x2;y2
             captions.append(caption)
-            # do not post process image fragments if dummy
-            if asset['asset-id'] == "<no-process-demo>":
-                continue
             # Crop image for extraction
             h = box[3] - box[1]
             w = box[2] - box[0]
-            cropped = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
+            cropped_img = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
             # process cropped image fragment for searching
-            features.append(process_cropped_image(cropped, label_name, idx).tolist())
-
-        index_captions(asset, captions, features)
+            pred = index_cropped_image(asset, cropped_img, label_name, box, idx)
+            # index caption
+            index_asset_meta(asset, idx, caption, pred)
 
         result['captions'] = captions
         result_list.append(result)

@@ -1,7 +1,8 @@
 import configparser
 import faiss
 import os
-from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Index
+from elasticsearch_dsl.connections import connections
 from tensorflow.python.keras.applications.resnet50 import ResNet50
 from tensorflow.python.keras.models import Model
 
@@ -9,6 +10,7 @@ import keras
 import keras.preprocessing.image
 from keras_retinanet.models.resnet import custom_objects
 import tensorflow as tf
+from search_engine import EsAsset
 
 import logging
 logger = logging.getLogger('celum.settings')
@@ -67,8 +69,15 @@ def initialize_similarity_index():
 
 def initialize_elastic_search():
     global search
-    search = Elasticsearch(hosts=[{'host': config["ELASTICSEARCH_SERVER"]["host"],
-                                   'port': config["ELASTICSEARCH_SERVER"]["port"]}])
+    connections.create_connection(hosts=config["ELASTICSEARCH_SERVER"]["host"],
+                                  port=config["ELASTICSEARCH_SERVER"]["port"],
+                                  timeout=20)
+
+    index = Index('retinanet_demo')
+    if not index.exists():
+        index.doc_type(EsAsset)
+        index.create()
+
     logger.info("Elastic search initialized!")
 
 
