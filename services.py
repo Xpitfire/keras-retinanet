@@ -113,9 +113,12 @@ def get_similar_asset_metas(feature, n=1):
     return asset_metas
 
 
-def handle_suggestion_response(suggestions, asset_metas):
+def handle_suggestion_response(current_asset_id, suggestions, asset_metas):
     for asset_meta in asset_metas:
         asset_id = asset_meta['asset-id']
+        # skip if it is the same id as the classified image
+        if current_asset_id == asset_id:
+            continue
         cropped_id = asset_meta['cropped-id']
         parent_url, path = fetch_cropped_url(asset_id, cropped_id)
         if asset_id not in suggestions:
@@ -222,16 +225,18 @@ def classify_content(content):
             faiss_features = features.reshape((1, int(settings.config['FAISS_SETTINGS']['index_size'])))
             # add feature to faiss index
             settings.index.add(faiss_features)
-            # find similar suggestions and handle response
-            asset_metas = get_similar_asset_metas(faiss_features)
-            handle_suggestion_response(suggestions, asset_metas)
             # index caption
             index_asset_meta(asset, idx, caption, features.tolist(), settings.index.ntotal-1)
+            # find similar suggestions and handle response
+            asset_metas = get_similar_asset_metas(faiss_features)
+            handle_suggestion_response(asset['asset-id'], suggestions, asset_metas)
             # append caption for return
             captions.append(caption)
 
-        result['captions'] = captions
-        result['similar-suggestions'] = suggestions
+        if len(captions) > 0:
+            result['captions'] = captions
+        if len(suggestions) > 0:
+            result['similar-suggestions'] = suggestions
         result_list.append(result)
 
     return {'results': result_list}
