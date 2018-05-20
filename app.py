@@ -6,6 +6,7 @@ import settings
 from misc import jsonp
 import logging
 
+from models import Content
 from services import classify_content
 
 logger = logging.getLogger('celum.app')
@@ -27,7 +28,8 @@ def handle_request(content):
 
 @app.route('/classify/assets', methods=['POST'])
 def classify_assets():
-    content = request.get_json()
+    json_content = request.get_json()
+    content = Content(json_content)
     return handle_request(content)
 
 

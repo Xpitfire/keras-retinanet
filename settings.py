@@ -9,7 +9,7 @@ import keras
 import keras.preprocessing.image
 from keras_retinanet.models.resnet import custom_objects
 import tensorflow as tf
-from search_engine import EsAsset, EsAssetMeta, EsCropped
+from models_es import EsAsset, EsAssetMeta, EsCropped
 import faiss
 
 import logging

@@ -10,7 +10,7 @@ from keras_retinanet.preprocessing.url_generator import UrlGenerator
 from elasticsearch_dsl import Search, Q
 
 import settings
-from search_engine import EsAsset, EsCropped, EsAssetMeta
+from models_es import EsAsset, EsCropped, EsAssetMeta
 import feature_extractor
 
 import logging
@@ -24,14 +24,14 @@ def index_original_image(img, asset):
     if not os.path.exists(original_dir):
         os.makedirs(original_dir)
         logger.info('Created new dir: {}'.format(original_dir))
-    ori_file_name = '{}/{}.png'.format(original_dir, asset['asset-id'])
+    ori_file_name = '{}/{}.png'.format(original_dir, asset.asset_id)
     cv2.imwrite(ori_file_name, img)
 
     # insert asset into database
     logger.info('Creating validation generator...')
-    es_asset = EsAsset(meta={'id': asset['asset-id']},
-                       asset_id=asset['asset-id'],
-                       asset_url=asset['url'],
+    es_asset = EsAsset(meta={'id': asset.asset_id},
+                       asset_id=asset.asset_id,
+                       asset_url=asset.url,
                        path=ori_file_name)
     es_asset.save()
     return ori_file_name
@@ -44,14 +44,14 @@ def index_cropped_image(asset, img, label_name, idx):
     if not os.path.exists(extraction_dir):
         os.makedirs(extraction_dir)
         logger.info('Created new dir: {}'.format(extraction_dir))
-    cropped_file_name = '{}/{}-{}.png'.format(extraction_dir, asset['asset-id'], idx)
+    cropped_file_name = '{}/{}-{}.png'.format(extraction_dir, asset.asset_id, idx)
     logger.info('Extracted image: {}'.format(cropped_file_name))
     converted_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(cropped_file_name, converted_img)
     # insert cropped image into database
-    es_cropped = EsCropped(meta={'id': '{}-{}'.format(asset['asset-id'], idx)},
-                           asset_id=asset['asset-id'],
-                           parent_url=asset['url'],
+    es_cropped = EsCropped(meta={'id': '{}-{}'.format(asset.asset_id, idx)},
+                           asset_id=asset.asset_id,
+                           parent_url=asset.url,
                            path=cropped_file_name)
     es_cropped.save()
     return cropped_file_name
@@ -60,8 +60,8 @@ def index_cropped_image(asset, img, label_name, idx):
 # Inserts the meta data of an asset into the database
 def index_asset_meta(asset, idx, caption, feature, faiss_idx):
     # store cropped image in database
-    es_meta = EsAssetMeta(meta={'id': '{}-{}'.format(asset['asset-id'], idx)},
-                          asset_id=asset['asset-id'],
+    es_meta = EsAssetMeta(meta={'id': '{}-{}'.format(asset.asset_id, idx)},
+                          asset_id=asset.asset_id,
                           cropped_id=idx,
                           faiss_idx=faiss_idx,
                           label=caption['label'],
@@ -147,20 +147,21 @@ def handle_suggestion_response(current_asset_id, suggestions, asset_metas):
 def classify_content(content):
     # create a generator for testing data
     urls = []
-    for asset in content['assets']:
-        urls.append(asset['url'])
+    for asset in content.assets:
+        urls.append(asset.url)
     # prepare images for download
     val_generator = UrlGenerator(urls,
                                  settings.config['RETINANET_MODEL']['classes_file'],
                                  settings.config['RETINANET_MODEL']['labels_file'])
+
     result_list = []
     # load image
-    for i, asset in enumerate(content['assets']):
-        logger.info('Running classification on: {}'.format(asset['url']))
+    for i, asset in enumerate(content.assets):
+        logger.info('Running classification on: {}'.format(asset.url))
         # initialize result object
         result = {
-            'url': asset['url'],
-            'asset-id': asset['asset-id']
+            'url': asset.url,
+            'asset-id': asset.asset_id
         }
         logger.info('Reading image bgr...')
         try:
@@ -229,7 +230,7 @@ def classify_content(content):
             index_asset_meta(asset, idx, caption, features.tolist(), settings.index.ntotal-1)
             # find similar suggestions and handle response
             asset_metas = get_similar_asset_metas(faiss_features)
-            handle_suggestion_response(asset['asset-id'], suggestions, asset_metas)
+            handle_suggestion_response(asset.asset_id, suggestions, asset_metas)
             # append caption for return
             captions.append(caption)
 
