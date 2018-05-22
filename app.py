@@ -5,7 +5,7 @@ from flask import Flask, request, Response, jsonify
 import traceback
 
 import core
-from misc import jsonp
+import misc
 import logging
 
 from model_encoder import ResponseEncoder
@@ -38,17 +38,13 @@ def classify_assets():
 
 
 @app.route('/classify', methods=['GET'])
-@jsonp
+@misc.jsonp
 def classify():
+    id_ = request.args.get('id')
     url = request.args.get('url')
-    content = {
-        "assets": [
-            {
-                "asset-id": "no-process-demo",
-                "url": url
-            }
-        ]
-    }
+    if not id_:
+        id_ = 'dummy'
+    content = misc.classify_get_req_to_content(id_, url)
     return handle_request(content)
 
 

@@ -1,6 +1,8 @@
 import functools
 from flask import request, current_app
 
+from models import Content
+
 
 def jsonp(func):
     # TODO: fix jsonp workaround - currently used to avoid cors issue
@@ -20,3 +22,15 @@ def jsonp(func):
             return func(*args, **kwargs)
 
     return decorated_function
+
+
+def classify_get_req_to_content(asset_id, url):
+    return Content({
+        "assets": [
+            {
+                "asset-id": asset_id,
+                "url": url
+            }
+        ]
+    })
+

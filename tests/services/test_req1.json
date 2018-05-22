@@ -1,0 +1,20 @@
+{
+  "assets": [
+    {
+      "asset-id": "a1",
+      "url": "https://www.midcoaststudio.com/wp-content/uploads/2015/12/ford-lineup-slideshow_01-04.jpg"
+    },
+    {
+      "asset-id": "b2",
+      "url": "https://i.stack.imgur.com/H03KE.png"
+    },
+    {
+      "asset-id": "c3",
+      "url": "https://www.scienceabc.com/wp-content/uploads/2016/10/Plane-flying-on-earth-atmosphere.jpg"
+    },
+    {
+      "asset-id": "d4",
+      "url": "file:///Users/xpitfire/workspace/GitHub/keras-retinanet/data/test.png"
+    }
+  ]
+}
