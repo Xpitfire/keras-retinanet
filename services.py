@@ -1,3 +1,5 @@
+import config_accessor as cfg
+
 import traceback
 import os
 import time
@@ -21,7 +23,7 @@ logger = logging.getLogger('celum.services')
 # Inserts an asset into the database
 def index_original_image(img, asset):
     # save original image
-    original_dir = 'data/original'
+    original_dir = cfg.resolve(cfg.CLASSIFICATION, cfg.original_images_path)
     if not os.path.exists(original_dir):
         os.makedirs(original_dir)
         logger.info('Created new dir: {}'.format(original_dir))
@@ -41,7 +43,7 @@ def index_original_image(img, asset):
 # Inserts the cropped image data of an asset into the database
 def index_cropped_image(asset, img, label_name, idx):
     # save cropped image
-    extraction_dir = 'data/extracted/{}'.format(label_name)
+    extraction_dir = '{}/{}'.format(cfg.resolve(cfg.CLASSIFICATION, cfg.extracted_images_path), label_name)
     if not os.path.exists(extraction_dir):
         os.makedirs(extraction_dir)
         logger.info('Created new dir: {}'.format(extraction_dir))
@@ -82,8 +84,8 @@ def extract_features(file_name):
 def map_index_ids_to_asset_metas(indices_ids):
     num_entries = np.array(indices_ids).shape[0]
     asset_metas = []
-    search = Search(index=settings.config["ELASTICSEARCH_SERVER"]["index_prefix"] +
-                          settings.config["ELASTICSEARCH_SERVER"]["index_asset_meta"])
+    search = Search(index=cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix) +
+                          cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_asset_meta))
     search.query = Q('terms', faiss_idx=indices_ids)
     search = search[:num_entries]
     response = search.execute()
@@ -138,8 +140,8 @@ def classify_content(content):
         urls.append(asset.url)
     # prepare images for download
     val_generator = UrlGenerator(urls,
-                                 settings.config['RETINANET_MODEL']['classes_file'],
-                                 settings.config['RETINANET_MODEL']['labels_file'])
+                                 cfg.resolve(cfg.RETINANET_MODEL, cfg.classes_file),
+                                 cfg.resolve(cfg.RETINANET_MODEL, cfg.labels_file))
 
     response = Response()
     # load image
@@ -190,7 +192,7 @@ def classify_content(content):
 
         # process and save detections
         for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
-            if score < float(settings.config['CLASSIFICATION']['min_confidence']):
+            if score < cfg.resolve_float(cfg.CLASSIFICATION, cfg.min_confidence):
                 continue
             # get position data
             box = detections[0, idx, :4].astype(int)
@@ -209,7 +211,7 @@ def classify_content(content):
             # process cropped image fragment for searching
             cropped_file_name = index_cropped_image(asset, cropped_img, label_name, idx)
             features = extract_features(cropped_file_name)
-            faiss_features = features.reshape((1, int(settings.config['FAISS_SETTINGS']['index_size'])))
+            faiss_features = features.reshape((1, cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_size)))
             # add feature to faiss index
             settings.index.add(faiss_features)
             # index caption

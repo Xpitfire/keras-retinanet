@@ -1,4 +1,4 @@
-import configparser
+import config_accessor as cfg
 import os
 from elasticsearch_dsl import Index
 from elasticsearch_dsl.connections import connections
@@ -13,10 +13,9 @@ from models_es import EsAsset, EsAssetMeta, EsCropped
 import faiss
 
 import logging
+
 logger = logging.getLogger('celum.settings')
 
-
-config = None
 index = None
 db_asset = None
 db_asset_meta = None
@@ -25,20 +24,13 @@ model = None
 extraction_model = None
 
 
-def initialize_settings():
-    global config
-    print('Reading configurations...')
-    config = configparser.ConfigParser()
-    config.read('retinanet.cfg')
-
-
 def initialize_logging():
     print('Initializing logging...')
     # set up logging to file - see previous section for more details
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                         datefmt='%m-%d %H:%M',
-                        filename=config['DEFAULT']['log_dir'] + config['DEFAULT']['log_name'],
+                        filename=cfg.resolve(cfg.DEFAULT, cfg.log_dir) + cfg.resolve(cfg.DEFAULT, cfg.log_name),
                         filemode='a')
     # define a Handler which writes INFO messages or higher to the sys.stderr
     console = logging.StreamHandler()
@@ -53,13 +45,13 @@ def initialize_logging():
 
 def initialize_similarity_index():
     global index
-    path = config["FAISS_SETTINGS"]["index_path"]
+    path = cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path)
     if not os.path.exists(path):
         os.mkdir(path)
 
-    file = path + config["FAISS_SETTINGS"]["index_file"]
+    file = path + cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file)
     if not os.path.exists(file):
-        index = faiss.IndexFlatIP(int(config['FAISS_SETTINGS']['index_size']))
+        index = faiss.IndexFlatIP(cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_size))
     else:
         try:
             index = faiss.read_index(file)
@@ -71,19 +63,22 @@ def initialize_similarity_index():
 
 def initialize_elastic_search():
     global db_asset, db_cropped, db_asset_meta
-    connections.create_connection(hosts=config["ELASTICSEARCH_SERVER"]["host"],
-                                  port=config["ELASTICSEARCH_SERVER"]["port"],
+    connections.create_connection(hosts=cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.host),
+                                  port=cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.port),
                                   timeout=20)
 
-    db_asset = Index(config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_asset"])
+    db_asset = Index(cfg.resolve(cfg.ELASTICSEARCH_SERVER,
+                                 cfg.index_prefix) + cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_asset))
     if not db_asset.exists():
         db_asset.doc_type(EsAsset)
         db_asset.create()
-    db_asset_meta = Index(config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_asset_meta"])
+    db_asset_meta = Index(cfg.resolve(cfg.ELASTICSEARCH_SERVER,
+                                      cfg.index_prefix) + cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_asset_meta))
     if not db_asset_meta.exists():
         db_asset_meta.doc_type(EsAssetMeta)
         db_asset_meta.create()
-    db_cropped = Index(config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_cropped"])
+    db_cropped = Index(cfg.resolve(cfg.ELASTICSEARCH_SERVER,
+                                   cfg.index_prefix) + cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_cropped))
     if not db_cropped.exists():
         db_cropped.doc_type(EsCropped)
         db_cropped.create()
@@ -105,8 +100,8 @@ def initialize_retinanet():
     keras.backend.tensorflow_backend.set_session(get_session())
 
     logger.info('Loading model name...')
-    model = keras.models.load_model(config['RETINANET_MODEL']['model_path'] +
-                                    config['RETINANET_MODEL']['model_name'],
+    model = keras.models.load_model(cfg.resolve(cfg.RETINANET_MODEL, cfg.model_path) +
+                                    cfg.resolve(cfg.RETINANET_MODEL, cfg.model_name),
                                     custom_objects=custom_objects)
 
 

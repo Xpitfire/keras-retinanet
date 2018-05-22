@@ -1,3 +1,5 @@
+import config_accessor as cfg
+
 from flask import Flask, request, Response, jsonify
 
 import traceback
@@ -59,9 +61,8 @@ def initialize():
 
 
 if __name__ == '__main__':
-    settings.initialize_settings()
     settings.initialize_logging()
     logger.info('Server app started!')
-    app.run(host=settings.config['RETINANET_SERVER']['host'],
-            port=int(settings.config['RETINANET_SERVER']['port']),
+    app.run(host=cfg.resolve(cfg.RETINANET_SERVER, cfg.host),
+            port=cfg.resolve_int(cfg.RETINANET_SERVER, cfg.port),
             debug=True)

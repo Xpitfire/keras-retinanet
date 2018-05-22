@@ -1,12 +1,10 @@
-import configparser
+import config_accessor as cfg
 from elasticsearch_dsl import DocType, Keyword, Text
 
 import logging
 logger = logging.getLogger('celum.search_engine')
 
-config = configparser.ConfigParser()
-config.read('retinanet.cfg')
-search_index_prefix = config["ELASTICSEARCH_SERVER"]["index_prefix"]
+search_index_prefix = cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix)
 
 
 class EsAsset(DocType):
@@ -15,7 +13,8 @@ class EsAsset(DocType):
     path = Text()
 
     class Meta:
-        index = config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_asset"]
+        index = cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix) + \
+                cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_asset)
 
     def save(self, **kwargs):
         return super(EsAsset, self).save(**kwargs)
@@ -32,7 +31,8 @@ class EsAssetMeta(DocType):
     feature = Text()
 
     class Meta:
-        index = config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_asset_meta"]
+        index = cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix) + \
+                cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_asset_meta)
 
     def save(self, **kwargs):
         return super(EsAssetMeta, self).save(**kwargs)
@@ -44,7 +44,8 @@ class EsCropped(DocType):
     path = Text()
 
     class Meta:
-        index = config["ELASTICSEARCH_SERVER"]["index_prefix"] + config["ELASTICSEARCH_SERVER"]["index_cropped"]
+        index = cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix) + \
+                cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_cropped)
 
     def save(self, **kwargs):
         return super(EsCropped, self).save(**kwargs)
