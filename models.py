@@ -9,6 +9,13 @@ class Asset(object):
         self.url = data['url']
 
 
+class AssetMeta(object):
+    def __init__(self, asset_id, cropped_id, faiss_idx):
+        self.asset_id = asset_id
+        self.cropped_id = cropped_id
+        self.faiss_idx = faiss_idx
+
+
 class Response(object):
     def __init__(self):
         self.result_list = []
@@ -24,30 +31,22 @@ class Result(object):
 
 
 class Caption(object):
-    def __init__(self, id, label, score, top_left, bottom_right):
-        self.id = id
+    def __init__(self, caption_id, label, score, top_left, bottom_right):
+        self.caption_id = caption_id
         self.label = label
         self.score = score
         self.top_left = top_left
         self.bottom_right = bottom_right
 
 
-class SimilarSuggestions(object):
-    def __init__(self, data):
-        self.data = data
-
-    def __getattr__(self,key):
-        return [Suggestion(item) for item in self.data[key]]
-
-
 class Suggestion(object):
-    def __init__(self, data):
-        self.url = None
-        self.frames = []
+    def __init__(self, url, frames):
+        self.url = url
+        self.frames = frames
 
 
 class Frame(object):
-    def __init__(self):
-        self.frame_id = None
-        self.faiss_idx = None
-        self.url = None
+    def __init__(self, frame_id, faiss_idx, url):
+        self.frame_id = frame_id
+        self.faiss_idx = faiss_idx
+        self.url = url

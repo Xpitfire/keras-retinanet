@@ -10,6 +10,7 @@ from keras_retinanet.preprocessing.url_generator import UrlGenerator
 from elasticsearch_dsl import Search, Q
 
 import settings
+from models import Response, Result, Caption, AssetMeta, Suggestion, Frame
 from models_es import EsAsset, EsCropped, EsAssetMeta
 import feature_extractor
 
@@ -64,10 +65,10 @@ def index_asset_meta(asset, idx, caption, feature, faiss_idx):
                           asset_id=asset.asset_id,
                           cropped_id=idx,
                           faiss_idx=faiss_idx,
-                          label=caption['label'],
-                          score=caption['score'],
-                          top_left=caption['top-left'],
-                          bottom_right=caption['bottom-right'],
+                          label=caption.label,
+                          score=caption.score,
+                          top_left=caption.top_left,
+                          bottom_right=caption.bottom_right,
                           feature=feature)
     es_meta.save()
 
@@ -87,11 +88,7 @@ def map_index_ids_to_asset_metas(indices_ids):
     search = search[:num_entries]
     response = search.execute()
     for hit in response:
-        asset_metas.append({
-            "asset-id": hit.asset_id,
-            "cropped-id": hit.cropped_id,
-            "faiss-idx": hit.faiss_idx
-        })
+        asset_metas.append(AssetMeta(hit.asset_id, hit.cropped_id, hit.faiss_idx))
     return asset_metas if response.hits.total > 0 else []
 
 
@@ -113,25 +110,34 @@ def get_similar_asset_metas(feature, n=1):
     return asset_metas
 
 
-def handle_suggestion_response(current_asset_id, suggestions, asset_metas):
+def handle_suggestion_response(result, current_asset_id, suggestions, asset_metas):
     for asset_meta in asset_metas:
-        asset_id = asset_meta['asset-id']
+        asset_id = asset_meta.asset_id
         # skip if it is the same id as the classified image
         if current_asset_id == asset_id:
             continue
-        cropped_id = asset_meta['cropped-id']
+        cropped_id = asset_meta.cropped_id
         parent_url, path = fetch_cropped_url(asset_id, cropped_id)
         if asset_id not in suggestions:
+            result.suggestions[asset_id] = Suggestion(parent_url,
+                                                      [Frame(cropped_id, asset_meta.faiss_idx, path)])
             suggestions[asset_id] = {
                 "url": parent_url,
                 "frames": [{
                     "frame-id": cropped_id,
-                    "faiss-idx": asset_meta['faiss-idx'],
+                    "faiss-idx": asset_meta.faiss_idx,
                     "url": path
                 }]
             }
         else:
             contains = False
+            for frame in result.suggestions[asset_id].frames:
+                if frame.frame_id == cropped_id:
+                    contains = True
+                    break
+            if not contains:
+                result.suggestions[asset_id].frames += [Frame(cropped_id, asset_meta.faiss_idx, path)]
+
             for frame in suggestions[asset_id]["frames"]:
                 if frame['frame-id'] == cropped_id:
                     contains = True
@@ -139,7 +145,7 @@ def handle_suggestion_response(current_asset_id, suggestions, asset_metas):
             if not contains:
                 suggestions[asset_id]["frames"] += [{
                     "frame-id": cropped_id,
-                    "faiss-idx": asset_meta['faiss-idx'],
+                    "faiss-idx": asset_meta.faiss_idx,
                     "url": path
                 }]
 
@@ -154,12 +160,16 @@ def classify_content(content):
                                  settings.config['RETINANET_MODEL']['classes_file'],
                                  settings.config['RETINANET_MODEL']['labels_file'])
 
+    response = Response()
     result_list = []
     # load image
     for i, asset in enumerate(content.assets):
         logger.info('Running classification on: {}'.format(asset.url))
         # initialize result object
-        result = {
+        result = Result()
+        result.url = asset.url
+        result.asset_id = asset.asset_id
+        result_tmp = {
             'url': asset.url,
             'asset-id': asset.asset_id
         }
@@ -192,7 +202,8 @@ def classify_content(content):
         _, _, detections = settings.model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
         logger.info('Processing time: {}'.format(elapsed))
-        result['time'] = str(elapsed)
+        result.time = str(elapsed)
+        result_tmp['time'] = str(elapsed)
 
         # compute predicted labels and scores
         predicted_labels = np.argmax(detections[0, :, 4:], axis=1)
@@ -201,17 +212,24 @@ def classify_content(content):
         # correct for image scale
         detections[0, :, :4] /= scale
 
-        captions = []
-        suggestions = {}
+        captions_tmp = []
+        suggestions_tmp = {}
         # process and save detections
         for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
-            if score < 0.5:
+            if score < float(settings.config['CLASSIFICATION']['min_confidence']):
                 continue
             # get position data
             box = detections[0, idx, :4].astype(int)
             label_name = val_generator.label_to_name(label_id)
             # save meta-info for REST API response
-            caption = {'id': str(label_id),
+
+            caption = Caption(str(label_id),
+                              label_name,
+                              str(score),
+                              '{};{}'.format(box[0], box[1]),   # x1;y1
+                              '{};{}'.format(box[2], box[3]))   # x2;y2
+            result.captions.append(caption)
+            caption_tmp = {'id': str(label_id),
                        'label': label_name,
                        'score': str(score),
                        'top-left': '{};{}'.format(box[0], box[1]),         # x1;y1
@@ -230,14 +248,17 @@ def classify_content(content):
             index_asset_meta(asset, idx, caption, features.tolist(), settings.index.ntotal-1)
             # find similar suggestions and handle response
             asset_metas = get_similar_asset_metas(faiss_features)
-            handle_suggestion_response(asset.asset_id, suggestions, asset_metas)
+            handle_suggestion_response(result, asset.asset_id, suggestions_tmp, asset_metas)
             # append caption for return
-            captions.append(caption)
+            captions_tmp.append(caption_tmp)
+            # add result to response list
+            response.result_list.append(result)
+        if len(captions_tmp) > 0:
+            result_tmp['captions'] = captions_tmp
+        if len(suggestions_tmp) > 0:
+            result_tmp['similar-suggestions'] = suggestions_tmp
 
-        if len(captions) > 0:
-            result['captions'] = captions
-        if len(suggestions) > 0:
-            result['similar-suggestions'] = suggestions
-        result_list.append(result)
+        print(response)
+        result_list.append(result_tmp)
 
     return {'results': result_list}
