@@ -11,10 +11,9 @@ import numpy as np
 from keras_retinanet.preprocessing.url_generator import UrlGenerator
 from elasticsearch_dsl import Search, Q
 
-import settings
+import core
 from models import Response, Result, Caption, AssetMeta, Suggestion, Frame
 from models_es import EsAsset, EsCropped, EsAssetMeta
-import feature_extractor
 
 import logging
 logger = logging.getLogger('celum.services')
@@ -77,7 +76,7 @@ def index_asset_meta(asset, idx, caption, feature, faiss_idx):
 
 # Extracts features from a given image file
 def extract_features(file_name):
-    return feature_extractor.predict(file_name)
+    return core.predict_features(file_name)
 
 
 # Maps the similarity index ids to asset ids
@@ -106,7 +105,7 @@ def fetch_cropped_url(asset_id, cropped_id):
 
 # Returns a list of similar assets given a feature
 def get_similar_asset_metas(feature, n=1):
-    _, indices = settings.index.search(feature, n+1)
+    _, indices = core.index.search(feature, n + 1)
     indices = [item for item in indices[0].tolist() if item >= 0]
     asset_metas = map_index_ids_to_asset_metas(indices)
     return asset_metas
@@ -134,7 +133,7 @@ def handle_suggestion_response(result, current_asset_id, asset_metas):
 
 
 def classify_content(content):
-    # create a generator for testing data
+    # create a generator for fetching data
     urls = []
     for asset in content.assets:
         urls.append(asset.url)
@@ -178,7 +177,7 @@ def classify_content(content):
 
         # classify image
         start = time.time()
-        _, _, detections = settings.model.predict_on_batch(np.expand_dims(image, axis=0))
+        _, _, detections = core.model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
         logger.info('Processing time: {}'.format(elapsed))
         result.time = str(elapsed)
@@ -213,9 +212,9 @@ def classify_content(content):
             features = extract_features(cropped_file_name)
             faiss_features = features.reshape((1, cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_size)))
             # add feature to faiss index
-            settings.index.add(faiss_features)
+            core.index.add(faiss_features)
             # index caption
-            index_asset_meta(asset, idx, caption, features.tolist(), settings.index.ntotal-1)
+            index_asset_meta(asset, idx, caption, features.tolist(), core.index.ntotal - 1)
             # find similar suggestions and handle response
             asset_metas = get_similar_asset_metas(faiss_features)
             handle_suggestion_response(result, asset.asset_id, asset_metas)

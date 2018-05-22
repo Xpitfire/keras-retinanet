@@ -2,7 +2,7 @@ import config_accessor as cfg
 from elasticsearch_dsl import DocType, Keyword, Text
 
 import logging
-logger = logging.getLogger('celum.search_engine')
+logger = logging.getLogger('celum.models_es')
 
 search_index_prefix = cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix)
 

@@ -3,7 +3,10 @@ import os
 from elasticsearch_dsl import Index
 from elasticsearch_dsl.connections import connections
 from tensorflow.python.keras.applications.resnet50 import ResNet50
+from tensorflow.python.keras.preprocessing import image
 from tensorflow.python.keras.models import Model
+
+import numpy as np
 
 import keras
 import keras.preprocessing.image
@@ -21,7 +24,7 @@ db_asset = None
 db_asset_meta = None
 db_cropped = None
 model = None
-extraction_model = None
+feature_model = None
 
 
 def initialize_logging():
@@ -30,7 +33,7 @@ def initialize_logging():
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                         datefmt='%m-%d %H:%M',
-                        filename=cfg.resolve(cfg.DEFAULT, cfg.log_dir) + cfg.resolve(cfg.DEFAULT, cfg.log_name),
+                        filename=cfg.resolve(cfg.DEFAULT, cfg.log_dir)+cfg.resolve(cfg.DEFAULT, cfg.log_name),
                         filemode='a')
     # define a Handler which writes INFO messages or higher to the sys.stderr
     console = logging.StreamHandler()
@@ -52,6 +55,7 @@ def initialize_similarity_index():
     file = path + cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file)
     if not os.path.exists(file):
         index = faiss.IndexFlatIP(cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_size))
+        persist_similarity_index()
     else:
         try:
             index = faiss.read_index(file)
@@ -59,6 +63,16 @@ def initialize_similarity_index():
         except (OSError, TypeError, NameError):
             index = faiss.read_index(file)
             logger.error("Can't load index! Using default empty index")
+
+
+def persist_similarity_index():
+    if index is not None:
+        faiss.write_index(index,
+                          cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path) +
+                          cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file))
+        logger.info("Faiss index saved to disk")
+    else:
+        logger.warning("Can't save, index was not loaded yet!")
 
 
 def initialize_elastic_search():
@@ -106,8 +120,16 @@ def initialize_retinanet():
 
 
 def initialize_extraction_model():
-    global extraction_model
+    global feature_model
     logger.info('Loading extraction model...')
     resnet = ResNet50(weights='imagenet')
     output = resnet.layers[-2].output
-    extraction_model = Model(resnet.input, output)
+    feature_model = Model(resnet.input, output)
+
+
+def predict_features(img_file):
+    x = image.load_img(img_file, target_size=(224, 224))
+    x = image.img_to_array(x)
+    x = np.expand_dims(x, axis=0)
+    return feature_model.predict(x)[0]
+
