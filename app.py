@@ -4,7 +4,7 @@ from flask import Flask, request, Response, jsonify
 
 import traceback
 
-import settings
+import core
 from misc import jsonp
 import logging
 
@@ -54,14 +54,14 @@ def classify():
 
 @app.before_first_request
 def initialize():
-    settings.initialize_similarity_index()
-    settings.initialize_elastic_search()
-    settings.initialize_retinanet()
-    settings.initialize_extraction_model()
+    core.initialize_similarity_index()
+    core.initialize_elastic_search()
+    core.initialize_retinanet()
+    core.initialize_extraction_model()
 
 
 if __name__ == '__main__':
-    settings.initialize_logging()
+    core.initialize_logging()
     logger.info('Server app started!')
     app.run(host=cfg.resolve(cfg.RETINANET_SERVER, cfg.host),
             port=cfg.resolve_int(cfg.RETINANET_SERVER, cfg.port),
