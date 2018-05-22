@@ -6,6 +6,7 @@ import settings
 from misc import jsonp
 import logging
 
+from model_encoder import ResponseEncoder
 from models import Content
 from services import classify_content
 
@@ -17,7 +18,8 @@ app = Flask(__name__)
 def handle_request(content):
     try:
         classification_results = classify_content(content)
-        return jsonify(classification_results)
+        encoder = ResponseEncoder(classification_results)
+        return encoder.to_json()
     except:
         err = traceback.format_exc()
         json_response = jsonify({'exception': 'Server endpoint not responding! Please try again later.'})

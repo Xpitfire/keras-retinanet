@@ -110,7 +110,7 @@ def get_similar_asset_metas(feature, n=1):
     return asset_metas
 
 
-def handle_suggestion_response(result, current_asset_id, suggestions, asset_metas):
+def handle_suggestion_response(result, current_asset_id, asset_metas):
     for asset_meta in asset_metas:
         asset_id = asset_meta.asset_id
         # skip if it is the same id as the classified image
@@ -118,17 +118,9 @@ def handle_suggestion_response(result, current_asset_id, suggestions, asset_meta
             continue
         cropped_id = asset_meta.cropped_id
         parent_url, path = fetch_cropped_url(asset_id, cropped_id)
-        if asset_id not in suggestions:
+        if asset_id not in result.suggestions:
             result.suggestions[asset_id] = Suggestion(parent_url,
                                                       [Frame(cropped_id, asset_meta.faiss_idx, path)])
-            suggestions[asset_id] = {
-                "url": parent_url,
-                "frames": [{
-                    "frame-id": cropped_id,
-                    "faiss-idx": asset_meta.faiss_idx,
-                    "url": path
-                }]
-            }
         else:
             contains = False
             for frame in result.suggestions[asset_id].frames:
@@ -137,17 +129,6 @@ def handle_suggestion_response(result, current_asset_id, suggestions, asset_meta
                     break
             if not contains:
                 result.suggestions[asset_id].frames += [Frame(cropped_id, asset_meta.faiss_idx, path)]
-
-            for frame in suggestions[asset_id]["frames"]:
-                if frame['frame-id'] == cropped_id:
-                    contains = True
-                    break
-            if not contains:
-                suggestions[asset_id]["frames"] += [{
-                    "frame-id": cropped_id,
-                    "faiss-idx": asset_meta.faiss_idx,
-                    "url": path
-                }]
 
 
 def classify_content(content):
@@ -161,7 +142,6 @@ def classify_content(content):
                                  settings.config['RETINANET_MODEL']['labels_file'])
 
     response = Response()
-    result_list = []
     # load image
     for i, asset in enumerate(content.assets):
         logger.info('Running classification on: {}'.format(asset.url))
@@ -169,10 +149,7 @@ def classify_content(content):
         result = Result()
         result.url = asset.url
         result.asset_id = asset.asset_id
-        result_tmp = {
-            'url': asset.url,
-            'asset-id': asset.asset_id
-        }
+
         logger.info('Reading image bgr...')
         try:
             # fetch images
@@ -203,7 +180,6 @@ def classify_content(content):
         elapsed = time.time() - start
         logger.info('Processing time: {}'.format(elapsed))
         result.time = str(elapsed)
-        result_tmp['time'] = str(elapsed)
 
         # compute predicted labels and scores
         predicted_labels = np.argmax(detections[0, :, 4:], axis=1)
@@ -212,8 +188,6 @@ def classify_content(content):
         # correct for image scale
         detections[0, :, :4] /= scale
 
-        captions_tmp = []
-        suggestions_tmp = {}
         # process and save detections
         for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
             if score < float(settings.config['CLASSIFICATION']['min_confidence']):
@@ -222,18 +196,12 @@ def classify_content(content):
             box = detections[0, idx, :4].astype(int)
             label_name = val_generator.label_to_name(label_id)
             # save meta-info for REST API response
-
             caption = Caption(str(label_id),
                               label_name,
                               str(score),
                               '{};{}'.format(box[0], box[1]),   # x1;y1
                               '{};{}'.format(box[2], box[3]))   # x2;y2
             result.captions.append(caption)
-            caption_tmp = {'id': str(label_id),
-                       'label': label_name,
-                       'score': str(score),
-                       'top-left': '{};{}'.format(box[0], box[1]),         # x1;y1
-                       'bottom-right': '{};{}'.format(box[2], box[3])}     # x2;y2
             # Crop image for extraction
             h = box[3] - box[1]
             w = box[2] - box[0]
@@ -248,17 +216,8 @@ def classify_content(content):
             index_asset_meta(asset, idx, caption, features.tolist(), settings.index.ntotal-1)
             # find similar suggestions and handle response
             asset_metas = get_similar_asset_metas(faiss_features)
-            handle_suggestion_response(result, asset.asset_id, suggestions_tmp, asset_metas)
-            # append caption for return
-            captions_tmp.append(caption_tmp)
-            # add result to response list
-            response.result_list.append(result)
-        if len(captions_tmp) > 0:
-            result_tmp['captions'] = captions_tmp
-        if len(suggestions_tmp) > 0:
-            result_tmp['similar-suggestions'] = suggestions_tmp
+            handle_suggestion_response(result, asset.asset_id, asset_metas)
 
-        print(response)
-        result_list.append(result_tmp)
-
-    return {'results': result_list}
+        # add result to response list
+        response.result_list.append(result)
+    return response
