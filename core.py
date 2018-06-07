@@ -1,5 +1,12 @@
 import config_accessor as cfg
 import os
+import csv
+from shutil import copyfile
+from pathlib import Path
+import schedule
+import time
+from threading import Thread, Lock
+
 from elasticsearch_dsl import Index
 from elasticsearch_dsl.connections import connections
 from tensorflow.python.keras.applications.resnet50 import ResNet50
@@ -25,6 +32,10 @@ db_asset_meta = None
 db_cropped = None
 model = None
 feature_model = None
+blacklist = []
+blacklist_mutex = None
+cron_job_thread = None
+round_robin_backup_index = 0
 
 
 def initialize_logging():
@@ -52,7 +63,7 @@ def initialize_similarity_index():
     if not os.path.exists(path):
         os.mkdir(path)
 
-    file = path + cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file)
+    file = os.path.join(path, cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file))
     if not os.path.exists(file):
         index = faiss.IndexFlatIP(cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_size))
         persist_similarity_index()
@@ -67,9 +78,9 @@ def initialize_similarity_index():
 
 def persist_similarity_index():
     if index is not None:
-        faiss.write_index(index,
-                          cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path) +
-                          cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file))
+        file = os.path.join(cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path),
+                            cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file))
+        faiss.write_index(index, file)
         logger.info("Faiss index saved to disk")
     else:
         logger.warning("Can't save, index was not loaded yet!")
@@ -127,9 +138,87 @@ def initialize_extraction_model():
     feature_model = Model(resnet.input, output)
 
 
+def initialize_blacklist():
+    global blacklist, blacklist_mutex
+    blacklist_mutex = Lock()
+
+    path = cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path)
+    if not os.path.exists(path):
+        os.mkdir(path)
+    file = os.path.join(path, cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_blacklist_file))
+    if not os.path.exists(file):
+        Path(file).touch()
+    with open(file,'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            blacklist.append(int(row['index']))
+
+
+# Multi-threading is currently not used/required - preventive method!
+def threadsafe_blacklist_operation(delegate):
+    """
+    Thread safe implementation for handling multiple blacklist operations at once.
+    :param delegate:
+    :return:
+    """
+    blacklist_mutex.acquire()
+    try:
+        return delegate(blacklist)
+    finally:
+        blacklist_mutex.release()
+
+
+def persist_blacklist_index():
+    path = cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path)
+    file = os.path.join(path, cfg.resolve(cfg.FAISS_SETTINGS,
+                                          cfg.index_blacklist_file))
+    with open(file, 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=['index'])
+        writer.writeheader()
+        blacklist_dict = threadsafe_blacklist_operation(lambda bl: [{'index': id} for id in bl])
+        writer.writerows(blacklist_dict)
+
+
 def predict_features(img_file):
     x = image.load_img(img_file, target_size=(224, 224))
     x = image.img_to_array(x)
     x = np.expand_dims(x, axis=0)
     return feature_model.predict(x)[0]
 
+
+def backup_persisting_files():
+    global round_robin_backup_index
+    round_robin_backup_index += 1
+    round_robin_backup_index %= cfg.resolve_int(cfg.CRON_JOB, cfg.cron_job_round_robin_backups)
+
+    # copy faiss file
+    path = cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_path)
+    file = os.path.join(path, cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_file))
+    copyfile(file, file+'.backup_{}'.format(round_robin_backup_index))
+
+    # copy blacklist file
+    file = os.path.join(path, cfg.resolve(cfg.FAISS_SETTINGS, cfg.index_blacklist_file))
+    copyfile(file, file+'.backup_{}'.format(round_robin_backup_index))
+
+
+def cron_job():
+    logging.info('Backup persisting files...')
+    backup_persisting_files()
+    logger.info('Persisting blacklist...')
+    persist_blacklist_index()
+    logger.info('Persisting faiss index...')
+    persist_similarity_index()
+
+
+def initialize_cron_job():
+    global cron_job_thread
+
+    def cron_job_runner():
+        schedule.every(cfg.resolve_int(cfg.CRON_JOB, cfg.cron_job_interval)).seconds.do(cron_job)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+
+    if not cron_job_thread:
+        cron_job_thread = Thread(target=cron_job_runner)
+        cron_job_thread.start()

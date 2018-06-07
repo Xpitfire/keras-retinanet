@@ -11,7 +11,7 @@ class ResponseEncoder(object):
         for r_obj in self.obj.result_list:
             result = {
                 'asset-id': r_obj.asset_id,
-                'url': r_obj.url,
+                #'url': r_obj.url,
                 'time': r_obj.time
             }
             captions = []
@@ -26,13 +26,13 @@ class ResponseEncoder(object):
             suggestions = {}
             for s_obj_key, s_obj_value in r_obj.suggestions.items():
                 suggestions[s_obj_key] = {}
-                suggestions[s_obj_key]['url'] = s_obj_value.url
+                #suggestions[s_obj_key]['url'] = s_obj_value.url
                 frames = []
                 for f_obj in s_obj_value.frames:
                     frames.append({
-                        'frame-id': f_obj.frame_id,
+                        #'frame-id': f_obj.frame_id,
                         'faiss-idx': f_obj.faiss_idx,
-                        'url': f_obj.url
+                        #'url': f_obj.url
                     })
                 if len(frames) > 0:
                     suggestions[s_obj_key]['frames'] = frames

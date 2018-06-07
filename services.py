@@ -106,7 +106,7 @@ def fetch_cropped_url(asset_id, cropped_id):
 # Returns a list of similar assets given a feature
 def get_similar_asset_metas(feature, n=1):
     _, indices = core.index.search(feature, n + 1)
-    indices = [item for item in indices[0].tolist() if item >= 0]
+    indices = [item for item in indices[0].tolist() if item >= 0 and item not in core.blacklist]
     asset_metas = map_index_ids_to_asset_metas(indices)
     return asset_metas
 
@@ -222,3 +222,31 @@ def classify_content(content):
         # add result to response list
         response.result_list.append(result)
     return response
+
+
+def add_to_blacklist(asset_id):
+    try:
+        asset = EsAssetMeta.get(id=asset_id)
+        id = asset.faiss_idx
+    except:
+        return -1
+
+    def blacklist_insert(blacklist):
+        if id not in blacklist:
+            blacklist.append(id)
+    core.threadsafe_blacklist_operation(blacklist_insert)
+    return 0
+
+
+def remove_from_blacklist(asset_id):
+    try:
+        asset = EsAssetMeta.get(id=asset_id)
+        id = asset.faiss_idx
+    except:
+        return -1
+
+    def blacklist_remove(blacklist):
+        if id in blacklist:
+            blacklist.remove(id)
+    core.threadsafe_blacklist_operation(blacklist_remove)
+    return 0

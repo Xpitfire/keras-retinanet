@@ -7,6 +7,7 @@ ELASTICSEARCH_SERVER = 'ELASTICSEARCH_SERVER'
 RETINANET_SERVER = 'RETINANET_SERVER'
 RETINANET_MODEL = 'RETINANET_MODEL'
 FAISS_SETTINGS = 'FAISS_SETTINGS'
+CRON_JOB = 'CRON_JOB'
 
 log_dir = 'log_dir'
 log_name = 'log_name'
@@ -20,6 +21,7 @@ index_prefix = 'index_prefix'
 index_asset = 'index_asset'
 index_asset_meta = 'index_asset_meta'
 index_cropped = 'index_cropped'
+index_blacklist_file = 'index_blacklist_file'
 
 model_path = 'model_path'
 model_name = 'model_name'
@@ -29,6 +31,10 @@ labels_file = 'labels_file'
 min_confidence = 'min_confidence'
 original_images_path = 'original_images_path'
 extracted_images_path = 'extracted_images_path'
+
+cron_job_interval = 'cron_job_interval'
+cron_job_round_robin_backups = 'cron_job_round_robin_backups'
+
 
 print('Reading configurations...')
 config = configparser.ConfigParser()

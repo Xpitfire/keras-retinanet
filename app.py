@@ -10,7 +10,7 @@ import logging
 
 from model_encoder import ResponseEncoder
 from models import Content
-from services import classify_content
+from services import classify_content, add_to_blacklist, remove_from_blacklist
 
 logger = logging.getLogger('celum.app')
 
@@ -37,6 +37,18 @@ def classify_assets():
     return handle_request(content)
 
 
+@app.route('/blacklist/<string:asset_id>', methods=['DELETE'])
+def blacklist_id(asset_id):
+    ret = add_to_blacklist(asset_id)
+    return Response(status=200 if ret == 0 else 404)
+
+
+@app.route('/blacklist/undo/<string:asset_id>', methods=['GET'])
+def undo_blacklist_id(asset_id):
+    ret = remove_from_blacklist(asset_id)
+    return Response(status=200 if ret == 0 else 404)
+
+
 @app.route('/classify', methods=['GET'])
 @misc.jsonp
 def classify():
@@ -51,9 +63,11 @@ def classify():
 @app.before_first_request
 def initialize():
     core.initialize_similarity_index()
+    core.initialize_blacklist()
     core.initialize_elastic_search()
     core.initialize_retinanet()
     core.initialize_extraction_model()
+    core.initialize_cron_job()
 
 
 if __name__ == '__main__':

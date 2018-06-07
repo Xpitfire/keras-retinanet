@@ -26,6 +26,7 @@ pandas
 opencv-python
 Cython
 h5py
+schedule
 
 ################################################################
 # TensorFlow can be installed either as CPU or GPU versions.
@@ -43,12 +44,12 @@ prettytensor
 # The tutorial on Reinforcement Learning uses OpenAI Gym.
 # Uncomment this line if you want to run that tutorial.
 
-# gym[atari]
+#gym[atari]
 
 ################################################################
 # Custom libraries for keras.
 
-# keras-resnet
+#keras-resnet
 
 ################################################################
 # Web service endpoint and web host.
@@ -72,5 +73,9 @@ elasticsearch-dsl
 
 
 ################################################################
-# Indexing engine
-faiss-gpu
+# Indexing engine - installation works only over Anaconda3
+
+# for CPU verison use
+#faiss-cpu
+# for GPU engine use
+#faiss-gpu
