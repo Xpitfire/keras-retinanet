@@ -30,8 +30,8 @@ class ResponseEncoder(object):
                 frames = []
                 for f_obj in s_obj_value.frames:
                     frames.append({
-                        #'frame-id': f_obj.frame_id,
-                        'faiss-idx': f_obj.faiss_idx,
+                        'frame-id': f_obj.frame_id,
+                        #'faiss-idx': f_obj.faiss_idx,
                         #'url': f_obj.url
                     })
                 if len(frames) > 0:
