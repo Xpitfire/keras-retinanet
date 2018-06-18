@@ -4,13 +4,14 @@ from flask import Flask, request, Response, jsonify
 
 import traceback
 
+import sys
 import core
 import misc
 import logging
 
 from model_encoder import ResponseEncoder
 from models import Content
-from services import classify_content, add_to_blacklist, remove_from_blacklist
+from services import classify_content, add_to_blacklist, remove_from_blacklist, reset_blacklist
 
 logger = logging.getLogger('celum.app')
 
@@ -30,26 +31,14 @@ def handle_request(content):
         return Response(json_response, status=status, mimetype='application/json')
 
 
-@app.route('/classify/assets', methods=['POST'])
+@app.route('/services/v1/classify', methods=['POST'])
 def classify_assets():
     json_content = request.get_json()
     content = Content(json_content)
     return handle_request(content)
 
 
-@app.route('/blacklist/<string:asset_id>', methods=['DELETE'])
-def blacklist_id(asset_id):
-    ret = add_to_blacklist(asset_id)
-    return Response(status=200 if ret == 0 else 404)
-
-
-@app.route('/blacklist/undo/<string:asset_id>', methods=['GET'])
-def undo_blacklist_id(asset_id):
-    ret = remove_from_blacklist(asset_id)
-    return Response(status=200 if ret == 0 else 404)
-
-
-@app.route('/classify', methods=['GET'])
+@app.route('/services/v1/classify', methods=['GET'])
 @misc.jsonp
 def classify():
     id_ = request.args.get('id')
@@ -58,6 +47,30 @@ def classify():
         id_ = 'dummy'
     content = misc.classify_get_req_to_content(id_, url)
     return handle_request(content)
+
+
+@app.route('/services/v1/blacklist/<string:asset_id>', methods=['DELETE'])
+def blacklist_id(asset_id):
+    ret = add_to_blacklist(asset_id)
+    return Response(status=200 if ret == 0 else 404)
+
+
+@app.route('/services/v1/blacklist/undo/<string:asset_id>', methods=['GET'])
+def undo_blacklist_id(asset_id):
+    ret = remove_from_blacklist(asset_id)
+    return Response(status=200 if ret == 0 else 404)
+
+
+@app.route('/services/v1/blacklist/reset', methods=['DELETE'])
+def blacklist_reset():
+    ret = reset_blacklist()
+    return Response(status=200 if ret == 0 else 404)
+
+
+@app.route('/services/v1/shutdown', methods=['GET'])
+def shutdown_hook():
+    core.trigger_backup()
+    sys.exit()
 
 
 @app.before_first_request
@@ -75,4 +88,5 @@ if __name__ == '__main__':
     logger.info('Server app started!')
     app.run(host=cfg.resolve(cfg.RETINANET_SERVER, cfg.host),
             port=cfg.resolve_int(cfg.RETINANET_SERVER, cfg.port),
-            debug=True)
+            debug=cfg.resolve_bool(cfg.RETINANET_SERVER, cfg.debug),
+            threaded=cfg.resolve_bool(cfg.RETINANET_SERVER, cfg.threaded))

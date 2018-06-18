@@ -2,6 +2,7 @@ import config_accessor as cfg
 
 import traceback
 import os
+import sys
 import time
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError
 
@@ -33,10 +34,26 @@ def index_original_image(img, asset):
     logger.info('Creating validation generator...')
     es_asset = EsAsset(meta={'id': asset.asset_id},
                        asset_id=asset.asset_id,
-                       asset_url=asset.url,
                        path=ori_file_name)
     es_asset.save()
     return ori_file_name
+
+
+def remove_cropped_if_asset_exists(asset):
+    try:
+        search = Search(index=cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix) +
+                              cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_asset_meta))
+        search.query = Q('match', asset_id=asset.asset_id)
+        search.exclude()
+        for hit in search:
+            idx = '{}-{}'.format(asset.asset_id, hit.cropped_id)
+            s = Search(index=cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix) +
+                             cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_cropped))
+            s.query = Q('match', id=idx)
+            s.delete()
+        search.delete()
+    except:
+        print(sys.exc_info()[0])
 
 
 # Inserts the cropped image data of an asset into the database
@@ -53,7 +70,6 @@ def index_cropped_image(asset, img, label_name, idx):
     # insert cropped image into database
     es_cropped = EsCropped(meta={'id': '{}-{}'.format(asset.asset_id, idx)},
                            asset_id=asset.asset_id,
-                           parent_url=asset.url,
                            path=cropped_file_name)
     es_cropped.save()
     return cropped_file_name
@@ -93,14 +109,9 @@ def map_index_ids_to_asset_metas(indices_ids):
     return asset_metas if response.hits.total > 0 else []
 
 
-def fetch_asset_url(asset_id):
-    asset = EsAsset.get(id=asset_id)
-    return asset.asset_url if asset else None
-
-
-def fetch_cropped_url(asset_id, cropped_id):
+def fetch_cropped_path(asset_id, cropped_id):
     cropped = EsCropped.get(id='{}-{}'.format(asset_id, cropped_id))
-    return (cropped.parent_url, cropped.path) if cropped else None
+    return cropped.path if cropped else None
 
 
 # Returns a list of similar assets given a feature
@@ -118,10 +129,9 @@ def handle_suggestion_response(result, current_asset_id, asset_metas):
         if current_asset_id == asset_id:
             continue
         cropped_id = asset_meta.cropped_id
-        parent_url, path = fetch_cropped_url(asset_id, cropped_id)
+        path = fetch_cropped_path(asset_id, cropped_id)
         if asset_id not in result.suggestions:
-            result.suggestions[asset_id] = Suggestion(parent_url,
-                                                      [Frame(cropped_id, asset_meta.faiss_idx, path)])
+            result.suggestions[asset_id] = Suggestion([Frame(cropped_id, asset_meta.faiss_idx, path)])
         else:
             contains = False
             for frame in result.suggestions[asset_id].frames:
@@ -207,6 +217,8 @@ def classify_content(content):
             h = box[3] - box[1]
             w = box[2] - box[0]
             cropped_img = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
+            # update sequence to remove previous index if available
+            remove_cropped_if_asset_exists(asset)
             # process cropped image fragment for searching
             cropped_file_name = index_cropped_image(asset, cropped_img, label_name, idx)
             features = extract_features(cropped_file_name)
@@ -249,4 +261,11 @@ def remove_from_blacklist(asset_id):
         if id in blacklist:
             blacklist.remove(id)
     core.threadsafe_blacklist_operation(blacklist_remove)
+    return 0
+
+
+def reset_blacklist():
+    def blacklist_reset(blacklist):
+        blacklist.clear()
+    core.threadsafe_blacklist_operation(blacklist_reset)
     return 0

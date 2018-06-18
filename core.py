@@ -201,7 +201,7 @@ def backup_persisting_files():
     copyfile(file, file+'.backup_{}'.format(round_robin_backup_index))
 
 
-def cron_job():
+def trigger_backup():
     logging.info('Backup persisting files...')
     backup_persisting_files()
     logger.info('Persisting blacklist...')
@@ -214,7 +214,7 @@ def initialize_cron_job():
     global cron_job_thread
 
     def cron_job_runner():
-        schedule.every(cfg.resolve_int(cfg.CRON_JOB, cfg.cron_job_interval)).seconds.do(cron_job)
+        schedule.every(cfg.resolve_int(cfg.CRON_JOB, cfg.cron_job_interval)).minutes.do(trigger_backup)
         while True:
             schedule.run_pending()
             time.sleep(1)

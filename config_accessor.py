@@ -13,6 +13,8 @@ log_dir = 'log_dir'
 log_name = 'log_name'
 host = 'host'
 port = 'port'
+debug = 'debug'
+threaded = 'threaded'
 
 index_path = 'index_path'
 index_file = 'index_file'
@@ -51,3 +53,7 @@ def resolve_int(section, prop):
 
 def resolve_float(section, prop):
     return float(resolve(section, prop))
+
+
+def resolve_bool(section, prop):
+    return bool(resolve(section, prop))

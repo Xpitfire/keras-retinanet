@@ -9,7 +9,6 @@ search_index_prefix = cfg.resolve(cfg.ELASTICSEARCH_SERVER, cfg.index_prefix)
 
 class EsAsset(DocType):
     asset_id = Keyword()
-    asset_url = Text()
     path = Text()
 
     class Meta:
@@ -40,7 +39,6 @@ class EsAssetMeta(DocType):
 
 class EsCropped(DocType):
     asset_id = Keyword()
-    parent_url = Text()
     path = Text()
 
     class Meta:

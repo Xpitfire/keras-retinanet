@@ -49,7 +49,6 @@ class Response(object):
 
 class Result(object):
     def __init__(self):
-        self.url = None
         self.asset_id = None
         self.time = None
         self.captions = []
@@ -59,7 +58,7 @@ class Result(object):
         return 'Result()'
 
     def __str__(self):
-        res = 'asset-id: {}, url: {}, time: {}\n'.format(self.asset_id, self.url, self.time)
+        res = 'asset-id: {}, time: {}\n'.format(self.asset_id, self.time)
         res += ''.join(['\tcaption: {}\n'.format(str(c)) for c in self.captions])
         res += ''.join(['\tsuggestion: {}: {}\n'.format(key, str(value)) for key, value in self.suggestions.items()])
         return res
@@ -83,29 +82,27 @@ class Caption(object):
 
 
 class Suggestion(object):
-    def __init__(self, url, frames):
-        self.url = url
+    def __init__(self, frames):
         self.frames = frames
 
     def __repr__(self):
         return 'Suggestion()'
 
     def __str__(self):
-        res = 'url: {}\n'.format(self.url)
-        res += ''.join(['\t\tframe: {}\n'.format(str(f)) for f in self.frames])
+        res = ''.join(['\t\tframe: {}\n'.format(str(f)) for f in self.frames])
         return res
 
 
 class Frame(object):
-    def __init__(self, frame_id, faiss_idx, url):
+    def __init__(self, frame_id, faiss_idx, path):
         self.frame_id = frame_id
         self.faiss_idx = faiss_idx
-        self.url = url
+        self.path = path
 
     def __repr__(self):
         return 'Frame()'
 
     def __str__(self):
-        return 'frame-id: {}, faiss-idx: {}, url: {}'.format(
-            self.frame_id, self.faiss_idx, self.url
+        return 'frame-id: {}, faiss-idx: {}, path: {}'.format(
+            self.frame_id, self.faiss_idx, self.path
         )
