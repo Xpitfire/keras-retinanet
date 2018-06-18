@@ -2,6 +2,14 @@ import setuptools
 
 setuptools.setup(
     name='keras-retinanet',
+<<<<<<< HEAD
+    version='0.0.2',
+    url='https://github.com/Xpitfire/keras-retinanet.git',
+    author='Marius-Constantin Dinu',
+    author_email='dinu.marius-constantin@hotmail.com',
+    maintainer='Marius-Constantin Dinu',
+    maintainer_email='dinu.marius-constantin@hotmail.com',
+=======
     version='0.3.1',
     description='Keras implementation of RetinaNet object detection.',
     url='https://github.com/fizyr/keras-retinanet',
@@ -9,6 +17,7 @@ setuptools.setup(
     author_email='h.gaiser@fizyr.com',
     maintainer='Hans Gaiser',
     maintainer_email='h.gaiser@fizyr.com',
+>>>>>>> aa3fd9626d34cc2f79bb81b52bb8df59310488b4
     packages=setuptools.find_packages(),
     install_requires=['keras', 'keras-resnet', 'six', 'scipy'],
     entry_points = {

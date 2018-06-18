@@ -24,11 +24,14 @@ from .transform import change_transform_origin
 
 
 def read_image_bgr(path):
+<<<<<<< HEAD
+=======
     """ Read an image in BGR format.
 
     Args
         path: Path to the image.
     """
+>>>>>>> aa3fd9626d34cc2f79bb81b52bb8df59310488b4
     image = np.asarray(Image.open(path).convert('RGB'))
     return image[:, :, ::-1].copy()
 

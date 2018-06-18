@@ -23,7 +23,6 @@ import numpy as np
 import os
 
 import cv2
-import pickle
 
 
 def _compute_ap(recall, precision):
@@ -78,46 +77,37 @@ def _get_detections(generator, model, score_threshold=0.05, max_detections=100, 
         image, scale = generator.resize_image(image)
 
         # run network
-        _, _, detections = model.predict_on_batch(np.expand_dims(image, axis=0))
-
-        # clip to image shape
-        detections[:, :, 0] = np.maximum(0, detections[:, :, 0])
-        detections[:, :, 1] = np.maximum(0, detections[:, :, 1])
-        detections[:, :, 2] = np.minimum(image.shape[1], detections[:, :, 2])
-        detections[:, :, 3] = np.minimum(image.shape[0], detections[:, :, 3])
+        boxes, scores, labels = model.predict_on_batch(np.expand_dims(image, axis=0))
 
         # correct boxes for image scale
-        detections[0, :, :4] /= scale
-
-        # select scores from detections
-        scores = detections[0, :, 4:]
+        boxes /= scale
 
         # select indices which have a score above the threshold
-        indices = np.where(detections[0, :, 4:] > score_threshold)
+        indices = np.where(scores[0, :] > score_threshold)[0]
 
         # select those scores
-        scores = scores[indices]
+        scores = scores[0][indices]
 
         # find the order with which to sort the scores
         scores_sort = np.argsort(-scores)[:max_detections]
 
         # select detections
-        image_boxes      = detections[0, indices[0][scores_sort], :4]
-        image_scores     = np.expand_dims(detections[0, indices[0][scores_sort], 4 + indices[1][scores_sort]], axis=1)
-        image_detections = np.append(image_boxes, image_scores, axis=1)
-        image_predicted_labels = indices[1][scores_sort]
+        image_boxes      = boxes[0, indices[scores_sort], :]
+        image_scores     = scores[scores_sort]
+        image_labels     = labels[0, indices[scores_sort]]
+        image_detections = np.concatenate([image_boxes, np.expand_dims(image_scores, axis=1), np.expand_dims(image_labels, axis=1)], axis=1)
 
         if save_path is not None:
-            draw_annotations(raw_image, generator.load_annotations(i), generator=generator)
-            draw_detections(raw_image, detections[0, indices[0][scores_sort], :], generator=generator)
+            draw_annotations(raw_image, generator.load_annotations(i), label_to_name=generator.label_to_name)
+            draw_detections(raw_image, image_boxes, image_scores, image_labels, label_to_name=generator.label_to_name)
 
             cv2.imwrite(os.path.join(save_path, '{}.png'.format(i)), raw_image)
 
         # copy detections to all_detections
         for label in range(generator.num_classes()):
-            all_detections[i][label] = image_detections[image_predicted_labels == label, :]
+            all_detections[i][label] = image_detections[image_detections[:, -1] == label, :-1]
 
-        print('{}/{}'.format(i, generator.size()), end='\r')
+        print('{}/{}'.format(i + 1, generator.size()), end='\r')
 
     return all_detections
 
@@ -143,7 +133,7 @@ def _get_annotations(generator):
         for label in range(generator.num_classes()):
             all_annotations[i][label] = annotations[annotations[:, 4] == label, :4].copy()
 
-        print('{}/{}'.format(i, generator.size()), end='\r')
+        print('{}/{}'.format(i + 1, generator.size()), end='\r')
 
     return all_annotations
 

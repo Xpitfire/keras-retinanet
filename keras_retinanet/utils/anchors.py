@@ -26,6 +26,21 @@ def anchor_targets_bbox(
     positive_overlap=0.5,
     **kwargs
 ):
+    """ Generate anchor targets for bbox detection.
+
+    Args
+        image_shape: Shape of the image.
+        annotations: np.array of shape (N, 5) for (x1, y1, x2, y2, label).
+        num_classes: Number of classes to predict.
+        mask_shape: If the image is padded with zeros, mask_shape can be used to mark the relevant part of the image.
+        negative_overlap: IoU overlap for negative anchors (all anchors with overlap < negative_overlap are negative).
+        positive_overlap: IoU overlap or positive anchors (all anchors with overlap > positive_overlap are positive).
+
+    Returns
+        labels: np.array of shape (A, num_classes) where a cols consists of -1 for ignore, 0 for negative and 1 for positive for a certain class.
+        annotations: np.array of shape (A, 5) for (x1, y1, x2, y2, label) containing the annotations corresponding to each anchor or 0 if there is no corresponding anchor.
+        anchors: np.array of shape (A, 4) for (x1, y1, x2, y2) containing the anchor boxes.
+    """
     anchors = anchors_for_shape(image_shape, **kwargs)
 
     # label: 1 is positive, 0 is negative, -1 is dont care
@@ -33,7 +48,7 @@ def anchor_targets_bbox(
 
     if annotations.shape[0]:
         # obtain indices of gt annotations with the greatest overlap
-        overlaps             = compute_overlap(anchors, annotations[:, :4])
+        overlaps             = compute_overlap(anchors, annotations)
         argmax_overlaps_inds = np.argmax(overlaps, axis=1)
         max_overlaps         = overlaps[np.arange(overlaps.shape[0]), argmax_overlaps_inds]
 
@@ -50,7 +65,7 @@ def anchor_targets_bbox(
     else:
         # no annotations? then everything is background
         labels[:] = 0
-        annotations = np.zeros_like(anchors)
+        annotations = np.zeros((anchors.shape[0], annotations.shape[1]))
 
     # ignore annotations outside of image
     mask_shape         = image_shape if mask_shape is None else mask_shape
@@ -61,14 +76,80 @@ def anchor_targets_bbox(
     return labels, annotations, anchors
 
 
+def layer_shapes(image_shape, model):
+    """Compute layer shapes given input image shape and the model.
+
+    Args
+        image_shape: The shape of the image.
+        model: The model to use for computing how the image shape is transformed in the pyramid.
+
+    Returns
+        A dictionary mapping layer names to image shapes.
+    """
+    shape = {
+        model.layers[0].name: (None,) + image_shape,
+    }
+
+    for layer in model.layers[1:]:
+        nodes = layer._inbound_nodes
+        for node in nodes:
+            inputs = [shape[lr.name] for lr in node.inbound_layers]
+            if not inputs:
+                continue
+            shape[layer.name] = layer.compute_output_shape(inputs[0] if len(inputs) == 1 else inputs)
+
+    return shape
+
+
+def make_shapes_callback(model):
+    """ Make a function for getting the shape of the pyramid levels.
+    """
+    def get_shapes(image_shape, pyramid_levels):
+        shape = layer_shapes(image_shape, model)
+        image_shapes = [shape["P{}".format(level)][1:3] for level in pyramid_levels]
+        return image_shapes
+
+    return get_shapes
+
+
+def guess_shapes(image_shape, pyramid_levels):
+    """Guess shapes based on pyramid levels.
+
+    Args
+         image_shape: The shape of the image.
+         pyramid_levels: A list of what pyramid levels are used.
+
+    Returns
+        A list of image shapes at each pyramid level.
+    """
+    image_shape = np.array(image_shape[:2])
+    image_shapes = [(image_shape + 2 ** x - 1) // (2 ** x) for x in pyramid_levels]
+    return image_shapes
+
+
 def anchors_for_shape(
     image_shape,
     pyramid_levels=None,
     ratios=None,
     scales=None,
     strides=None,
-    sizes=None
+    sizes=None,
+    shapes_callback=None,
 ):
+    """ Generators anchors for a given shape.
+
+    Args
+        image_shape: The shape of the image.
+        pyramid_levels: List of ints representing which pyramids to use (defaults to [3, 4, 5, 6, 7]).
+        ratios: List of ratios with which anchors are generated (defaults to [0.5, 1, 2]).
+        scales: List of scales with which anchors are generated (defaults to [2^0, 2^(1/3), 2^(2/3)]).
+        strides: Stride per pyramid level, defines how the pyramids are constructed.
+        sizes: Sizes of the anchors per pyramid level.
+        shapes_callback: Function to call for getting the shape of the image at different pyramid levels.
+
+    Returns
+        np.array of shape (N, 4) containing the (x1, y1, x2, y2) coordinates for the anchors.
+    """
     if pyramid_levels is None:
         pyramid_levels = [3, 4, 5, 6, 7]
     if strides is None:
@@ -80,23 +161,28 @@ def anchors_for_shape(
     if scales is None:
         scales = np.array([2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)])
 
-    # skip the first two levels
-    image_shape = np.array(image_shape[:2])
-    for i in range(pyramid_levels[0] - 1):
-        image_shape = (image_shape + 1) // 2
+    if shapes_callback is None:
+        shapes_callback = guess_shapes
+    image_shapes = shapes_callback(image_shape, pyramid_levels)
 
     # compute anchors over all pyramid levels
     all_anchors = np.zeros((0, 4))
     for idx, p in enumerate(pyramid_levels):
-        image_shape     = (image_shape + 1) // 2
         anchors         = generate_anchors(base_size=sizes[idx], ratios=ratios, scales=scales)
-        shifted_anchors = shift(image_shape, strides[idx], anchors)
+        shifted_anchors = shift(image_shapes[idx], strides[idx], anchors)
         all_anchors     = np.append(all_anchors, shifted_anchors, axis=0)
 
     return all_anchors
 
 
 def shift(shape, stride, anchors):
+    """ Produce shifted anchors based on shape of the map and stride size.
+
+    Args
+        shape  : Shape to shift the anchors over.
+        stride : Stride to shift the anchors with over the shape.
+        anchors: The anchors to apply at each location.
+    """
     shift_x = (np.arange(0, shape[1]) + 0.5) * stride
     shift_y = (np.arange(0, shape[0]) + 0.5) * stride
 
@@ -159,7 +245,7 @@ def bbox_transform(anchors, gt_boxes, mean=None, std=None):
     if mean is None:
         mean = np.array([0, 0, 0, 0])
     if std is None:
-        std = np.array([0.1, 0.1, 0.2, 0.2])
+        std = np.array([0.2, 0.2, 0.2, 0.2])
 
     if isinstance(mean, (list, tuple)):
         mean = np.array(mean)
@@ -173,24 +259,13 @@ def bbox_transform(anchors, gt_boxes, mean=None, std=None):
 
     anchor_widths  = anchors[:, 2] - anchors[:, 0]
     anchor_heights = anchors[:, 3] - anchors[:, 1]
-    anchor_ctr_x   = anchors[:, 0] + 0.5 * anchor_widths
-    anchor_ctr_y   = anchors[:, 1] + 0.5 * anchor_heights
 
-    gt_widths  = gt_boxes[:, 2] - gt_boxes[:, 0]
-    gt_heights = gt_boxes[:, 3] - gt_boxes[:, 1]
-    gt_ctr_x   = gt_boxes[:, 0] + 0.5 * gt_widths
-    gt_ctr_y   = gt_boxes[:, 1] + 0.5 * gt_heights
+    targets_dx1 = (gt_boxes[:, 0] - anchors[:, 0]) / anchor_widths
+    targets_dy1 = (gt_boxes[:, 1] - anchors[:, 1]) / anchor_heights
+    targets_dx2 = (gt_boxes[:, 2] - anchors[:, 2]) / anchor_widths
+    targets_dy2 = (gt_boxes[:, 3] - anchors[:, 3]) / anchor_heights
 
-    # clip widths to 1
-    gt_widths  = np.maximum(gt_widths, 1)
-    gt_heights = np.maximum(gt_heights, 1)
-
-    targets_dx = (gt_ctr_x - anchor_ctr_x) / anchor_widths
-    targets_dy = (gt_ctr_y - anchor_ctr_y) / anchor_heights
-    targets_dw = np.log(gt_widths / anchor_widths)
-    targets_dh = np.log(gt_heights / anchor_heights)
-
-    targets = np.stack((targets_dx, targets_dy, targets_dw, targets_dh))
+    targets = np.stack((targets_dx1, targets_dy1, targets_dx2, targets_dy2))
     targets = targets.T
 
     targets = (targets - mean) / std
@@ -200,13 +275,13 @@ def bbox_transform(anchors, gt_boxes, mean=None, std=None):
 
 def compute_overlap(a, b):
     """
-    Parameters
-    ----------
-    a: (N, 4) ndarray of float
-    b: (K, 4) ndarray of float
+    Args
+
+        a: (N, 4) ndarray of float
+        b: (K, 4) ndarray of float
+
     Returns
-    -------
-    overlaps: (N, K) ndarray of overlap between boxes and query_boxes
+        overlaps: (N, K) ndarray of overlap between boxes and query_boxes
     """
     area = (b[:, 2] - b[:, 0]) * (b[:, 3] - b[:, 1])
 
