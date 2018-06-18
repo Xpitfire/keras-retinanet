@@ -1,24 +1,46 @@
 FROM nvidia/cuda:8.0-cudnn6-devel
 
 # -------------------------------------------
-# General packages
+# Set Environment
 # -------------------------------------------
-RUN apt-get update && apt-get install -y python3 python3-setuptools python3-pip python3-dev python-opencv \ 
-                                         build-essential libssl-dev libffi-dev git wget module-init-tools libcupti-dev
-RUN pip3 install --upgrade pip
+ENV PATH /opt/conda/bin:$PATH
 
 # -------------------------------------------
-# Workspace reference
+# General packages
 # -------------------------------------------
-ADD . /code
-WORKDIR /code
+RUN apt-get update && apt-get install -y build-essential libssl-dev libffi-dev git wget module-init-tools libcupti-dev
 
 # -------------------------------------------
 # Python tools setup
 # -------------------------------------------
-RUN pip3 install -r requirements.txt
-RUN pip3 install --user --upgrade git+https://github.com/broadinstitute/keras-resnet
-RUN python3 setup.py install --user
+# install anaconda for
+RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh -O ~/anaconda.sh && \
+    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
+    rm ~/anaconda.sh && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
+RUN conda update conda
+RUN conda install -y -c pytorch faiss-gpu
+RUN pip install --upgrade pip
+
+# change to workspace
+ADD . /code
+WORKDIR /code
+
+# install pip requirements
+RUN pip install -r requirements.txt
+
+#RUN apt-get update && apt-get install -y python3 python3-setuptools python3-pip python3-dev python-opencv \
+#                                         curl build-essential libssl-dev libffi-dev git wget module-init-tools libcupti-dev
+RUN apt-get install -y python-opencv
+
+
+# -------------------------------------------
+# custom keras tools
+# -------------------------------------------
+RUN pip install --user --upgrade git+https://github.com/broadinstitute/keras-resnet
+RUN python setup.py install --user
 
 # setting notebook options for development mode -> uncomment for production mode
 RUN mkdir ~/.jupyter

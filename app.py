@@ -18,6 +18,9 @@ logger = logging.getLogger('celum.app')
 app = Flask(__name__)
 
 
+default_error_message = 'Server endpoint not responding! Please check your request or try again later.'
+
+
 def handle_request(content):
     try:
         classification_results = classify_content(content)
@@ -25,28 +28,39 @@ def handle_request(content):
         return encoder.to_json()
     except:
         err = traceback.format_exc()
-        json_response = jsonify({'exception': 'Server endpoint not responding! Please try again later.'})
-        status = 500
         logger.error(err)
-        return Response(json_response, status=status, mimetype='application/json')
+        json_response = jsonify({'exception': default_error_message})
+        return Response(json_response, status=400, mimetype='application/json')
 
 
 @app.route('/services/v1/classify', methods=['POST'])
 def classify_assets():
-    json_content = request.get_json()
-    content = Content(json_content)
-    return handle_request(content)
+    try:
+        json_content = request.get_json()
+        content = Content(json_content)
+        return handle_request(content)
+    except:
+        err = traceback.format_exc()
+        logger.error(err)
+        json_response = jsonify({'exception': default_error_message})
+        return Response(json_response, status=400, mimetype='application/json')
 
 
 @app.route('/services/v1/classify', methods=['GET'])
 @misc.jsonp
 def classify():
-    id_ = request.args.get('id')
-    url = request.args.get('url')
-    if not id_:
-        id_ = 'dummy'
-    content = misc.classify_get_req_to_content(id_, url)
-    return handle_request(content)
+    try:
+        id_ = request.args.get('id')
+        url = request.args.get('url')
+        if not id_:
+            id_ = 'dummy'
+        content = misc.classify_get_req_to_content(id_, url)
+        return handle_request(content)
+    except:
+        err = traceback.format_exc()
+        logger.error(err)
+        json_response = jsonify({'exception': default_error_message})
+        return Response(json_response, status=400, mimetype='application/json')
 
 
 @app.route('/services/v1/blacklist/<string:asset_id>', methods=['DELETE'])
