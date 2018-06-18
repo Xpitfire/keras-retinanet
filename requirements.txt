@@ -49,7 +49,7 @@ prettytensor
 ################################################################
 # Custom libraries for keras.
 
-#keras-resnet
+keras-resnet
 
 ################################################################
 # Web service endpoint and web host.

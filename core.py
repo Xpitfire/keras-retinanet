@@ -15,9 +15,8 @@ from tensorflow.python.keras.models import Model
 
 import numpy as np
 
-import keras
+from keras_retinanet import models
 import keras.preprocessing.image
-from keras_retinanet.models.resnet import custom_objects
 import tensorflow as tf
 from models_es import EsAsset, EsAssetMeta, EsCropped
 import faiss
@@ -125,9 +124,9 @@ def initialize_retinanet():
     keras.backend.tensorflow_backend.set_session(get_session())
 
     logger.info('Loading model name...')
-    model = keras.models.load_model(cfg.resolve(cfg.RETINANET_MODEL, cfg.model_path) +
-                                    cfg.resolve(cfg.RETINANET_MODEL, cfg.model_name),
-                                    custom_objects=custom_objects)
+    model = models.load_model(cfg.resolve(cfg.RETINANET_MODEL, cfg.model_path) +
+                              cfg.resolve(cfg.RETINANET_MODEL, cfg.model_name),
+                              backbone_name=cfg.resolve(cfg.RETINANET_MODEL, cfg.backbone_name))
 
 
 def initialize_extraction_model():

@@ -27,6 +27,7 @@ index_blacklist_file = 'index_blacklist_file'
 
 model_path = 'model_path'
 model_name = 'model_name'
+backbone_name = 'backbone_name'
 classes_file = 'classes_file'
 labels_file = 'labels_file'
 

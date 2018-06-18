@@ -187,27 +187,21 @@ def classify_content(content):
 
         # classify image
         start = time.time()
-        _, _, detections = core.model.predict_on_batch(np.expand_dims(image, axis=0))
+        boxes, scores, labels = core.model.predict_on_batch(np.expand_dims(image, axis=0))
         elapsed = time.time() - start
         logger.info('Processing time: {}'.format(elapsed))
         result.time = str(elapsed)
-
-        # compute predicted labels and scores
-        predicted_labels = np.argmax(detections[0, :, 4:], axis=1)
-        scores = detections[0, np.arange(detections.shape[1]), 4 + predicted_labels]
-
-        # correct for image scale
-        detections[0, :, :4] /= scale
-
+        boxes /= scale
         # process and save detections
-        for idx, (label_id, score) in enumerate(zip(predicted_labels, scores)):
+        idx = 0
+        for box, score, label in zip(boxes[0], scores[0], labels[0]):
             if score < cfg.resolve_float(cfg.CLASSIFICATION, cfg.min_confidence):
                 continue
             # get position data
-            box = detections[0, idx, :4].astype(int)
-            label_name = val_generator.label_to_name(label_id)
+            box = boxes[0, idx, :4].astype(int)
+            label_name = val_generator.label_to_name(label)
             # save meta-info for REST API response
-            caption = Caption(str(label_id),
+            caption = Caption(str(label),
                               label_name,
                               str(score),
                               '{};{}'.format(box[0], box[1]),   # x1;y1
@@ -230,6 +224,7 @@ def classify_content(content):
             # find similar suggestions and handle response
             asset_metas = get_similar_asset_metas(faiss_features)
             handle_suggestion_response(result, asset.asset_id, asset_metas)
+            idx += 1
 
         # add result to response list
         response.result_list.append(result)
