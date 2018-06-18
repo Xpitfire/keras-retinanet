@@ -11,6 +11,12 @@ docker run --name retinanet --runtime=nvidia -p 5000:5000 -p 9090:9090 -v /home/
 
 Here we are mapping a directory directly to the docker instance. The `--runtime=nvidia` option assumes that there is GPU support via `nvidia-docker2`. To operate on CPU only remove that option.
 
+Test the connection by sending an example request:
+
+```
+curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "http://localhost:5000/services/v1/classify?url=https://i.stack.imgur.com/H03KE.png"
+```
+
 ### Using docker compose
 
 To build after checking out the repository execute:

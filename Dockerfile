@@ -21,7 +21,8 @@ RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 RUN conda update conda
-RUN conda install -y -c pytorch faiss-gpu
+#RUN conda install -y -c pytorch faiss-gpu
+RUN conda install -y -c pytorch faiss-cpu
 RUN pip install --upgrade pip
 
 # change to workspace
@@ -50,5 +51,8 @@ RUN echo "c.NotebookApp.password = u''" >> ~/.jupyter/jupyter_notebook_config.py
 # -------------------------------------------
 # Startup script
 # -------------------------------------------
+EXPOSE 5000
+EXPOSE 9090
+
 COPY ./wrapper_script.sh /
 CMD ["/wrapper_script.sh"]
