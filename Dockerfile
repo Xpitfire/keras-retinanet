@@ -21,8 +21,12 @@ RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 RUN conda update conda
-#RUN conda install -y -c pytorch faiss-gpu
-RUN conda install -y -c pytorch faiss-cpu
+
+# chose between CPU or GPU version:
+RUN conda install -y -c pytorch faiss-gpu
+#RUN conda install -y -c pytorch faiss-cpu
+
+# update pip package manager
 RUN pip install --upgrade pip
 
 # change to workspace
@@ -32,14 +36,12 @@ WORKDIR /code
 # install pip requirements
 RUN pip install -r requirements.txt
 
-#RUN apt-get update && apt-get install -y python3 python-setuptools python3-pip python3-dev python-opencv \
-#                                         curl build-essential libssl-dev libffi-dev git wget module-init-tools libcupti-dev
+# install additional python packages
 RUN apt-get install -y python-opencv python-setuptools python-dev
 
 # -------------------------------------------
 # custom keras tools
 # -------------------------------------------
-#RUN pip install --user --upgrade git+https://github.com/broadinstitute/keras-resnet
 RUN pip install . --user
 
 # setting notebook options for development mode -> uncomment for production mode
