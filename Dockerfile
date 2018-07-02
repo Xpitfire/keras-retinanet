@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel
+FROM nvidia/cuda:8.0-cudnn6-runtime-ubuntu16.04
 
 # -------------------------------------------
 # Set Environment

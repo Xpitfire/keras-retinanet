@@ -5,14 +5,17 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: elasticsearch
     environment: ['http.host=0.0.0.0', 'transport.host=127.0.0.1']
-    ports: ['127.0.0.1:9200:9200']
+    ports:
+          - "9200:9200"
     networks: ['stack']
 
   retinanet:
     build: .
     container_name: retinanet
     environment: ['http.host=0.0.0.0', 'transport.host=127.0.0.1']
-    ports: ['127.0.0.1:5000:5000', '127.0.0.1:9090:9090']
+    ports:
+          - "5000:5000"
+          - "9090:9090"
     volumes:
       - .:/code
     networks: ['stack']
