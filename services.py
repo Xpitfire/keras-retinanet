@@ -117,10 +117,10 @@ def fetch_cropped_path(asset_id, cropped_id):
 # Returns a list of similar assets given a feature
 def get_similar_asset_metas(feature, n=1):
     additional_loading = 1
-    max_retries = 3
+    max_retries = 3 + n
     retries = 0
     matched_indices = []
-    while len(matched_indices) < n and retries < max_retries:
+    while len(matched_indices) <= n and retries < max_retries:
         _, indices = core.index.search(feature, n + additional_loading)
         tmp = [item for item in indices[0].tolist()
                if item >= 0 and item not in core.blacklist and item not in matched_indices]
