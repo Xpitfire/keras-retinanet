@@ -35,6 +35,8 @@ min_confidence = 'min_confidence'
 original_images_path = 'original_images_path'
 extracted_images_path = 'extracted_images_path'
 
+max_assets_per_request = 'max_assets_per_request'
+
 cron_job_interval = 'cron_job_interval'
 cron_job_round_robin_backups = 'cron_job_round_robin_backups'
 
