@@ -24,6 +24,7 @@ index_asset = 'index_asset'
 index_asset_meta = 'index_asset_meta'
 index_cropped = 'index_cropped'
 index_blacklist_file = 'index_blacklist_file'
+index_n_similar_results = 'index_n_similar_results'
 
 model_path = 'model_path'
 model_name = 'model_name'

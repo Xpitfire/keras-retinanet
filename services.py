@@ -233,7 +233,8 @@ def classify_content(content):
             # index caption
             index_asset_meta(asset, idx, caption, features.tolist(), core.index.ntotal - 1)
             # find similar suggestions and handle response
-            asset_metas = get_similar_asset_metas(faiss_features)
+            asset_metas = get_similar_asset_metas(faiss_features,
+                                                  cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_n_similar_results))
             handle_suggestion_response(result, asset.asset_id, asset_metas)
             idx += 1
 
