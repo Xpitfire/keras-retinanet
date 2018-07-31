@@ -68,7 +68,7 @@ def parse_post_req_content(insert=False):
 
 
 @app.route('/services/v1/insert', methods=['POST'])
-def classify_assets():
+def insert_assets():
     content = parse_post_req_content(insert=True)
     max_requests = cfg.resolve_int(cfg.CLASSIFICATION, cfg.max_assets_per_request)
     if len(content.assets) > max_requests:
