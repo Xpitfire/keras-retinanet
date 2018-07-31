@@ -55,15 +55,25 @@ def handle_request(content):
         raise InvalidUsage('Error while processing request! Please try again later...')
 
 
-def parse_post_req_content():
+def parse_post_req_content(insert=False):
     try:
         json_content = request.get_json()
         content = Content(json_content)
+        content.insert = insert
         return content
     except:
         err = traceback.format_exc()
         logger.error(err)
         raise InvalidUsage('Could not parse request! Please check ids and request format.')
+
+
+@app.route('/services/v1/insert', methods=['POST'])
+def classify_assets():
+    content = parse_post_req_content(insert=True)
+    max_requests = cfg.resolve_int(cfg.CLASSIFICATION, cfg.max_assets_per_request)
+    if len(content.assets) > max_requests:
+        raise InvalidUsage('Exceeded maximum number of assets ({}) per request!'.format(max_requests))
+    return handle_request(content)
 
 
 @app.route('/services/v1/classify', methods=['POST'])

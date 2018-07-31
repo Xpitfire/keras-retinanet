@@ -57,7 +57,7 @@ def remove_cropped_if_asset_exists(asset):
 
 
 # Inserts the cropped image data of an asset into the database
-def index_cropped_image(asset, img, label_name, idx):
+def index_cropped_image(asset, img, label_name, idx, insert=False):
     # save cropped image
     extraction_dir = '{}/{}'.format(cfg.resolve(cfg.CLASSIFICATION, cfg.extracted_images_path), label_name)
     if not os.path.exists(extraction_dir):
@@ -68,10 +68,11 @@ def index_cropped_image(asset, img, label_name, idx):
     converted_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(cropped_file_name, converted_img)
     # insert cropped image into database
-    es_cropped = EsCropped(meta={'id': '{}-{}'.format(asset.asset_id, idx)},
-                           asset_id=asset.asset_id,
-                           path=cropped_file_name)
-    es_cropped.save()
+    if insert:
+        es_cropped = EsCropped(meta={'id': '{}-{}'.format(asset.asset_id, idx)},
+                               asset_id=asset.asset_id,
+                               path=cropped_file_name)
+        es_cropped.save()
     return cropped_file_name
 
 
@@ -177,7 +178,8 @@ def classify_content(content):
             # fetch images
             image = val_generator.read_image_bgr(i)
             # index original image for searching
-            index_original_image(image, asset)
+            if content.insert:
+                index_original_image(image, asset)
         except (OSError, ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
             logger.warning('Skipped: Unable to reach resource')
             continue
@@ -222,16 +224,28 @@ def classify_content(content):
             h = box[3] - box[1]
             w = box[2] - box[0]
             cropped_img = draw[box[1]:(box[1] + h), box[0]:(box[0] + w)]
-            # update sequence to remove previous index if available
-            remove_cropped_if_asset_exists(asset)
+
+            if content.insert:
+                # update sequence to remove previous index if available
+                remove_cropped_if_asset_exists(asset)
+
             # process cropped image fragment for searching
-            cropped_file_name = index_cropped_image(asset, cropped_img, label_name, idx)
+            cropped_file_name = index_cropped_image(asset, cropped_img, label_name, idx, insert=content.insert)
             features = extract_features(cropped_file_name)
             faiss_features = features.reshape((1, cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_size)))
-            # add feature to faiss index
-            core.index.add(faiss_features)
+
+            # add or clean image
+            if content.insert:
+                # add feature to faiss index
+                core.index.add(faiss_features)
+            else:
+                # clean temp image again
+                os.remove(cropped_file_name)
+
             # index caption
-            index_asset_meta(asset, idx, caption, features.tolist(), core.index.ntotal - 1)
+            if content.insert:
+                index_asset_meta(asset, idx, caption, features.tolist(), core.index.ntotal - 1)
+
             # find similar suggestions and handle response
             asset_metas = get_similar_asset_metas(faiss_features,
                                                   cfg.resolve_int(cfg.FAISS_SETTINGS, cfg.index_n_similar_results))

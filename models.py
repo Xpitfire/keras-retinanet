@@ -1,6 +1,7 @@
 class Content(object):
     def __init__(self, data):
         self.assets = [Asset(item) for item in data['assets']]
+        self.insert = False
 
     def __repr__(self):
         return 'Content()'
